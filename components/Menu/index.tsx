@@ -84,7 +84,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                         >
                             <Link
                                 href={item.href}
-                                className="menu-item block text-8xl leading-tight tracking-tighter font-anton font-black text-secondary uppercase hover:text-accent text-center"
+                                className="menu-item block text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {item.label}
