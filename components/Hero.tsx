@@ -5,13 +5,16 @@ import Image from "next/image";
 import heroImage from "@/public/images/hero.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { SplitText } from "gsap/all";
+import { ScrollSmoother, SplitText } from "gsap/all";
 
 gsap.registerPlugin(SplitText);
 
 const Hero = () => {
 
+
+
     useGSAP(() => {
+
         const tl1 = gsap.timeline();
 
 
@@ -22,11 +25,11 @@ const Hero = () => {
         tl1.from(heroHeadline.words, {
             opacity: 0,
             y: 20,
-            duration: 0.5,
-            ease: "power2.inOut",
+            scale: .95,
+            duration: 2,
+            ease: "elastic.out(1,0.3)",
             stagger: 0.2,
-            rotate: 5,
-        });
+        })
 
         const heroSubtext = new SplitText(".hero-subtext", {
             type: "lines",
@@ -35,10 +38,16 @@ const Hero = () => {
         tl1.from(heroSubtext.lines, {
             opacity: 0,
             y: 20,
-            duration: 0.5,
+            duration: 1,
             ease: "power2.inOut",
             stagger: 0.2,
-        });
+        }, "-=2").from(".hero-svg", {
+            opacity: 0,
+            duration: 1,
+            scale: 0,
+            rotate: 180,
+            ease: "power4.inOut"
+        }, "-=1.5");
 
 
         tl1.from(".hero-svg", {
@@ -54,7 +63,7 @@ const Hero = () => {
                 titleComponent={
                     <div className="flex flex-col items-center justify-center">
                         {/* Headline */}
-                        <h1 className="hero-headline flex flex-wrap items-center justify-center gap-4 text-7xl md:text-8xl font-medium tracking-tighter text-secondary mb-12">
+                        <h1 className="hero-headline flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl sm:text-6xl md:text-8xl font-medium tracking-tighter text-secondary mb-8 md:mb-12">
                             <span>Dev Toolkit</span>
                             <span className="text-accent flex items-center justify-center relative">
                                 <svg width="0.8em" height="0.8em" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="animate-spin-slow hero-svg">
@@ -65,7 +74,7 @@ const Hero = () => {
                         </h1>
 
                         {/* Subtext */}
-                        <div className="hero-subtext text-xl md:text-2xl leading-relaxed text-secondary/80 max-w-3xl">
+                        <div className="hero-subtext text-base sm:text-xl md:text-2xl leading-relaxed text-secondary/80 max-w-sm sm:max-w-xl md:max-w-3xl mx-auto">
                             <p>
                                 Platform packed with <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">Webflow</span> & <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">HTML</span> resources,
                             </p>

@@ -46,7 +46,6 @@ const Navbar = () => {
     const handleActionMouseEnter = () => {
         gsap.to(".action-button", {
             scale: 1.1,
-
             duration: 0.3,
             ease: "back.out(1.7)"
         });
