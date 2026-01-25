@@ -30,8 +30,7 @@ const Message = () => {
         trigger: ".message-content",
         start: "top center",
         end: "30% center",
-        scrub: true
-
+        scrub: true,
       }
     })
 
@@ -79,16 +78,16 @@ const Message = () => {
   });
 
   return (
-    <section className="bg-secondary font-anton text-milk min-h-dvh overflow-hidden flex justify-center items-center relative z-20">
+    <section className=" message-content bg-secondary font-anton h-screen overflow-hidden flex justify-center items-center relative z-20">
       <div className="container mx-auto flex justify-center items-center py-28 relative">
         <div className="w-full h-full">
-          <div className="2xl:text-[7.5rem] md:text-8xl text-5xl font-bold uppercase leading-[9vw] tracking-[-.35vw] flex flex-col justify-center items-center md:gap-24 gap-14">
-            <h1 className="first-message leading-none 2xl:max-w-4xl md:max-w-2xl max-w-xs text-center  text-[#faeade10]">Stir up your fearless past and</h1>
+          <div className="2xl:text-[6rem] md:text-8xl text-5xl font-bold uppercase leading-[9vw] tracking-[-.35vw] flex flex-col justify-center items-center md:gap-24 gap-14">
+            <h1 className="first-message leading-none 2xl:max-w-5xl md:max-w-2xl max-w-xs text-center  text-[#faeade10]">Stir up your fearless past and</h1>
             <div style={{
               clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
-            }} className="rotate-3 2xl:translate-y-5 -translate-y-5 absolute z-10 border-[.5vw] border-[#7f3b2d]">
-              <div className="bg-light-brown md:pb-5 pb-3 px-5">
-                <h2 className="text-red-brown leading-none">Fuel Up</h2>
+            }} className="msg-text-scroll rotate-3 2xl:translate-y-5 -translate-y-5 absolute z-10">
+              <div className=" md:pb-5 pb-3 px-5">
+                <h2 className="text-accent leading-none">Fuel Up</h2>
               </div>
             </div>
             <h1 className="second-message leading-none 2xl:max-w-7xl md:max-w-4xl max-w-xs text-center text-[#faeade10]">
@@ -98,7 +97,7 @@ const Message = () => {
 
           <div className="flex justify-center items-center md:mt-20 mt-10">
             <div className="max-w-md px-10 flex justify-center items-center overflow-hidden">
-              <p className='text-center font-geist-sans'>
+              <p className='text-center font-geist-sans text-primary'>
                 Rev up your rebel spirit and feed the adventure of life with
                 SPLYT, where you're one chug away from epic nostalgia and
                 fearless fun.
