@@ -2,6 +2,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Magnetic from "./Magnetic";
+import Menu from "./Menu";
+import React from "react";
 
 const Navbar = () => {
 
@@ -60,34 +62,56 @@ const Navbar = () => {
         });
     }
 
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+    // Animate hamburger to X
+    React.useEffect(() => {
+        if (isMenuOpen) {
+            gsap.to(".burger-line-1", { rotate: 45, y: 5, duration: 0.3 });
+            gsap.to(".burger-line-2", { rotate: -45, y: -5, duration: 0.3 });
+        } else {
+            gsap.to(".burger-line-1", { rotate: 0, y: 0, duration: 0.3 });
+            gsap.to(".burger-line-2", { rotate: 0, y: 0, duration: 0.3 });
+        }
+    }, [isMenuOpen]);
+
     return (
-        <nav className="sticky top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
-            {/* Logo */}
-            <Magnetic>
-                <div className="logo text-xl font-fatkat cursor-pointer text-secondary">
-                    pikkcom<span className="text-accent">.</span>
-                </div>
-            </Magnetic>
+        <>
+            <Menu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+            <nav className="sticky top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
+                {/* Logo */}
+                <Magnetic>
+                    <div className="logo text-xl font-fatkat cursor-pointer text-secondary relative z-50">
+                        pikkcom<span className="text-accent">.</span>
+                    </div>
+                </Magnetic>
 
-            {/* Menu Icon - Custom Double Line */}
-            <Magnetic>
-                <button onMouseEnter={() => handleMenuMouseEnter()} onMouseLeave={() => handleMenuMouseLeave()} className=" menu-icon flex flex-col gap-2 cursor-pointer p-2" aria-label="Menu">
-                    <div className="w-8 h-0.5 bg-secondary"></div>
-                    <div className="w-8 h-0.5 bg-secondary"></div>
-                </button>
-            </Magnetic>
+                {/* Menu Icon - Custom Double Line */}
+                <Magnetic>
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        onMouseEnter={() => handleMenuMouseEnter()}
+                        onMouseLeave={() => handleMenuMouseLeave()}
+                        className="menu-icon flex flex-col gap-2 cursor-pointer p-2 relative z-50"
+                        aria-label="Menu"
+                    >
+                        <div className="burger-line-1 w-8 h-0.5 bg-secondary origin-center"></div>
+                        <div className="burger-line-2 w-8 h-0.5 bg-secondary origin-center"></div>
+                    </button>
+                </Magnetic>
 
-            {/* Right Action Button */}
-            <Magnetic>
-                <button
-                    onMouseEnter={() => handleActionMouseEnter()}
-                    onMouseLeave={() => handleActionMouseLeave()}
-                    className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer"
-                >
-                    LET'S TALK
-                </button>
-            </Magnetic>
-        </nav>
+                {/* Right Action Button */}
+                <Magnetic>
+                    <button
+                        onMouseEnter={() => handleActionMouseEnter()}
+                        onMouseLeave={() => handleActionMouseLeave()}
+                        className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
+                    >
+                        LET'S TALK
+                    </button>
+                </Magnetic>
+            </nav>
+        </>
     );
 };
 

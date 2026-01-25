@@ -1,4 +1,7 @@
+@import url('https://api.fontshare.com/v2/css?f[]=anton@400&display=swap');
+
 @import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
@@ -17,6 +20,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-fatkat: var(--font-fatkat);
+  --font-clash: 'Clash Display', sans-serif;
+  --font-anton: 'Anton', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
