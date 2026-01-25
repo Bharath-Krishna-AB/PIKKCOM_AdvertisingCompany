@@ -28,7 +28,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-secondary text-primary relative overflow-hidden pt-20 pb-5 px-6 md:px-12 flex flex-col justify-between min-h-screen">
+        <footer className=" bg-secondary text-primary relative overflow-hidden pt-20 pb-5 px-6 md:px-12 flex flex-col justify-between min-h-screen">
             {/* Top Section */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 border-b border-primary/10 pb-10">
                 <div className="max-w-xl mb-10 md:mb-0">
@@ -94,26 +94,43 @@ const Footer = () => {
             </div>
 
             {/* Massive Brand Text */}
-            <div className="relative w-full overflow-hidden mb-8">
-                <h1 className="footer-brand-text text-[15vw] md:text-[22vw] leading-[0.8] font-anton text-center text-primary/10 select-none pointer-events-none w-full">
-                    PIKKCOM
+            <div className="relative w-full mb-8">
+                <h1 className="footer-brand-text text-[15vw] md:text-[18vw] leading-[0.8] font-fatkat text-center text-primary/10 select-none pointer-events-none w-full">
+                    pikkcom
                 </h1>
             </div>
 
             {/* Bottom Bar */}
-            <div className="w-full flex flex-col md:flex-row justify-between items-center border border-primary/20 hover:border-accent/50 transition-colors duration-300 px-4 py-3 rounded-lg text-xs md:text-sm font-proxima font-bold tracking-wide uppercase text-primary/60">
-                <div className="flex items-center gap-4">
-                    <span>©2026 PIKKCOM</span>
-                    <span className="hidden md:inline w-px h-3 bg-primary/20"></span>
-                    <span className="hidden md:inline">INNOVATING FOR TOMORROW</span>
-                </div>
+            {/* Bottom Bar - Stand Alone Capsule */}
+            <div className="w-full mt-4 md:mt-0 flex justify-center pb-2">
+                <div className="w-full bg-primary/5 border border-primary/10 rounded-full px-4 py-3 md:px-6 md:py-4 backdrop-blur-sm hover:bg-primary/10 transition-all duration-500">
+                    <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-0">
+                        {/* Left: Brand & Status */}
+                        <div className="flex items-center gap-3 md:gap-4">
+                            <span className="text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase text-primary/60">
+                                © 2026 PIKKCOM
+                            </span>
+                            <span className="hidden md:block w-px h-3 bg-primary/20"></span>
+                            <span className="hidden md:block text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase text-primary/40">
+                                INNOVATING FOR TOMORROW
+                            </span>
+                        </div>
 
-                <div className="flex items-center gap-6 mt-2 md:mt-0">
-                    <Link href="#" className="hover:text-accent transition-colors">LEGAL</Link>
-                    <span>—</span>
-                    <Link href="#" className="hover:text-accent transition-colors">PRIVACY</Link>
-                    <span>—</span>
-                    <Link href="#" className="hover:text-accent transition-colors">COOKIES</Link>
+                        {/* Right: Interactive Links */}
+                        <div className="flex items-center gap-6 md:gap-8">
+                            <Link href="#" className="text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase text-primary/60 hover:text-accent transition-colors">
+                                LEGAL
+                            </Link>
+                            <span className="text-primary/20">—</span>
+                            <Link href="#" className="text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase text-primary/60 hover:text-accent transition-colors">
+                                PRIVACY
+                            </Link>
+                            <span className="text-primary/20">—</span>
+                            <Link href="#" className="text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase text-primary/60 hover:text-accent transition-colors">
+                                COOKIES
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>
