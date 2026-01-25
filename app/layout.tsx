@@ -27,7 +27,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* Global Vertical Lines */}
+        <div className="fixed inset-0 w-full h-full pointer-events-none select-none z-0">
+          {/* Mobile: 1 Line (Center) */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-secondary/10 -translate-x-1/2 md:hidden"></div>
+
+          {/* Desktop: 4 Lines (Evenly Distributed) */}
+          <div className="hidden md:flex justify-evenly w-full h-full">
+            <div className="w-px h-full bg-secondary/10"></div>
+            <div className="w-px h-full bg-secondary/10"></div>
+            <div className="w-px h-full bg-secondary/10"></div>
+            <div className="w-px h-full bg-secondary/10"></div>
+          </div>
+        </div>
+        <div className="relative z-10">
+          {children}
+        </div>
       </body>
     </html>
   );

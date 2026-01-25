@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <nav className="w-full flex items-center justify-between px-6 py-4 select-none bg-primary" >
+        <nav className="sticky top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
             {/* Logo */}
             <div className="text-4xl font-bold cursor-pointer text-secondary" style={{ fontFamily: 'Brush Script MT, cursive' }}>
                 pikkcom
@@ -18,7 +18,7 @@ const Navbar = () => {
             <button
                 className="px-8 py-3 rounded-full text-sm font-bold tracking-wider transition-all hover:scale-105 active:scale-95 shadow-sm bg-accent text-primary cursor-pointer"
             >
-                FIND IN STORES
+                LET'S TALK
             </button>
         </nav>
     );
