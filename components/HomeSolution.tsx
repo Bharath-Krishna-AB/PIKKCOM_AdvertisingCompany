@@ -89,7 +89,7 @@ const HomeSolution = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
+        <section ref={containerRef} className="pb-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
                 <h2 ref={titleRef} className="text-4xl md:text-6xl lg:text-6xl font-proxima font-bold mb-20 max-w-full leading-tighter tracking-tighter">
                     Your trusted partner for innovation across four strategic service offerings:
