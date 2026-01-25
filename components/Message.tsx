@@ -81,7 +81,7 @@ const Message = () => {
     <section className=" message-content bg-secondary font-anton h-screen overflow-hidden flex justify-center items-center relative z-20">
       <div className="container mx-auto flex justify-center items-center py-28 relative">
         <div className="w-full h-full">
-          <div className="2xl:text-[6rem] md:text-8xl text-5xl font-bold uppercase leading-[9vw] tracking-[-.35vw] flex flex-col justify-center items-center md:gap-24 gap-14">
+          <div className="2xl:text-[6rem] md:text-8xl text-5xl font-bold uppercase flex flex-col justify-center items-center md:gap-24 gap-14">
             <h1 className="first-message leading-none 2xl:max-w-5xl md:max-w-2xl max-w-xs text-center  text-[#faeade10]">Stir up your fearless past and</h1>
             <div style={{
               clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
@@ -97,7 +97,7 @@ const Message = () => {
 
           <div className="flex justify-center items-center md:mt-20 mt-10">
             <div className="max-w-md px-10 flex justify-center items-center overflow-hidden">
-              <p className='text-center font-geist-sans text-primary'>
+              <p className='text-center font-proxima text-primary'>
                 Rev up your rebel spirit and feed the adventure of life with
                 SPLYT, where you're one chug away from epic nostalgia and
                 fearless fun.

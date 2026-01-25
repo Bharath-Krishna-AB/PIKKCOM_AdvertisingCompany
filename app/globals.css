@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=anton@400&f[]=clash-display@200,300,400,500,600,700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=anton@400&display=swap');
 
 @import "tailwindcss";
 
@@ -21,7 +21,6 @@
   --font-mono: var(--font-geist-mono);
   --font-fatkat: var(--font-fatkat);
   --font-proxima: var(--font-proxima);
-  --font-clash: 'Clash Display', sans-serif;
   --font-anton: 'Anton', sans-serif;
 }
 
