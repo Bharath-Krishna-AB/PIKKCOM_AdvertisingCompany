@@ -36,11 +36,11 @@ const Hero = () => {
         });
 
         tl1.from(heroSubtext.lines, {
-            opacity: 0,
-            y: 20,
+            yPercent: 300,
+            rotate: 3,
+            ease: "power1.inOut",
             duration: 1,
-            ease: "power2.inOut",
-            stagger: 0.2,
+            stagger: 0.01,
         }, "-=2").from(".hero-svg", {
             opacity: 0,
             duration: 1,
