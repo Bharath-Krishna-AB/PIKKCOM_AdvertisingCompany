@@ -1,7 +1,7 @@
 import React from "react";
 import { ContainerScroll } from "./ui/container-scroll-animation";
 import Image from "next/image";
-import heroImage from "@/public/hero.png";
+import heroImage from "@/public/images/hero.png";
 
 const Hero = () => {
     return (

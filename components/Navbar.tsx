@@ -4,8 +4,8 @@ const Navbar = () => {
     return (
         <nav className="sticky top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
             {/* Logo */}
-            <div className="text-4xl font-bold cursor-pointer text-secondary" style={{ fontFamily: 'Brush Script MT, cursive' }}>
-                pikkcom
+            <div className="text-xl font-fatkat cursor-pointer text-secondary">
+                pikkcom<span className="text-accent">.</span>
             </div>
 
             {/* Menu Icon - Custom Double Line */}
