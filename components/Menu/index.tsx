@@ -84,41 +84,41 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                         >
                             <Link
                                 href={item.href}
-                                className="menu-item block text-8xl leading-tight tracking-tight font-anton font-black text-secondary uppercase hover:text-accent text-center"
+                                className="menu-item block text-8xl  font-anton font-black text-secondary uppercase hover:text-accent text-center"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {item.label}
                             </Link>
                         </div>
                     ))}
+                </div>
+
+                {/* Footer Links */}
+                <div className="flex justify-center gap-12 text-secondary/60 font-medium text-sm tracking-wide">
+                    <a href="#" className="hover:text-secondary transition-colors uppercase">YouTube</a>
+                    <a href="#" className="hover:text-secondary transition-colors uppercase">Instagram</a>
+                    <a href="#" className="hover:text-secondary transition-colors uppercase">TikTok</a>
+                </div>
             </div>
 
-            {/* Footer Links */}
-            <div className="flex justify-center gap-12 text-secondary/60 font-medium text-sm tracking-wide">
-                <a href="#" className="hover:text-secondary transition-colors uppercase">YouTube</a>
-                <a href="#" className="hover:text-secondary transition-colors uppercase">Instagram</a>
-                <a href="#" className="hover:text-secondary transition-colors uppercase">TikTok</a>
+            {/* Right Column: Image Preview */}
+            <div className="hidden md:flex flex-1 relative h-full w-full bg-secondary/5">
+                {menuItems.map((item, index) => (
+                    <div
+                        key={index}
+                        className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeImage === item.src ? 'opacity-100' : 'opacity-0'}`}
+                    >
+                        <Image
+                            src={item.src}
+                            alt={item.label}
+                            fill
+                            className="object-cover"
+                            priority={index === 0}
+                        />
+                        <div className="absolute inset-0 bg-black/10" />
+                    </div>
+                ))}
             </div>
-        </div>
-
-            {/* Right Column: Image Preview */ }
-    <div className="hidden md:flex flex-1 relative h-full w-full bg-secondary/5">
-        {menuItems.map((item, index) => (
-            <div
-                key={index}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeImage === item.src ? 'opacity-100' : 'opacity-0'}`}
-            >
-                <Image
-                    src={item.src}
-                    alt={item.label}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-black/10" />
-            </div>
-        ))}
-    </div>
         </div >
     );
 }
