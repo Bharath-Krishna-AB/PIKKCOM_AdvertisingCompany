@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HomeSolution from "@/components/HomeSolution";
 import Message from "@/components/Message";
+import Footer from "@/components/Footer";
 import { useGSAP } from "@gsap/react";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import gsap from "gsap";
@@ -27,6 +28,7 @@ export default function Home() {
           <Hero />
           <Message />
           <HomeSolution />
+          <Footer />
         </div>
       </div>
     </>
