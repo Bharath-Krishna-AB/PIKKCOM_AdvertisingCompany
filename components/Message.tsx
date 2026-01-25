@@ -81,8 +81,8 @@ const Message = () => {
     <section className=" message-content bg-secondary font-anton h-screen overflow-hidden flex justify-center items-center relative z-20">
       <div className="container mx-auto flex justify-center items-center py-28 relative">
         <div className="w-full h-full">
-          <div className="2xl:text-[6rem] md:text-8xl text-5xl font-bold uppercase flex flex-col justify-center items-center md:gap-24 gap-14">
-            <h1 className="first-message leading-none 2xl:max-w-5xl md:max-w-2xl max-w-xs text-center  text-[#faeade10]">Stir up your fearless past and</h1>
+          <div className="2xl:text-[8rem] md:text-8xl text-5xl font-bold uppercase flex flex-col justify-center items-center md:gap-24 gap-14">
+            <h1 className="first-message leading-none 2xl:max-w-7xl md:max-w-2xl max-w-xs text-center  text-[#faeade10]">Stir up your fearless past and</h1>
             <div style={{
               clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
             }} className="msg-text-scroll rotate-3 2xl:translate-y-5 -translate-y-5 absolute z-10">
