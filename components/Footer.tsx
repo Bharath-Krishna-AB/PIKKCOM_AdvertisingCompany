@@ -28,7 +28,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className=" bg-secondary text-primary relative overflow-hidden pt-20 pb-5 px-6 md:px-12 flex flex-col justify-between min-h-screen">
+        <footer className="footer-content bg-secondary text-primary relative overflow-hidden pt-20 pb-5 px-6 md:px-12 flex flex-col justify-between min-h-screen">
             {/* Top Section */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mb-20 border-b border-primary/10 pb-10">
                 <div className="max-w-xl mb-10 md:mb-0">

@@ -30,7 +30,7 @@ const Navbar = () => {
         // ScrollTrigger for Message Section
         ScrollTrigger.create({
             trigger: ".message-content",
-            start: "top top",
+            start: "top top+=50",
             end: "bottom top",
             onEnter: () => {
                 gsap.to("nav", {
@@ -58,7 +58,7 @@ const Navbar = () => {
                 });
                 gsap.to(".logo", {
                     color: "var(--color-secondary)",
-                    duration: 0.3 
+                    duration: 0.3
                 });
                 gsap.to(".burger-line-1, .burger-line-2", {
                     backgroundColor: "var(--color-secondary)",
@@ -66,6 +66,46 @@ const Navbar = () => {
                 });
             },
             onEnterBack: () => {
+                gsap.to("nav", {
+                    backgroundColor: "transparent",
+                    backdropFilter: "none",
+                    borderColor: "transparent",
+                    duration: 0.3
+                });
+                gsap.to(".logo", {
+                    color: "var(--color-primary)",
+                    duration: 0.3
+                });
+                gsap.to(".burger-line-1, .burger-line-2", {
+                    backgroundColor: "var(--color-primary)",
+                    duration: 0.3
+                });
+            },
+            onLeaveBack: () => {
+                gsap.to("nav", {
+                    backgroundColor: "rgba(244, 244, 244, 0.7)",
+                    backdropFilter: "blur(12px)",
+                    borderColor: "rgba(34, 29, 29, 0.05)",
+                    duration: 0.3,
+                    clearProps: "backdropFilter"
+                });
+                gsap.to(".logo", {
+                    color: "var(--color-secondary)",
+                    duration: 0.3
+                });
+                gsap.to(".burger-line-1, .burger-line-2", {
+                    backgroundColor: "var(--color-secondary)",
+                    duration: 0.3
+                });
+            }
+        });
+
+        // ScrollTrigger for Footer Section
+        ScrollTrigger.create({
+            trigger: ".footer-content", // Targeting the footer class added
+            start: "top top+=50",
+            end: "bottom bottom",
+            onEnter: () => {
                 gsap.to("nav", {
                     backgroundColor: "transparent",
                     backdropFilter: "none",
