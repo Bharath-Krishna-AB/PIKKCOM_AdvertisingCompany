@@ -8,20 +8,23 @@ const Navbar = () => {
         const tl1 = gsap.timeline();
         tl1.from(".logo", {
             opacity: 0,
-            y: 20,
-            duration: 0.5
+            y: -20,
+            duration: 0.5,
+            ease: "power2.inOut"
         }).from(".menu-icon", {
             opacity: 0,
-            y: 20,
-            duration: 0.5
-        }).from(".action-button", {
+            y: -20,
+            duration: 0.5,
+            ease: "power2.inOut"
+        },"-=0.4").from(".action-button", {
             opacity: 0,
-            y: 20,
-            duration: 0.5
-        });
+            y: -20,
+            duration: 0.5,
+            ease: "power2.inOut"
+        },"-=0.4");
     })
 
-    const handleMouseEnter = () => {
+    const handleMenuMouseEnter = () => {
         gsap.to(".menu-icon", {
             scale: 1.1,
             opacity: .9,
@@ -30,8 +33,26 @@ const Navbar = () => {
         });
     }
 
-    const handleMouseLeave = () => {
+    const handleMenuMouseLeave = () => {
         gsap.to(".menu-icon", {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    }
+
+    const handleActionMouseEnter = () => {
+        gsap.to(".action-button", {
+            scale: 1.1,
+
+            duration: 0.3,
+            ease: "back.out(1.7)"
+        });
+    }
+
+    const handleActionMouseLeave = () => {
+        gsap.to(".action-button", {
             scale: 1,
             opacity: 1,
             duration: 0.3,
@@ -47,14 +68,16 @@ const Navbar = () => {
             </div>
 
             {/* Menu Icon - Custom Double Line */}
-            <button onMouseEnter={() => handleMouseEnter()} onMouseLeave={() => handleMouseLeave()} className=" menu-icon flex flex-col gap-2 cursor-pointer p-2" aria-label="Menu">
+            <button onMouseEnter={() => handleMenuMouseEnter()} onMouseLeave={() => handleMenuMouseLeave()} className=" menu-icon flex flex-col gap-2 cursor-pointer p-2" aria-label="Menu">
                 <div className="w-8 h-0.5 bg-secondary"></div>
                 <div className="w-8 h-0.5 bg-secondary"></div>
             </button>
 
             {/* Right Action Button */}
             <button
-                className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider transition-all hover:scale-105 active:scale-95 shadow-sm bg-accent text-primary cursor-pointer"
+                onMouseEnter={() => handleActionMouseEnter()}
+                onMouseLeave={() => handleActionMouseLeave()}
+                className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer"
             >
                 LET'S TALK
             </button>
