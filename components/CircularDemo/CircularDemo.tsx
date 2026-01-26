@@ -66,7 +66,7 @@ const CircularDemo = () => {
         <section className="w-full min-h-screen  relative flex flex-col items-center pt-24 overflow-hidden font-[family-name:var(--font-figtree)]">
             {/* Header Section */}
             <div className="text-center z-10 space-y-6 mb-8 max-w-5xl mx-auto px-4">
-                <h2 className="text-[5rem] leading-[1] font-medium tracking-tight text-[#1a1a1a]">
+                <h2 className="text-[5rem] leading-none font-medium tracking-tight text-[#1a1a1a]">
                     A growing toolkit for
                     <br />
                     creative developers
@@ -75,33 +75,14 @@ const CircularDemo = () => {
                 <p className="text-lg text-neutral-600">
                     Access everything with a single membership:
                 </p>
-
-                {/* Navigation Pills */}
-                <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
-                    <button className="px-5 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 text-sm font-medium transition-colors">
-                        The Vault
-                    </button>
-                    <button className="px-5 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 text-sm font-medium transition-colors">
-                        Page Transition Course
-                    </button>
-                    <button className="px-5 py-2 rounded-full bg-[#1a1a1a] text-white text-sm font-medium transition-colors">
-                        Icons
-                    </button>
-                    <button className="px-5 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 text-sm font-medium transition-colors">
-                        Easings
-                    </button>
-                    <button className="px-5 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 text-sm font-medium transition-colors">
-                        Community
-                    </button>
-                </div>
             </div>
 
             {/* Gallery Section */}
-            <div className="w-full h-[800px] relative mt-8">
+            <div className="w-full h-[100vh] relative mt-8 ">
                 <div className="absolute inset-0 mask-linear-fade">
                     <CircularDemoRenderer
                         items={demoItems}
-                        bend={3}
+                        bend={2}
                         textColor="#ffffff"
                         borderRadius={0.05}
                         font="bold 24px Figtree"

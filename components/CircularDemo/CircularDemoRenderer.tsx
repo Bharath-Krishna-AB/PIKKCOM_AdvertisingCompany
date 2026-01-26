@@ -314,7 +314,10 @@ class Media {
         if (viewport) {
             this.viewport = viewport;
         }
-        this.scale = this.screen.height / 1500;
+        // Scale so that card width is approx 40% of screen width (roughly 2.5 cards visible, allowing for margins/gaps)
+        // 600 is base card width
+        this.scale = (this.screen.width * 0.4) / 800;
+
         // Make cards portrait: taller than wide
         this.plane.scale.y = (this.viewport.height * (800 * this.scale)) / this.screen.height;
         this.plane.scale.x = (this.viewport.width * (600 * this.scale)) / this.screen.width;
