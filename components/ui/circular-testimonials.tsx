@@ -9,6 +9,8 @@ import React, {
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
+
 interface Testimonial {
     quote: string;
     name: string;
@@ -175,6 +177,10 @@ export const CircularTestimonials = ({
         exit: { opacity: 0, y: -20 },
     };
 
+
+
+
+
     return (
         <div className="testimonial-container">
             <div className="testimonial-grid">
@@ -185,7 +191,7 @@ export const CircularTestimonials = ({
                             key={testimonial.src}
                             src={testimonial.src}
                             alt={testimonial.name}
-                            className="testimonial-image"
+                            className={`testimonial-image`}
                             data-index={index}
                             style={getImageStyle(index)}
                         />

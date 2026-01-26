@@ -31,7 +31,7 @@ const testimonials = [
 
 const Testimonial = () => {
     return (
-        <section className="bg-white min-h-screen flex items-center justify-center py-24">
+        <section className=" min-h-screen/2 flex items-center justify-center py-24">
             <div
                 className="items-center justify-center relative flex w-full max-w-7xl"
             >
@@ -39,12 +39,12 @@ const Testimonial = () => {
                     testimonials={testimonials}
                     autoplay={true}
                     colors={{
-                        name: "#0a0a0a",
-                        designation: "#454545",
-                        testimony: "#171717",
-                        arrowBackground: "#141414",
-                        arrowForeground: "#f1f1f7",
-                        arrowHoverBackground: "#00A6FB",
+                        name: "var(--secondary)",
+                        designation: "var(--secondary)",
+                        testimony: "var(--secondary)",
+                        arrowBackground: "var(--secondary)",
+                        arrowForeground: "var(--primary)",
+                        arrowHoverBackground: "var(--accent)",
                     }}
                     fontSizes={{
                         name: "2rem",
