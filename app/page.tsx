@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 import { useGSAP } from "@gsap/react";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import gsap from "gsap";
+import CircularGallery from "@/components/CircularGallery/CircularGalleryRenderer";
+import CircularDemo from "@/components/CircularDemo/CircularDemo";
 
 gsap.registerPlugin(ScrollSmoother)
 
@@ -29,6 +31,8 @@ export default function Home() {
           <Hero />
           <Message />
           <HomeSolution />
+          {/* <CircularGallery/> */}
+          <CircularDemo />
           <Testimonial />
           <Footer />
         </div>
