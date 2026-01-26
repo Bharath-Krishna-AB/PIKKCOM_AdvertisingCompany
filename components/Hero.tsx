@@ -63,23 +63,23 @@ const Hero = () => {
                 titleComponent={
                     <div className="flex flex-col items-center justify-center">
                         {/* Headline */}
-                        <h1 className="hero-headline flex flex-wrap items-center justify-center gap-2 md:gap-4 text-4xl sm:text-6xl md:text-8xl font-medium tracking-tighter text-secondary mb-8 md:mb-12">
-                            <span>Dev Toolkit</span>
-                            <span className="text-accent flex items-center justify-center relative">
+                        <h1 className="hero-headline flex flex-nowrap whitespace-nowrap items-center justify-center text-[3.5vw] md:text-[5vw] lg:text-[6vw] font-medium tracking-tighter text-secondary mb-8 md:mb-12">
+                            <span>Turn Demand </span>
+                            <span className="text-accent flex items-center justify-center relative mx-[1vw] md:mx-[1.5vw]">
                                 <svg width="0.8em" height="0.8em" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="animate-spin-slow hero-svg">
                                     <path d="M 152 70.059 L 201.539 20.519 L 235.48 54.461 L 185.941 104 L 256 104 L 256 152 L 185.941 152 L 235.48 201.539 L 201.539 235.48 L 152 185.941 L 152 256 L 104 256 L 104 185.941 L 54.46 235.48 L 20.52 201.539 L 70.059 152 L 0 152 L 0 104 L 70.059 104 L 20.519 54.46 L 54.461 20.52 L 104 70.059 L 104 0 L 152 0 Z" fill="currentColor"></path>
                                 </svg>
                             </span>
-                            <span>Built to Flex</span>
+                            <span>Into Performance</span>
                         </h1>
 
                         {/* Subtext */}
                         <div className="hero-subtext text-base sm:text-xl md:text-2xl leading-relaxed text-secondary/80 max-w-sm sm:max-w-xl md:max-w-3xl mx-auto">
                             <p>
-                                Platform packed with <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">Webflow</span> & <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">HTML</span> resources,
+                                PPIKKCOM combines <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">intelligence</span> , <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">technology</span> and <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">media</span> to help
                             </p>
                             <p className="mt-2">
-                                <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">icons</span> , <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">easings</span> and a page transition <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">course</span>
+                                <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">brands</span> spot winning products, understand true <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">customer intent</span> , and launch high-impact campaigns that <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">convert</span>.
                             </p>
                         </div>
                     </div>
