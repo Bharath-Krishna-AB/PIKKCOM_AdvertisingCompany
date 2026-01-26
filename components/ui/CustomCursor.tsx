@@ -67,10 +67,6 @@ const CustomCursor = () => {
                     translateX: "-50%",
                     translateY: "-50%",
                 }}
-                animate={{
-                    scale: isHovering ? 2.5 : 1, // Subtle grow on hover, kept it simpler than ring
-                }}
-                transition={{ duration: 0.2 }}
                 className="absolute w-4 h-4 bg-white rounded-full z-50 will-change-transform"
             />
         </div>
