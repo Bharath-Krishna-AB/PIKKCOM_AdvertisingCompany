@@ -63,7 +63,7 @@ const demoItems: DemoItem[] = [
 
 const CircularDemo = () => {
     return (
-        <section className="w-full min-h-screen bg-[#FDFDFD] relative flex flex-col items-center pt-24 overflow-hidden font-[family-name:var(--font-figtree)]">
+        <section className="w-full min-h-screen  relative flex flex-col items-center pt-24 overflow-hidden font-[family-name:var(--font-figtree)]">
             {/* Header Section */}
             <div className="text-center z-10 space-y-6 mb-8 max-w-5xl mx-auto px-4">
                 <h2 className="text-[5rem] leading-[1] font-medium tracking-tight text-[#1a1a1a]">

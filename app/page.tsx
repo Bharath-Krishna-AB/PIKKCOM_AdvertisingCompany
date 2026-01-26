@@ -9,10 +9,17 @@ import Footer from "@/components/Footer";
 import { useGSAP } from "@gsap/react";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import gsap from "gsap";
-import CircularGallery from "@/components/CircularGallery/CircularGalleryRenderer";
 import CircularDemo from "@/components/CircularDemo/CircularDemo";
 
 gsap.registerPlugin(ScrollSmoother)
+
+const GridSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className={`relative border-b border-neutral-200 ${className}`}>
+    <div className="relative z-10 w-full">
+      {children}
+    </div>
+  </div>
+);
 
 export default function Home() {
 
@@ -28,12 +35,21 @@ export default function Home() {
       <Navbar />
       <div id="smooth-wrapper">
         <div id="smooth-content">
-          <Hero />
-          <Message />
-          <HomeSolution />
-          {/* <CircularGallery/> */}
-          <CircularDemo />
-          <Testimonial />
+          <GridSection>
+            <Hero />
+          </GridSection>
+          <GridSection>
+            <Message />
+          </GridSection>
+          <GridSection>
+            <HomeSolution />
+          </GridSection>
+          <GridSection>
+            <CircularDemo />
+          </GridSection>
+          <GridSection>
+            <Testimonial />
+          </GridSection>
           <Footer />
         </div>
       </div>
