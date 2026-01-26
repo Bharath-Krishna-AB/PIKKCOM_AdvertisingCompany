@@ -3,45 +3,46 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger, SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 // Using placeholder images for now as specific assets weren't provided
 import hatImage from "@/public/images/hat.png";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
     {
         id: "01",
         label: "Solutions",
         title: "Real-Time Brands",
-        image: hatImage, // Placeholder
+        image: hatImage,
         link: "#",
-        color: "#ffb400" // Mustard yellow-ish from design
+        color: "#ffb400"
     },
     {
         id: "02",
         label: "Solutions",
         title: "Marketing Orchestration",
-        image: hatImage, // Placeholder
+        image: hatImage,
         link: "#",
-        color: "#a0a0ff" // Light blue-ish
+        color: "#a0a0ff"
     },
     {
         id: "03",
         label: "Solutions",
         title: "Glass Box Media",
-        image: hatImage, // Placeholder
+        image: hatImage,
         link: "#",
-        color: "#b0e0b0" // Green-ish
+        color: "#b0e0b0"
     },
     {
         id: "04",
         label: "Solutions",
         title: "Technology Services",
-        image: hatImage, // Placeholder
+        image: hatImage,
         link: "#",
-        color: "#e0b0b0" // Pink-ish
+        color: "#e0b0b0"
     }
 ];
 
@@ -50,98 +51,106 @@ const HomeSolution = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
 
     useGSAP(() => {
-        if (!containerRef.current || !titleRef.current) return;
+        if (!containerRef.current) return;
 
         // Title Animation
-        const splitTitle = new SplitText(titleRef.current, { type: "words, chars" });
-        gsap.from(splitTitle.words, {
-            opacity: 0,
+        gsap.from(titleRef.current, {
             y: 50,
+            opacity: 0,
             duration: 1,
-            stagger: 0.05,
-            ease: "power4.out",
+            ease: "power3.out",
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top 80%",
             }
         });
 
-        // Cards Animation
-        const cards = gsap.utils.toArray<HTMLElement>(".solution-card");
+        const cards = gsap.utils.toArray<HTMLElement>(".service-card");
 
-        cards.forEach((card, i) => {
-            gsap.from(card, {
-                opacity: 0,
-                y: 100,
-                duration: 1,
-                delay: i * 0.1, // Staggered delay
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 70%",
-                }
-            });
+        // Staggered Entrance
+        gsap.from(cards, {
+            y: 150,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.2, // Defined stagger
+            ease: "power4.out",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 75%",
+            }
+        });
 
-            // Hover effects handled via CSS/GSAP context if needed, 
-            // but simpler to do primarily in CSS for performance with some GSAP spice
+        // Parallax Effect for Offset Columns (2 & 4)
+        // They should move slightly differently to enhance the staggered feel
+        const evenCards = cards.filter((_, i) => i % 2 !== 0);
+        gsap.to(evenCards, {
+            y: -30, // Move up slightly faster
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+            }
         });
 
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="pb-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
-            <div className="max-w-7xl mx-auto w-full">
-                <h2 ref={titleRef} className="text-4xl md:text-6xl lg:text-6xl font-proxima font-bold mb-20 max-w-full leading-tighter tracking-tighter">
-                    Your trusted partner for innovation across four strategic service offerings:
+        <section ref={containerRef} className="py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
+            <div className="max-w-[90rem] mx-auto w-full relative z-10">
+
+                {/* Header */}
+                <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold font-proxima leading-tighter tracking-tight mb-24 md:mb-32 max-w-5xl">
+                    Your trusted partner for innovation across four strategic service offerings <span className="text-accent">:</span>
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative">
-                    {services.map((service) => (
+                {/* Staggered Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 w-full">
+                    {services.map((service, i) => (
                         <div
                             key={service.id}
-                            className="solution-card group relative flex flex-col"
+                            className={`service-card group relative flex flex-col ${i % 2 !== 0 ? "lg:translate-y-24" : ""}`} // Zigzag offset on desktop
                         >
-                            {/* Background Number */}
-                            <div className="absolute -top-16 -right-4 md:-right-8 text-9xl font-bold text-secondary/5 opacity-0 group-hover:opacity-10 transition-opacity duration-500 font-proxima select-none pointer-events-none z-0 transform group-hover:-translate-y-4">
-                                {service.id}
+                            {/* Giant Background Number */}
+                            <div className="absolute -top-16 lg:-top-24 right-0 lg:left-0 z-0 select-none pointer-events-none">
+                                <span className="text-[8rem] lg:text-[10rem] font-bold text-white leading-none tracking-tighter"
+                                    style={{ textShadow: "0px 0px 30px rgba(0,0,0,0.02)" }}>
+                                    {service.id}
+                                </span>
                             </div>
 
                             {/* Image Container */}
-                            <div className="relative aspect-square w-full overflow-hidden rounded-lg mb-6 shadow-sm group-hover:shadow-xl transition-shadow duration-500 bg-gray-100">
-                                <div className="absolute inset-0 bg-secondary/10 z-10 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                            <div className="relative w-full aspect-square mb-6 overflow-hidden rounded-lg shadow-sm group-hover:shadow-2xl transition-all duration-500 z-10 bg-white">
                                 <Image
                                     src={service.image}
                                     alt={service.title}
                                     fill
-                                    className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                                    className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                                 />
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
 
                             {/* Content */}
-                            <div className="relative z-10 flex flex-col grow">
-                                <span className="text-sm font-medium text-secondary/60 mb-2 block uppercase tracking-wide">
+                            <div className="relative z-10 pl-2">
+                                <span className="text-sm font-semibold uppercase tracking-wide opacity-60 mb-1 block">
                                     {service.label}
                                 </span>
 
-                                <div className="flex items-end justify-between gap-4 mt-auto">
-                                    <h3 className="text-2xl font-proxima font-bold leading-tight group-hover:text-accent transition-colors duration-300">
+                                <div className="flex items-start justify-between gap-4">
+                                    <h3 className="text-2xl lg:text-3xl font-bold font-proxima leading-tight group-hover:text-[var(--accent)] transition-colors duration-300 max-w-[80%]">
                                         {service.title}
                                     </h3>
 
                                     <Link
                                         href={service.link}
-                                        className="flex items-center justify-center w-10 h-10 rounded-full border border-secondary/20 group-hover:border-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-300 shrink-0"
+                                        className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--secondary)] text-[var(--primary)] group-hover:bg-[var(--accent)] transition-colors duration-300 shrink-0 mt-1"
                                     >
-                                        <svg
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 16 16"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
+                                        <ArrowRight
+                                            size={20}
                                             className="transform -rotate-45 group-hover:rotate-0 transition-transform duration-300"
-                                        >
-                                            <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor" />
-                                        </svg>
+                                        />
                                     </Link>
                                 </div>
                             </div>
