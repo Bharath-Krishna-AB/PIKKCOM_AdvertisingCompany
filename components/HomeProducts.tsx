@@ -10,44 +10,36 @@ import Link from "next/link";
 import hatImage from "@/public/images/hat.png";
 import { SplitText } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger,SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const services = [
     {
         id: "01",
-        label: "Solutions",
-        title: "Real-Time Brands",
+        label: "Products",
+        title: "Pikkcom VR",
         image: hatImage,
         link: "#",
         color: "#ffb400"
     },
     {
         id: "02",
-        label: "Solutions",
-        title: "Marketing Orchestration",
+        label: "Products",
+        title: "Reflexn",
         image: hatImage,
         link: "#",
         color: "#a0a0ff"
     },
     {
         id: "03",
-        label: "Solutions",
-        title: "Glass Box Media",
+        label: "Products",
+        title: "Insights",
         image: hatImage,
         link: "#",
         color: "#b0e0b0"
-    },
-    {
-        id: "04",
-        label: "Solutions",
-        title: "Technology Services",
-        image: hatImage,
-        link: "#",
-        color: "#e0b0b0"
     }
 ];
 
-const HomeSolution = () => {
+const HomeProducts = () => {
     const containerRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -102,7 +94,7 @@ const HomeSolution = () => {
             }
         });
 
-        // Parallax Effect for Offset Columns (2 & 4)
+        // Parallax Effect for Offset Columns (Middle Card)
         // They should move slightly differently to enhance the staggered feel
         const evenCards = cards.filter((_, i) => i % 2 !== 0);
         gsap.to(evenCards, {
@@ -128,7 +120,7 @@ const HomeSolution = () => {
                 </h2>
 
                 {/* Staggered Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 w-full">
                     {services.map((service, i) => (
                         <div
                             key={service.id}
@@ -184,4 +176,4 @@ const HomeSolution = () => {
     );
 };
 
-export default HomeSolution;
+export default HomeProducts;
