@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import gsap from "gsap";
 import CircularDemo from "@/components/CircularDemo/CircularDemo";
+import HomeConnect from "@/components/HomeConnect";
 
 gsap.registerPlugin(ScrollSmoother)
 
@@ -46,6 +47,9 @@ export default function Home() {
           </GridSection>
           <GridSection>
             <CircularDemo />
+          </GridSection>
+          <GridSection>
+            <HomeConnect />
           </GridSection>
           <GridSection>
             <Testimonial />

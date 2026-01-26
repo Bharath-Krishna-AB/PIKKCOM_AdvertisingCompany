@@ -8,8 +8,9 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 // Using placeholder images for now as specific assets weren't provided
 import hatImage from "@/public/images/hat.png";
+import { SplitText } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger,SplitText);
 
 const services = [
     {
@@ -51,6 +52,27 @@ const HomeSolution = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
 
     useGSAP(() => {
+
+        const title = SplitText.create(".home-solution h2", {
+            type: "words",
+        })
+
+        const HeadingTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".home-solution h2",
+                start: "top bottom",
+            }
+        })
+
+        HeadingTl.from(title.words, {
+            yPercent: 200,
+            opacity: 0,
+            rotate: 3,
+            ease: "power1.inOut",
+            duration: 1,
+            stagger: 0.1,
+        })
+
         if (!containerRef.current) return;
 
         // Title Animation
@@ -97,7 +119,7 @@ const HomeSolution = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
+        <section ref={containerRef} className="home-solution py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
             <div className="max-w-[90rem] mx-auto w-full relative z-10">
 
                 {/* Header */}
