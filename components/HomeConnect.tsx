@@ -47,6 +47,7 @@ const HomeConnect = () => {
                 }
             });
 
+
             // Button reveal animation
             gsap.from(".connect-btn", {
                 y: 20,
@@ -64,6 +65,29 @@ const HomeConnect = () => {
         },
         { scope: containerRef }
     );
+
+    const btnRef = useRef<HTMLButtonElement>(null);
+    const arrowBtnRef = useRef<HTMLButtonElement>(null);
+
+    const handleBtnEnter = () => {
+        if (!btnRef.current) return;
+        gsap.to(btnRef.current, { scale: 1.05, duration: 0.3, ease: "power2.out" });
+    }
+
+    const handleBtnLeave = () => {
+        if (!btnRef.current) return;
+        gsap.to(btnRef.current, { scale: 1, x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+    }
+
+    // Simple Magnetic Effect for Arrow Button
+    const handleArrowEnter = () => {
+        if (!arrowBtnRef.current) return;
+        gsap.to(arrowBtnRef.current, { scale: 1.1, duration: 0.3 });
+    }
+    const handleArrowLeave = () => {
+        if (!arrowBtnRef.current) return;
+        gsap.to(arrowBtnRef.current, { scale: 1, x: 0, y: 0, duration: 0.5, ease: "back.out(1.7)" });
+    }
 
     return (
         <section
@@ -108,12 +132,33 @@ const HomeConnect = () => {
             </div>
 
             {/* Bottom Buttons */}
-            <div className="w-full flex items-center gap-4">
-                <button className="connect-btn group h-14 px-8 rounded-full bg-[#1a1a1a] text-white text-lg font-medium flex items-center gap-2 transition-all hover:bg-neutral-800 hover:scale-105 active:scale-95">
-                    Reach out
+            <div className="w-full flex items-center justify-between md:justify-start gap-6">
+                <button
+                    ref={btnRef}
+                    onMouseEnter={handleBtnEnter}
+                    onMouseLeave={handleBtnLeave}
+                    className="connect-btn group relative h-16 px-10 rounded-full bg-[#1a1a1a] text-white overflow-hidden transition-transform hover:scale-105 active:scale-95"
+                >
+                    <div className="relative z-10 flex items-center gap-2">
+                        <span className="text-xl font-medium relative overflow-hidden h-7 block">
+                            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Reach out</span>
+                            <span className="block absolute top-0 left-0 translate-y-full transition-transform duration-500 group-hover:translate-y-0 text-neutral-300">Let's talk</span>
+                        </span>
+                    </div>
+                    {/* Fill effect */}
+                    <div className="absolute inset-0 bg-neutral-800 translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0" />
                 </button>
-                <button className="connect-btn group h-14 w-14 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#1a1a1a] transition-all hover:bg-neutral-50 hover:border-neutral-300 hover:scale-105 active:scale-95">
-                    <ArrowUpRight className="w-6 h-6 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+
+                <button
+                    ref={arrowBtnRef}
+                    onMouseEnter={handleArrowEnter}
+                    onMouseLeave={handleArrowLeave}
+                    className="connect-btn group relative h-16 w-16 rounded-full border border-neutral-200 bg-white flex items-center justify-center overflow-hidden transition-all hover:border-neutral-900 active:scale-90"
+                >
+                    <div className="relative w-6 h-6 overflow-hidden">
+                        <ArrowUpRight className="absolute w-6 h-6 transition-all duration-500 ease-out group-hover:-translate-y-full group-hover:translate-x-full text-[#1a1a1a] group-hover:text-black" />
+                        <ArrowUpRight className="absolute w-6 h-6 -translate-x-full translate-y-full transition-all duration-500 ease-out group-hover:translate-x-0 group-hover:translate-y-0 text-[#1a1a1a] group-hover:text-black" />
+                    </div>
                 </button>
             </div>
         </section>
