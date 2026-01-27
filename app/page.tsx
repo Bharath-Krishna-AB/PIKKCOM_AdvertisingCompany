@@ -50,9 +50,6 @@ export default function Home() {
           <GridSection>
             <HomeConnect />
           </GridSection>
-          <GridSection>
-            <Testimonial />
-          </GridSection>
           <Footer />
         </div>
       </div>
