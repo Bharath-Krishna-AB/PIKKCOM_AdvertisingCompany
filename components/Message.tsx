@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 
-gsap.registerPlugin(SplitText,ScrollTrigger)
+gsap.registerPlugin(SplitText, ScrollTrigger)
 
 
 const Message = () => {
@@ -91,16 +91,16 @@ const Message = () => {
               </div>
             </div>
             <h1 className="second-message leading-none 2xl:max-w-7xl md:max-w-4xl max-w-xs text-center text-[#faeade10]">
-                 and build converting campaigns.
+              and build converting campaigns.
             </h1>
           </div>
 
           <div className="flex justify-center items-center md:mt-20 mt-10">
             <div className="max-w-md px-10 flex justify-center items-center overflow-hidden">
               <p className='text-center font-proxima text-primary'>
-                Rev up your rebel spirit and feed the adventure of life with
-                SPLYT, where you're one chug away from epic nostalgia and
-                fearless fun.
+                Fuel smarter growth and unlock real performance
+                with PIKKCOM, where every campaign is driven by
+                proven demand, sharp intelligence, and results that convert.
               </p>
             </div>
           </div>
