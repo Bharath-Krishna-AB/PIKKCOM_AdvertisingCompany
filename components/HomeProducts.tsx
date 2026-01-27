@@ -128,8 +128,11 @@ const HomeProducts = () => {
                         >
                             {/* Giant Background Number */}
                             <div className="absolute -top-16 lg:-top-24 right-0 lg:left-0 z-0 select-none pointer-events-none">
-                                <span className="text-[8rem] lg:text-[10rem] font-bold text-white leading-none tracking-tighter"
-                                    style={{ textShadow: "0px 0px 30px rgba(0,0,0,0.02)" }}>
+                                <span className="text-[8rem] lg:text-[10rem] font-bold text-transparent leading-none tracking-tighter"
+                                    style={{
+                                        textShadow: "0px 0px 30px rgba(0,0,0,0.02)",
+                                        WebkitTextStroke: "2px #703EFF"
+                                    }}>
                                     {service.id}
                                 </span>
                             </div>
