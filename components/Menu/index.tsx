@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import Link from "next/link";
+import Magnetic from "../Magnetic";
 
 const menuItems = [
     { label: "HOME", href: "/", src: "/images/hero.png" },
@@ -20,7 +21,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
     const tl = useRef<gsap.core.Timeline>(null);
 
     useGSAP(() => {
-        gsap.set(container.current, { yPercent: -100 });
+        gsap.set(container.current, { yPercent: -100, autoAlpha: 1 });
 
         tl.current = gsap.timeline({ paused: true })
             .to(container.current, {
@@ -53,7 +54,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
     return (
         <div
             ref={container}
-            className="fixed inset-0 bg-primary z-60 flex flex-col md:flex-row h-screen w-screen overflow-hidden -translate-y-full"
+            className="fixed inset-0 bg-primary z-60 flex flex-col md:flex-row h-screen w-screen overflow-hidden invisible"
         >
             {/* Left Column: Navigation */}
             <div className="flex-1 flex flex-col justify-between px-6 py-6 md:px-12 md:py-10 relative z-10 h-full">
@@ -64,14 +65,16 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                         pikkcom<span className="text-accent">.</span>
                     </div>
 
-                    <button
-                        onClick={() => setIsOpen(false)}
-                        className="w-12 h-12 rounded-full border cursor-pointer border-secondary/20 flex items-center justify-center hover:bg-secondary hover:text-primary transition-colors duration-300"
-                    >
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
-                            <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </button>
+                    <Magnetic>
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="w-12 h-12 rounded-full border cursor-pointer border-secondary/20 flex items-center justify-center hover:bg-secondary hover:text-primary transition-colors duration-300"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
+                                <path d="M1 1L13 13M1 13L13 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>
+                    </Magnetic>
                 </div>
 
                 {/* Main Navigation */}
@@ -119,6 +122,6 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                     </div>
                 ))}
             </div>
-        </div >
+        </div>
     );
 }

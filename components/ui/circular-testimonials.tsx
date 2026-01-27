@@ -7,6 +7,7 @@ import React, {
     useCallback,
 } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Magnetic from "../Magnetic";
 import { motion, AnimatePresence } from "framer-motion";
 
 
@@ -250,31 +251,37 @@ export const CircularTestimonials = ({
                             </motion.p>
                         </motion.div>
                     </AnimatePresence>
+
+
                     <div className="arrow-buttons">
-                        <button
-                            className="arrow-button prev-button"
-                            onClick={handlePrev}
-                            style={{
-                                backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg,
-                            }}
-                            onMouseEnter={() => setHoverPrev(true)}
-                            onMouseLeave={() => setHoverPrev(false)}
-                            aria-label="Previous testimonial"
-                        >
-                            <ArrowLeft size={28} color={colorArrowFg} />
-                        </button>
-                        <button
-                            className="arrow-button next-button"
-                            onClick={handleNext}
-                            style={{
-                                backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg,
-                            }}
-                            onMouseEnter={() => setHoverNext(true)}
-                            onMouseLeave={() => setHoverNext(false)}
-                            aria-label="Next testimonial"
-                        >
-                            <ArrowRight size={28} color={colorArrowFg} />
-                        </button>
+                        <Magnetic>
+                            <button
+                                className="arrow-button prev-button"
+                                onClick={handlePrev}
+                                style={{
+                                    backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg,
+                                }}
+                                onMouseEnter={() => setHoverPrev(true)}
+                                onMouseLeave={() => setHoverPrev(false)}
+                                aria-label="Previous testimonial"
+                            >
+                                <ArrowLeft size={28} color={colorArrowFg} />
+                            </button>
+                        </Magnetic>
+                        <Magnetic>
+                            <button
+                                className="arrow-button next-button"
+                                onClick={handleNext}
+                                style={{
+                                    backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg,
+                                }}
+                                onMouseEnter={() => setHoverNext(true)}
+                                onMouseLeave={() => setHoverNext(false)}
+                                aria-label="Next testimonial"
+                            >
+                                <ArrowRight size={28} color={colorArrowFg} />
+                            </button>
+                        </Magnetic>
                     </div>
                 </div>
             </div>
