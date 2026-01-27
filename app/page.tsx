@@ -33,7 +33,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <GridSection>

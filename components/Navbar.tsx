@@ -5,140 +5,147 @@ import { ScrollTrigger } from "gsap/all";
 import Magnetic from "./Magnetic";
 import Menu from "./Menu";
 import React from "react";
+import { usePathname } from "next/navigation";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
 
+    const currentPath = usePathname()
+
+
     useGSAP(() => {
-        const tl1 = gsap.timeline();
-        tl1.from(".logo", {
-            opacity: 0,
-            y: -20,
-            duration: 0.5,
-            ease: "power2.inOut"
-        }).from(".menu-icon", {
-            opacity: 0,
-            y: -20,
-            duration: 0.5,
-            ease: "power2.inOut"
-        }, "-=0.4").from(".action-button", {
-            duration: 0.5,
-            ease: "power2.inOut"
-        }, "-=0.4");
+        if (currentPath === "/") {
+            const tl1 = gsap.timeline();
+            tl1.from(".logo", {
+                opacity: 0,
+                y: -20,
+                duration: 0.5,
+                ease: "power2.inOut"
+            }).from(".menu-icon", {
+                opacity: 0,
+                y: -20,
+                duration: 0.5,
+                ease: "power2.inOut"
+            }, "-=0.4").from(".action-button", {
+                duration: 0.5,
+                ease: "power2.inOut"
+            }, "-=0.4");
 
-        // ScrollTrigger for Message Section
-        ScrollTrigger.create({
-            trigger: ".message-content",
-            start: "top top+=50",
-            end: "bottom top",
-            onEnter: () => {
-                gsap.to("nav", {
-                    backgroundColor: "transparent",
-                    backdropFilter: "none",
-                    borderColor: "transparent",
-                    duration: 0.3
-                });
-                gsap.to(".logo", {
-                    color: "var(--color-primary)",
-                    duration: 0.3
-                });
-                gsap.to(".burger-line-1, .burger-line-2", {
-                    backgroundColor: "var(--color-primary)",
-                    duration: 0.3
-                });
-            },
-            onLeave: () => {
-                gsap.to("nav", {
-                    backgroundColor: "rgba(244, 244, 244, 0.7)", // primary with opacity
-                    backdropFilter: "blur(12px)",
-                    borderColor: "rgba(34, 29, 29, 0.05)", // secondary/5
-                    duration: 0.3,
-                    clearProps: "backdropFilter" // clear to let CSS handle it if needed
-                });
-                gsap.to(".logo", {
-                    color: "var(--color-secondary)",
-                    duration: 0.3
-                });
-                gsap.to(".burger-line-1, .burger-line-2", {
-                    backgroundColor: "var(--color-secondary)",
-                    duration: 0.3
-                });
-            },
-            onEnterBack: () => {
-                gsap.to("nav", {
-                    backgroundColor: "transparent",
-                    backdropFilter: "none",
-                    borderColor: "transparent",
-                    duration: 0.3
-                });
-                gsap.to(".logo", {
-                    color: "var(--color-primary)",
-                    duration: 0.3
-                });
-                gsap.to(".burger-line-1, .burger-line-2", {
-                    backgroundColor: "var(--color-primary)",
-                    duration: 0.3
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to("nav", {
-                    backgroundColor: "rgba(244, 244, 244, 0.7)",
-                    backdropFilter: "blur(12px)",
-                    borderColor: "rgba(34, 29, 29, 0.05)",
-                    duration: 0.3,
-                    clearProps: "backdropFilter"
-                });
-                gsap.to(".logo", {
-                    color: "var(--color-secondary)",
-                    duration: 0.3
-                });
-                gsap.to(".burger-line-1, .burger-line-2", {
-                    backgroundColor: "var(--color-secondary)",
-                    duration: 0.3
-                });
-            }
-        });
+            // ScrollTrigger for Message Section
+            ScrollTrigger.create({
+                trigger: ".message-content",
+                start: "top top+=50",
+                end: "bottom top",
+                onEnter: () => {
+                    gsap.to("nav", {
+                        backgroundColor: "transparent",
+                        backdropFilter: "none",
+                        borderColor: "transparent",
+                        duration: 0.3
+                    });
+                    gsap.to(".logo", {
+                        color: "var(--color-primary)",
+                        duration: 0.3
+                    });
+                    gsap.to(".burger-line-1, .burger-line-2", {
+                        backgroundColor: "var(--color-primary)",
+                        duration: 0.3
+                    });
+                },
+                onLeave: () => {
+                    gsap.to("nav", {
+                        backgroundColor: "rgba(244, 244, 244, 0.7)", // primary with opacity
+                        backdropFilter: "blur(12px)",
+                        borderColor: "rgba(34, 29, 29, 0.05)", // secondary/5
+                        duration: 0.3,
+                        clearProps: "backdropFilter" // clear to let CSS handle it if needed
+                    });
+                    gsap.to(".logo", {
+                        color: "var(--color-secondary)",
+                        duration: 0.3
+                    });
+                    gsap.to(".burger-line-1, .burger-line-2", {
+                        backgroundColor: "var(--color-secondary)",
+                        duration: 0.3
+                    });
+                },
+                onEnterBack: () => {
+                    gsap.to("nav", {
+                        backgroundColor: "transparent",
+                        backdropFilter: "none",
+                        borderColor: "transparent",
+                        duration: 0.3
+                    });
+                    gsap.to(".logo", {
+                        color: "var(--color-primary)",
+                        duration: 0.3
+                    });
+                    gsap.to(".burger-line-1, .burger-line-2", {
+                        backgroundColor: "var(--color-primary)",
+                        duration: 0.3
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.to("nav", {
+                        backgroundColor: "rgba(244, 244, 244, 0.7)",
+                        backdropFilter: "blur(12px)",
+                        borderColor: "rgba(34, 29, 29, 0.05)",
+                        duration: 0.3,
+                        clearProps: "backdropFilter"
+                    });
+                    gsap.to(".logo", {
+                        color: "var(--color-secondary)",
+                        duration: 0.3
+                    });
+                    gsap.to(".burger-line-1, .burger-line-2", {
+                        backgroundColor: "var(--color-secondary)",
+                        duration: 0.3
+                    });
+                }
+            });
 
-        // ScrollTrigger for Footer Section
-        ScrollTrigger.create({
-            trigger: ".footer-content", // Targeting the footer class added
-            start: "top top+=50",
-            end: "bottom bottom",
-            onEnter: () => {
-                gsap.to("nav", {
-                    backgroundColor: "transparent",
-                    backdropFilter: "none",
-                    borderColor: "transparent",
-                    duration: 0.3
-                });
-                gsap.to(".logo", {
-                    color: "var(--color-primary)",
-                    duration: 0.3
-                });
-                gsap.to(".burger-line-1, .burger-line-2", {
-                    backgroundColor: "var(--color-primary)",
-                    duration: 0.3
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to("nav", {
-                    backgroundColor: "rgba(244, 244, 244, 0.7)",
-                    backdropFilter: "blur(12px)",
-                    borderColor: "rgba(34, 29, 29, 0.05)",
-                    duration: 0.3,
-                    clearProps: "backdropFilter"
-                });
-                gsap.to(".logo", {
-                    color: "var(--color-secondary)",
-                    duration: 0.3
-                });
-                gsap.to(".burger-line-1, .burger-line-2", {
-                    backgroundColor: "var(--color-secondary)",
-                    duration: 0.3
-                });
-            }
-        });
+            // ScrollTrigger for Footer Section
+            ScrollTrigger.create({
+                trigger: ".footer-content", // Targeting the footer class added
+                start: "top top+=50",
+                end: "bottom bottom",
+                onEnter: () => {
+                    gsap.to("nav", {
+                        backgroundColor: "transparent",
+                        backdropFilter: "none",
+                        borderColor: "transparent",
+                        duration: 0.3
+                    });
+                    gsap.to(".logo", {
+                        color: "var(--color-primary)",
+                        duration: 0.3
+                    });
+                    gsap.to(".burger-line-1, .burger-line-2", {
+                        backgroundColor: "var(--color-primary)",
+                        duration: 0.3
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.to("nav", {
+                        backgroundColor: "rgba(244, 244, 244, 0.7)",
+                        backdropFilter: "blur(12px)",
+                        borderColor: "rgba(34, 29, 29, 0.05)",
+                        duration: 0.3,
+                        clearProps: "backdropFilter"
+                    });
+                    gsap.to(".logo", {
+                        color: "var(--color-secondary)",
+                        duration: 0.3
+                    });
+                    gsap.to(".burger-line-1, .burger-line-2", {
+                        backgroundColor: "var(--color-secondary)",
+                        duration: 0.3
+                    });
+                }
+            });
+        }
     })
 
     const handleMenuMouseEnter = () => {

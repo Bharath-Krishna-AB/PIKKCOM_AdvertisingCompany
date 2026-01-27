@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 import CustomCursor from "@/components/ui/CustomCursor";
+import Navbar from "@/components/Navbar";
 
 export default function RootLayout({
   children,
@@ -36,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${fatkat.variable} ${proxima.variable} antialiased`}
       >
@@ -55,6 +56,7 @@ export default function RootLayout({
           </div>
         </div>
         <div className="relative z-10">
+          <Navbar/>
           {children}
         </div>
       </body>
