@@ -53,7 +53,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
     return (
         <div
             ref={container}
-            className="fixed inset-0 bg-primary z-60 flex flex-col md:flex-row h-screen w-screen overflow-hidden"
+            className="fixed inset-0 bg-primary z-60 flex flex-col md:flex-row h-screen w-screen overflow-hidden -translate-y-full"
         >
             {/* Left Column: Navigation */}
             <div className="flex-1 flex flex-col justify-between px-6 py-6 md:px-12 md:py-10 relative z-10 h-full">

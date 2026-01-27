@@ -3,23 +3,31 @@ import React from "react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger, SplitText } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Footer = () => {
 
     useGSAP(() => {
-        // Parallax effect for the large text
-        gsap.to(".footer-brand-text", {
-            y: -50,
-            ease: "none",
+        const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: "footer",
+                trigger: ".footer-content",
                 start: "top bottom",
                 end: "bottom bottom",
-                scrub: true
+                scrub: true,
+                markers: true
             }
+        })
+
+        const footerBrandText = SplitText.create(".footer-brand-text", {
+            type: "words",
+        })
+
+        tl.from(footerBrandText.words, {
+            y: -100,
+            ease: "power3.out",
+            stagger: 0.1,
         });
     });
 
@@ -94,7 +102,7 @@ const Footer = () => {
             </div>
 
             {/* Massive Brand Text */}
-            <div className="relative w-full mb-8">
+            <div className="relative w-full mb-20">
                 <h1 className="footer-brand-text text-[15vw] md:text-[18vw] leading-[0.8] font-fatkat text-center text-primary/10 select-none pointer-events-none w-full">
                     pikkcom
                 </h1>
