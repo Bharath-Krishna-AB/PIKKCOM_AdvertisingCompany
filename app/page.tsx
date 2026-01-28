@@ -1,8 +1,7 @@
 "use client"
 
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import HomeSolution from "@/components/HomeProducts";
+import HomeSolution from "@/components/HomeSolution";
 import Message from "@/components/Message";
 import Footer from "@/components/Footer";
 import { useGSAP } from "@gsap/react";

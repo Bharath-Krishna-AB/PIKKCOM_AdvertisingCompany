@@ -15,31 +15,39 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 const services = [
     {
         id: "01",
-        label: "Products",
-        title: "Pikkcom VR",
+        label: "Solutions",
+        title: "Intelligence",
         image: hatImage,
         link: "#",
         color: "#ffb400"
     },
     {
         id: "02",
-        label: "Products",
-        title: "Reflexn",
+        label: "Solutions",
+        title: "Selection",
         image: hatImage,
         link: "#",
         color: "#a0a0ff"
     },
     {
         id: "03",
-        label: "Products",
-        title: "Insights",
+        label: "Solutions",
+        title: "Media",
         image: hatImage,
         link: "#",
         color: "#b0e0b0"
+    },
+    {
+        id: "04",
+        label: "Solutions",
+        title: "Optimization",
+        image: hatImage,
+        link: "#",
+        color: "#ff8080"
     }
 ];
 
-const HomeProducts = () => {
+const HomeSolutions = () => {
     const containerRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -108,7 +116,7 @@ const HomeProducts = () => {
             }
         });
 
-    }, { scope: containerRef });
+    }, { scope: containerRef, dependencies: [services] });
 
     return (
         <section ref={containerRef} className="home-solution py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
@@ -120,7 +128,7 @@ const HomeProducts = () => {
                 </h2>
 
                 {/* Staggered Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 w-full">
                     {services.map((service, i) => (
                         <div
                             key={service.id}
@@ -179,4 +187,4 @@ const HomeProducts = () => {
     );
 };
 
-export default HomeProducts;
+export default HomeSolutions;
