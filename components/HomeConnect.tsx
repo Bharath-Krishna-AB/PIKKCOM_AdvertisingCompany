@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -66,29 +65,6 @@ const HomeConnect = () => {
         { scope: containerRef }
     );
 
-    const btnRef = useRef<HTMLButtonElement>(null);
-    const arrowBtnRef = useRef<HTMLButtonElement>(null);
-
-    const handleBtnEnter = () => {
-        if (!btnRef.current) return;
-        gsap.to(btnRef.current, { scale: 1.05, duration: 0.3, ease: "power2.out" });
-    }
-
-    const handleBtnLeave = () => {
-        if (!btnRef.current) return;
-        gsap.to(btnRef.current, { scale: 1, x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
-    }
-
-    // Simple Magnetic Effect for Arrow Button
-    const handleArrowEnter = () => {
-        if (!arrowBtnRef.current) return;
-        gsap.to(arrowBtnRef.current, { scale: 1.1, duration: 0.3 });
-    }
-    const handleArrowLeave = () => {
-        if (!arrowBtnRef.current) return;
-        gsap.to(arrowBtnRef.current, { scale: 1, x: 0, y: 0, duration: 0.5, ease: "back.out(1.7)" });
-    }
-
     return (
         <section
             ref={containerRef}
@@ -134,9 +110,6 @@ const HomeConnect = () => {
             {/* Bottom Buttons */}
             <div className="w-full flex items-center justify-between md:justify-start gap-6">
                 <button
-                    ref={btnRef}
-                    onMouseEnter={handleBtnEnter}
-                    onMouseLeave={handleBtnLeave}
                     className="connect-btn group relative h-16 px-10 rounded-full bg-[#1a1a1a] text-white overflow-hidden transition-transform hover:scale-105 active:scale-95"
                 >
                     <div className="relative z-10 flex items-center gap-2">
@@ -147,18 +120,6 @@ const HomeConnect = () => {
                     </div>
                     {/* Fill effect */}
                     <div className="absolute inset-0 bg-neutral-800 translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0" />
-                </button>
-
-                <button
-                    ref={arrowBtnRef}
-                    onMouseEnter={handleArrowEnter}
-                    onMouseLeave={handleArrowLeave}
-                    className="connect-btn group relative h-16 w-16 rounded-full border border-neutral-200 bg-white flex items-center justify-center overflow-hidden transition-all hover:border-neutral-900 active:scale-90"
-                >
-                    <div className="relative w-6 h-6 overflow-hidden">
-                        <ArrowUpRight className="absolute w-6 h-6 transition-all duration-500 ease-out group-hover:-translate-y-full group-hover:translate-x-full text-[#1a1a1a] group-hover:text-black" />
-                        <ArrowUpRight className="absolute w-6 h-6 -translate-x-full translate-y-full transition-all duration-500 ease-out group-hover:translate-x-0 group-hover:translate-y-0 text-[#1a1a1a] group-hover:text-black" />
-                    </div>
                 </button>
             </div>
         </section>

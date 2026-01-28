@@ -14,6 +14,7 @@ const Hero = () => {
 
 
     useGSAP(() => {
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
         const tl1 = gsap.timeline();
 
@@ -87,11 +88,12 @@ const Hero = () => {
             >
                 <Image
                     src={heroImage}
-                    alt="hero"
+                    alt="Pikkcom Digital Advertising Hero"
                     height={720}
                     width={1400}
                     className="mx-auto rounded-2xl object-cover h-full object-top-left"
                     draggable={false}
+                    priority
                 />
             </ContainerScroll>
         </section>

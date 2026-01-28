@@ -45,11 +45,7 @@
 
 
 
-body {
-  background: var(--primary);
-  color: var(--secondary);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-}
+
 
 @media (min-width: 768px) {
   * {
@@ -64,6 +60,6 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-primary text-foreground;
   }
 }

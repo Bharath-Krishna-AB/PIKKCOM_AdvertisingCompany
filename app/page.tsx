@@ -1,56 +1,67 @@
-"use client"
-
 import Hero from "@/components/Hero";
 import HomeSolution from "@/components/HomeSolution";
 import Message from "@/components/Message";
 import Footer from "@/components/Footer";
-import { useGSAP } from "@gsap/react";
-import ScrollSmoother from "gsap/ScrollSmoother";
-import gsap from "gsap";
+import SmootherWrapper from "@/components/SmootherWrapper";
+import GridSection from "@/components/ui/GridSection";
+import hatImage from "@/public/images/hat.png";
 import CircularDemo from "@/components/CircularDemo/CircularDemo";
 import HomeConnect from "@/components/HomeConnect";
 
-gsap.registerPlugin(ScrollSmoother)
-
-const GridSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <div className={`relative border-b border-neutral-200 ${className}`}>
-    <div className="relative z-10 w-full">
-      {children}
-    </div>
-  </div>
-);
+const SERVICES_DATA = [
+  {
+    id: "01",
+    label: "Solutions",
+    title: "Intelligence",
+    image: hatImage,
+    link: "#",
+    color: "#ffb400"
+  },
+  {
+    id: "02",
+    label: "Solutions",
+    title: "Selection",
+    image: hatImage,
+    link: "#",
+    color: "#a0a0ff"
+  },
+  {
+    id: "03",
+    label: "Solutions",
+    title: "Media",
+    image: hatImage,
+    link: "#",
+    color: "#b0e0b0"
+  },
+  {
+    id: "04",
+    label: "Solutions",
+    title: "Optimization",
+    image: hatImage,
+    link: "#",
+    color: "#ff8080"
+  }
+];
 
 export default function Home() {
-
-  useGSAP(() => {
-    ScrollSmoother.create({
-      smooth: 3,
-      effects: true,
-    });
-  });
-
   return (
-    <>
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-          <GridSection>
-            <Hero />
-          </GridSection>
-          <GridSection>
-            <Message />
-          </GridSection>
-          <GridSection>
-            <HomeSolution />
-          </GridSection>
-          <GridSection>
-            <CircularDemo />
-          </GridSection>
-          <GridSection>
-            <HomeConnect />
-          </GridSection>
-          <Footer />
-        </div>
-      </div>
-    </>
+    <SmootherWrapper>
+      <GridSection>
+        <Hero />
+      </GridSection>
+      <GridSection>
+        <Message />
+      </GridSection>
+      <GridSection>
+        <HomeSolution services={SERVICES_DATA} />
+      </GridSection>
+      <GridSection>
+        <CircularDemo />
+      </GridSection>
+      <GridSection>
+        <HomeConnect />
+      </GridSection>
+      <Footer />
+    </SmootherWrapper>
   );
 }
