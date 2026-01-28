@@ -9,7 +9,16 @@ import Magnetic from "../Magnetic";
 const menuItems = [
     { label: "HOME", href: "/", src: "/images/hero.png" },
     { label: "SOLUTIONS", href: "/solutions", src: "/images/hero.png" },
-    { label: "PRODUCTS", href: "/products", src: "/images/hat.png" },
+    {
+        label: "PRODUCTS",
+        href: "/products",
+        src: "/images/hat.png",
+        subItems: [
+            { label: "PIKKCOM VR", href: "/products/pikkcomvr", src: "/images/hat.png" },
+            { label: "INSIGHTS", href: "/products/insights", src: "/images/hat.png" }, // TODO: Updates specific images if available
+            { label: "REFLEXN", href: "/products/reflexn", src: "/images/hat.png" },
+        ]
+    },
     // { label: "OUR WORK", href: "/our-work", src: "/images/hero.png" },
     { label: "COMPANY", href: "/company", src: "/images/hat.png" },
     { label: "CONTACTS", href: "/contact", src: "/images/hero.png" },
@@ -18,6 +27,7 @@ const menuItems = [
 export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (v: boolean) => void }) {
     const container = useRef<HTMLDivElement>(null);
     const [activeImage, setActiveImage] = useState(menuItems[0].src);
+    const [expandedItem, setExpandedItem] = useState<string | null>(null);
     const tl = useRef<gsap.core.Timeline>(null);
 
     useGSAP(() => {
@@ -29,7 +39,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 duration: 0.8,
                 ease: "power4.inOut",
             })
-            .from(".menu-item", {
+            .from(".menu-item-anim", {
                 y: 100,
                 opacity: 0,
                 stagger: 0.05,
@@ -57,10 +67,10 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
             className="fixed inset-0 bg-primary z-60 flex flex-col md:flex-row h-screen w-screen overflow-hidden invisible"
         >
             {/* Left Column: Navigation */}
-            <div className="flex-1 flex flex-col justify-between px-6 py-6 md:px-12 md:py-10 relative z-10 h-full">
+            <div className="flex-1 flex flex-col justify-between px-6 py-6 md:px-12 md:py-10 relative z-10 h-full overflow-y-auto no-scrollbar">
 
                 {/* Header: Logo & Close Button */}
-                <div className="flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full mb-8 md:mb-0">
                     <div className="text-xl font-fatkat cursor-pointer text-secondary">
                         pikkcom<span className="text-accent">.</span>
                     </div>
@@ -78,26 +88,53 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 </div>
 
                 {/* Main Navigation */}
-                <div className="flex flex-col gap-2 items-center justify-center flex-1">
+                <div className="flex flex-col gap-2 items-center justify-center flex-1 w-full">
                     {menuItems.map((item, index) => (
                         <div
                             key={index}
-                            className="menu-item-wrapper relative w-full p-0 overflow-hidden"
-                            onMouseEnter={() => handleMouseEnter(item)}
+                            className="menu-item-wrapper relative w-full flex flex-col items-center justify-center"
+                            onMouseEnter={() => {
+                                handleMouseEnter(item);
+                                if (item.subItems) setExpandedItem(item.label);
+                                else setExpandedItem(null);
+                            }}
+                            onMouseLeave={() => {
+                                // Optional: collapse on leave, or keep expanded until another hover
+                            }}
                         >
                             <Link
                                 href={item.href}
-                                className="menu-item block text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center"
+                                className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300"
                                 onClick={() => setIsOpen(false)}
                             >
                                 {item.label}
                             </Link>
+
+                            {/* Submenu Render */}
+                            {item.subItems && (
+                                <div className={`flex flex-col gap-2 items-center overflow-hidden transition-all duration-500 ease-in-out ${expandedItem === item.label ? 'max-h-[500px] opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
+                                    {item.subItems.map((subItem, subIndex) => (
+                                        <Link
+                                            key={subIndex}
+                                            href={subItem.href}
+                                            className="menu-item-anim block text-2xl md:text-4xl font-anton! text-secondary/70 hover:text-accent uppercase transition-colors duration-300"
+                                            onClick={() => setIsOpen(false)}
+                                            onMouseEnter={(e) => {
+                                                e.stopPropagation();
+                                                handleMouseEnter(subItem);
+                                            }}
+                                        >
+                                            {subItem.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
 
                 {/* Footer Links */}
-                <div className="flex justify-center gap-12 text-secondary/60 font-medium text-sm tracking-wide">
+                <div className="flex justify-center gap-12 text-secondary/60 font-medium text-sm tracking-wide mt-8 md:mt-0">
                     <a href="#" className="hover:text-secondary transition-colors uppercase">YouTube</a>
                     <a href="#" className="hover:text-secondary transition-colors uppercase">Instagram</a>
                     <a href="#" className="hover:text-secondary transition-colors uppercase">TikTok</a>
@@ -106,9 +143,9 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
 
             {/* Right Column: Image Preview */}
             <div className="hidden md:flex flex-1 relative h-full w-full bg-secondary/5">
-                {menuItems.map((item, index) => (
+                {menuItems.flatMap(i => i.subItems ? [i, ...i.subItems] : [i]).map((item, index) => (
                     <div
-                        key={index}
+                        key={index} // Using unique key strategy might be needed if duplicates exist, but here href/src combo is unique enough or index in flat map
                         className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeImage === item.src ? 'opacity-100' : 'opacity-0'}`}
                     >
                         <Image

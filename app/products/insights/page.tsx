@@ -88,7 +88,7 @@ const InsightsPage = () => {
           <section className="flex justify-end items-end w-full">
             <div className="relative group cursor-pointer w-full md:w-auto max-w-full md:max-w-none">
               <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
-              <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
+              <div className=" relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/hat.png"
                   alt="Vintage Synthesizers"
