@@ -107,33 +107,28 @@ const PikkcomVRPage = () => {
           </section>
         </div>
 
-        {/* EDITORIAL SECTION (NEW) */}
-        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 text-[#1a1a1a]">
-          {/* Left Col: Headline -> Right Col (Order Last) */}
-          <div className="lg:col-span-6 lg:order-last sticky top-24 self-start">
-            <h2 className="text-[7vw] text-right leading-[0.9] font-anton uppercase tracking-tight text-secondary">
+        {/* EDITORIAL HEADLINE SECTION */}
+        <section className="relative w-full max-w-screen mx-auto px-6 md:px-12 pt-24 pb-12 text-[#1a1a1a]">
+          <div className="w-full flex justify-end">
+            <h1 className="text-[7vw] text-right leading-none font-anton uppercase tracking-tight relative">
               <AnimatedLine text="We maximize" />
               <AnimatedLine text="the value of" />
               <AnimatedLine text="each opportunity" />
               <AnimatedLine text="your brand has" />
-              <AnimatedLine text="to connect" />
-            </h2>
+              <AnimatedLine text="to connect." />
+            </h1>
           </div>
+        </section>
 
-          {/* Right Col: Paragraphs -> Left Col (Order First) */}
-          {/* Increased offset to 80vh to start below the headline sections as requested */}
-          <div className="lg:col-span-6 lg:order-first space-y-8 md:space-y-12 pt-4 lg:pt-[80vh]">
-            <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-800">
-              We create impactful brand expressions that are thoughtfully contextualized across multiple dimensions—including audience, channel, timing and desired outcomes—to deliver truly optimized experiences in a fast-moving world.
+        {/* EDITORIAL PARAGRAPH SECTION */}
+        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 md:pb-32 text-[#1a1a1a]">
+          <div className="w-full space-y-8 md:space-y-16 ">
+            <p className="text-xl md:text-4xl font-normal leading-relaxed text-neutral-800 font-geist-mono">
+              We create <span className="font-semibold text-secondary">impactful brand expressions</span> that are <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-accent text-3xl md:text-4xl italic align-middle mx-1">thoughtfully contextualized</span> across multiple dimensions—including audience, channel, timing and desired outcomes—to deliver truly <span className="bg-accent/10 px-2 rounded-md">optimized experiences</span> in a fast-moving world.
+              Drawing on our broad expertise in <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-2xl md:text-3xl italic align-middle mx-1">culture & creativity</span>, experience design, production, media investment, and measurement, we help position your brand as the <span className="font-semibold underline decoration-accent decoration-2 underline-offset-4">top choice</span> for your audiences. By embedding an intelligent and streamlined operational model, powered by <span className="inline-flex items-center mx-1 align-middle bg-accent text-white px-3 py-1 rounded-full text-base font-medium">data & AI</span>, we create the agile foundation that allows you to do more with less, making every dollar work as hard as your creative.
+              Every engagement we design not only connects with people in meaningful moments but also generates <span className="inline-block bg-secondary text-primary px-4 py-1 rounded-full italic text-xl md:text-2xl mx-1 align-middle" style={{ fontFamily: 'var(--font-instrument)' }}>valuable data</span>, enabling your brand to remain <span className="font-semibold">agile, responsive, and relevant</span>—both in real time and over the long term.
             </p>
 
-            <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600">
-              Drawing on our broad expertise in culture, creativity, experience design, production, media investment, and measurement, we help position your brand as the top choice for your audiences. By embedding an intelligent and streamlined operational model, powered by data and AI, we create the agile foundation that allows you to do more with less, making every dollar work as hard as your creative at unprecedented speed and agility.
-            </p>
-
-            <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600">
-              Every engagement we design not only connects with people in meaningful moments but also generates valuable data, enabling your brand to remain agile, responsive, and relevant—both in real time and over the long term.
-            </p>
           </div>
         </section>
 

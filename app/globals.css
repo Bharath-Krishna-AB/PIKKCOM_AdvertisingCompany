@@ -1,4 +1,6 @@
 @import url('https://api.fontshare.com/v2/css?f[]=anton@400&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=instrument-serif@400,400i&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
 
 @import "tailwindcss";
 
@@ -28,6 +30,8 @@
   --font-fatkat: var(--font-fatkat);
   --font-proxima: var(--font-proxima);
   --font-anton: 'Anton', sans-serif;
+  --font-clash-display: 'Clash Display', sans-serif;
+  --font-instrument: 'Instrument Serif', serif;
   --color-ring: var(--ring);
   --color-border: var(--border);
   --radius-sm: calc(var(--radius) - 4px);
