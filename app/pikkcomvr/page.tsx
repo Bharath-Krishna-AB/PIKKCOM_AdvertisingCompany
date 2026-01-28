@@ -1,30 +1,17 @@
 'use client'
 
 import React, { useRef } from 'react'
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { Play } from 'lucide-react'
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from 'next/image'
 import Footer from '@/components/Footer'
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HomeConnect from '@/components/HomeConnect'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MagneticButton = ({ children }: { children: React.ReactNode }) => {
-  const ref = useRef<HTMLDivElement>(null)
-  // ... existing MagneticButton code ...
-  return (
-    <motion.div
-    // ...
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-const page = () => {
+const PikkcomVRPage = () => {
   const arrowMainRef = useRef<SVGPathElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -52,86 +39,109 @@ const page = () => {
 
   return (
     <>
-      <main ref={containerRef} className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between overflow-hidden">
+      <main ref={containerRef} className="relative w-full text-secondary overflow-hidden">
 
-        {/* Big Hero Text */}
-        <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-          <h1 className="text-[10vw] leading-none font-anton uppercase tracking-tight text-secondary relative">
-            <AnimatedLine text="Cool sounds to" />
-            <AnimatedLine text="supercharge digital" />
-            <AnimatedLine text="and real-life" />
-            <AnimatedLine text="moments." />
+        {/* HERO SECTION */}
+        <div className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
+          {/* Big Hero Text */}
+          <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
+            <h1 className="text-[10vw] leading-none font-anton uppercase tracking-tight relative">
+              <AnimatedLine text="Cool sounds to" />
+              <AnimatedLine text="supercharge digital" />
+              <AnimatedLine text="and real-life" />
+              <AnimatedLine text="moments." />
 
-            {/* Arrow SVG - Absolute positioned below text and pointing to image */}
-            <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
-              <svg
-                viewBox="0 0 400 300"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full"
-              >
-                <defs>
-                  <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M 1,1 Q 5,3 1,5" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-accent" />
-                  </marker>
-                </defs>
-
-                <path
-                  ref={arrowMainRef}
-                  d="M 80 80 
-                     C 80 250, 200 250, 220 200
-                     C 230 170, 180 170, 190 200
-                     C 200 240, 300 180, 320 150"
-                  stroke="currentColor"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* Arrow SVG */}
+              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
+                <svg
+                  viewBox="0 0 400 300"
                   fill="none"
-                  markerEnd="url(#arrowhead)"
-                  className="text-accent"
-                />
-              </svg>
-            </div>
-          </h1>
-        </section>
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-full"
+                >
+                  <defs>
+                    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+                      <path d="M 1,1 Q 5,3 1,5" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-accent" />
+                    </marker>
+                  </defs>
 
-        {/* Bottom Section */}
-        <section className="flex justify-end items-end w-full">
-          <div className="relative group cursor-pointer w-full md:w-auto max-w-full md:max-w-none">
-            <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
-            <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
-              {/* Using a placeholder image that matches the vintage synth vibe of the reference */}
-              <img
-                src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?q=80&w=2070&auto=format&fit=crop"
-                alt="Vintage Synthesizers"
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                  <path
+                    ref={arrowMainRef}
+                    d="M 80 80 
+                        C 80 250, 200 250, 220 200
+                        C 230 170, 180 170, 190 200
+                        C 200 240, 300 180, 320 150"
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                    markerEnd="url(#arrowhead)"
+                    className="text-accent"
+                  />
+                </svg>
+              </div>
+            </h1>
+          </section>
+
+          {/* Bottom Section */}
+          <section className="flex justify-end items-end w-full">
+            <div className="relative group cursor-pointer w-full md:w-auto max-w-full md:max-w-none">
+              <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
+              <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/hat.png"
+                  alt="Vintage Synthesizers"
+                  width={2070}
+                  height={1553}
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAKAAoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9U6KKKAP/2Q=="
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-secondary text-primary px-4 py-3 rounded-full font-anton text-lg uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                Explore Studio
+              </div>
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-secondary text-primary px-4 py-3 rounded-full font-anton text-lg uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-              Explore Studio
-            </div>
+          </section>
+        </div>
+
+        {/* EDITORIAL SECTION (NEW) */}
+        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 text-[#1a1a1a]">
+          {/* Left Col: Headline -> Right Col (Order Last) */}
+          <div className="lg:col-span-6 lg:order-last sticky top-24 self-start">
+            <h2 className="text-[7vw] text-right leading-[0.9] font-anton uppercase tracking-tight text-secondary">
+              <AnimatedLine text="We maximize" />
+              <AnimatedLine text="the value of" />
+              <AnimatedLine text="each opportunity" />
+              <AnimatedLine text="your brand has" />
+              <AnimatedLine text="to connect" />
+            </h2>
+          </div>
+
+          {/* Right Col: Paragraphs -> Left Col (Order First) */}
+          {/* Increased offset to 80vh to start below the headline sections as requested */}
+          <div className="lg:col-span-6 lg:order-first space-y-8 md:space-y-12 pt-4 lg:pt-[80vh]">
+            <p className="text-xl md:text-2xl font-light leading-relaxed text-neutral-800">
+              We create impactful brand expressions that are thoughtfully contextualized across multiple dimensions—including audience, channel, timing and desired outcomes—to deliver truly optimized experiences in a fast-moving world.
+            </p>
+
+            <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600">
+              Drawing on our broad expertise in culture, creativity, experience design, production, media investment, and measurement, we help position your brand as the top choice for your audiences. By embedding an intelligent and streamlined operational model, powered by data and AI, we create the agile foundation that allows you to do more with less, making every dollar work as hard as your creative at unprecedented speed and agility.
+            </p>
+
+            <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600">
+              Every engagement we design not only connects with people in meaningful moments but also generates valuable data, enabling your brand to remain agile, responsive, and relevant—both in real time and over the long term.
+            </p>
           </div>
         </section>
+
       </main>
-      <HomeConnect/>
+      <HomeConnect />
       <Footer />
     </>
   )
 }
 
-const AnimatedLine = ({ text }: { text: string }) => {
-  return (
-    <div className="overflow-hidden">
-      <motion.div
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-      >
-        {text}
-      </motion.div>
-    </div>
-  )
-}
-
-export default page
+export default PikkcomVRPage
