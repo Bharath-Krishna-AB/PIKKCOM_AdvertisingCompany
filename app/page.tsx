@@ -3,7 +3,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import HomeSolution from "@/components/HomeProducts";
-import Testimonial from "@/components/Testimonial";
 import Message from "@/components/Message";
 import Footer from "@/components/Footer";
 import { useGSAP } from "@gsap/react";

@@ -8,6 +8,7 @@ import Footer from '@/components/Footer'
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import HomeConnect from '@/components/HomeConnect'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,6 +114,7 @@ const page = () => {
           </div>
         </section>
       </main>
+      <HomeConnect/>
       <Footer />
     </>
   )
