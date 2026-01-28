@@ -9,9 +9,9 @@ import Magnetic from "../Magnetic";
 const menuItems = [
     { label: "HOME", href: "/", src: "/images/hero.png" },
     { label: "SOLUTIONS", href: "/solutions", src: "/images/hero.png" },
-    { label: "PRODUCTS", href: "/products", src: "/images/hero.png" },
-    { label: "OUR WORK", href: "/our-work", src: "/images/hero.png" },
-    { label: "COMPANY", href: "/company", src: "/images/hero.png" },
+    { label: "PRODUCTS", href: "/products", src: "/images/hat.png" },
+    // { label: "OUR WORK", href: "/our-work", src: "/images/hero.png" },
+    { label: "COMPANY", href: "/company", src: "/images/hat.png" },
     { label: "CONTACTS", href: "/contact", src: "/images/hero.png" },
 ];
 
