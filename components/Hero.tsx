@@ -77,10 +77,10 @@ const Hero = () => {
                         {/* Subtext */}
                         <div className="hero-subtext text-base sm:text-xl md:text-2xl leading-relaxed text-secondary/80 max-w-sm sm:max-w-xl md:max-w-3xl mx-auto">
                             <p>
-                                PIKKCOM combines <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">intelligence</span> , <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">technology</span> and <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">media</span> to help
+                                PIKKCOM combines <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">intelligence</span> , <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">technology</span> and <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">media</span> to help
                             </p>
                             <p className="mt-2">
-                                <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">brands</span> spot winning products, understand true <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">customer intent</span> , and launch high-impact campaigns that <span className="bg-gray-200/80 px-2 py-0.5 rounded-md text-secondary font-medium mx-1">convert</span>.
+                                <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">brands</span> spot winning products, understand true <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">customer intent</span> , and launch high-impact campaigns that <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">convert</span>.
                             </p>
                         </div>
                     </div>

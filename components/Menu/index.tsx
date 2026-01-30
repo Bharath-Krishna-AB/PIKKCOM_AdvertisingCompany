@@ -7,21 +7,21 @@ import Link from "next/link";
 import Magnetic from "../Magnetic";
 
 const menuItems = [
-    { label: "HOME", href: "/", src: "/images/hero.png" },
-    { label: "SOLUTIONS", href: "/solutions", src: "/images/hero.png" },
+    { label: "HOME", href: "/", src: "/images/home-hamburger-final.jpeg" },
+    { label: "SOLUTIONS", href: "/solutions", src: "/images/solutions-hamburger-v2.jpeg" },
     {
         label: "PRODUCTS",
         href: "/products",
-        src: "/images/hat.png",
+        src: "/images/products-hamburger-v2.jpeg",
         subItems: [
-            { label: "PIKKCOM VR", href: "/products/pikkcomvr", src: "/images/hat.png" },
-            { label: "INSIGHTS", href: "/products/insights", src: "/images/hat.png" }, // TODO: Updates specific images if available
-            { label: "REFLEXN", href: "/products/reflexn", src: "/images/hat.png" },
+            { label: "REFLEXN", href: "/products/reflexn", src: "/images/reflexn-hamburger-v2.jpeg" },
+            { label: "PIKKCOM VR", href: "/products/pikkcomvr", src: "/images/vr-hamburger-v2.jpeg" },
+            { label: "INSIGHTS", href: "/products/insights", src: "/images/insight-hamburger-v2.jpg" }, // TODO: Updates specific images if available
         ]
     },
     // { label: "OUR WORK", href: "/our-work", src: "/images/hero.png" },
-    { label: "COMPANY", href: "/company", src: "/images/hat.png" },
-    { label: "CONTACTS", href: "/contact", src: "/images/hero.png" },
+    { label: "COMPANY", href: "/company", src: "/images/company-hamburger-v2.jpeg" },
+    { label: "CONTACTS", href: "/contact", src: "/images/contact-hamburger-v2.jpeg" },
 ];
 
 export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (v: boolean) => void }) {
@@ -52,6 +52,8 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
     useEffect(() => {
         if (isOpen) {
             tl.current?.play();
+            setActiveImage(menuItems[0].src);
+            setExpandedItem(null);
         } else {
             tl.current?.reverse();
         }
@@ -110,6 +112,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                                 href={item.href}
                                 className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300"
                                 onClick={() => setIsOpen(false)}
+                                onMouseEnter={() => handleMouseEnter(item)}
                             >
                                 {item.label}
                             </Link>
