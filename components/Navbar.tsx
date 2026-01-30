@@ -19,17 +19,28 @@ const Navbar = () => {
     useGSAP(() => {
         if (currentPath === "/") {
             const tl1 = gsap.timeline();
-            tl1.from(".logo", {
+            tl1.fromTo(".logo", {
                 opacity: 0,
-                y: -20,
+                y: -20
+            }, {
+                opacity: 1,
+                y: 0,
                 duration: 0.5,
                 ease: "power2.inOut"
-            }).from(".menu-icon", {
+            }).fromTo(".menu-icon", {
                 opacity: 0,
-                y: -20,
+                y: -20
+            }, {
+                opacity: 1,
+                y: 0,
                 duration: 0.5,
                 ease: "power2.inOut"
-            }, "-=0.4").from(".action-button", {
+            }, "-=0.4").fromTo(".action-button", {
+                opacity: 0,
+                y: -20
+            }, {
+                opacity: 1,
+                y: 0,
                 duration: 0.5,
                 ease: "power2.inOut"
             }, "-=0.4");
@@ -47,11 +58,11 @@ const Navbar = () => {
                         duration: 0.3
                     });
                     gsap.to(".logo", {
-                        color: "var(--color-primary)",
+                        color: "var(--color-secondary)",
                         duration: 0.3
                     });
                     gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-primary)",
+                        backgroundColor: "var(--color-secondary)",
                         duration: 0.3
                     });
                 },
@@ -80,11 +91,11 @@ const Navbar = () => {
                         duration: 0.3
                     });
                     gsap.to(".logo", {
-                        color: "var(--color-primary)",
+                        color: "var(--color-secondary)",
                         duration: 0.3
                     });
                     gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-primary)",
+                        backgroundColor: "var(--color-secondary)",
                         duration: 0.3
                     });
                 },
@@ -120,11 +131,11 @@ const Navbar = () => {
                         duration: 0.3
                     });
                     gsap.to(".logo", {
-                        color: "var(--color-primary)",
+                        color: "var(--color-secondary)",
                         duration: 0.3
                     });
                     gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-primary)",
+                        backgroundColor: "var(--color-secondary)",
                         duration: 0.3
                     });
                 },
@@ -147,7 +158,7 @@ const Navbar = () => {
                 }
             });
         }
-    })
+    }, [currentPath]);
 
     const handleMenuMouseEnter = () => {
         gsap.to(".menu-icon", {

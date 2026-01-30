@@ -71,9 +71,13 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
 
                 {/* Header: Logo & Close Button */}
                 <div className="flex items-center justify-between w-full mb-8 md:mb-0">
-                    <div className="text-xl font-fatkat cursor-pointer text-secondary">
+                    <Link
+                        href="/"
+                        onClick={() => setIsOpen(false)}
+                        className="text-xl font-fatkat cursor-pointer text-secondary"
+                    >
                         pikkcom<span className="text-accent">.</span>
-                    </div>
+                    </Link>
 
                     <Magnetic>
                         <button
