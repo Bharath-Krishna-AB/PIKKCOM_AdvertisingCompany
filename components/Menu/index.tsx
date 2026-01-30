@@ -8,10 +8,10 @@ import Magnetic from "../Magnetic";
 
 const menuItems = [
     { label: "HOME", href: "/", src: "/images/home-hamburger-final.jpeg" },
-    { label: "SOLUTIONS", href: "/solutions", src: "/images/solutions-hamburger-v2.jpeg" },
+    { label: "SOLUTIONS", href: "", src: "/images/solutions-hamburger-v2.jpeg" },
     {
         label: "PRODUCTS",
-        href: "/products",
+        href: "",
         src: "/images/products-hamburger-v2.jpeg",
         subItems: [
             { label: "REFLEXN", href: "/products/reflexn", src: "/images/reflexn-hamburger-v2.jpeg" },
@@ -108,14 +108,23 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                                 // Optional: collapse on leave, or keep expanded until another hover
                             }}
                         >
-                            <Link
-                                href={item.href}
-                                className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300"
-                                onClick={() => setIsOpen(false)}
-                                onMouseEnter={() => handleMouseEnter(item)}
-                            >
-                                {item.label}
-                            </Link>
+                            {item.href ? (
+                                <Link
+                                    href={item.href}
+                                    className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300"
+                                    onClick={() => setIsOpen(false)}
+                                    onMouseEnter={() => handleMouseEnter(item)}
+                                >
+                                    {item.label}
+                                </Link>
+                            ) : (
+                                <span
+                                    className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300 cursor-default"
+                                    onMouseEnter={() => handleMouseEnter(item)}
+                                >
+                                    {item.label}
+                                </span>
+                            )}
 
                             {/* Submenu Render */}
                             {item.subItems && (

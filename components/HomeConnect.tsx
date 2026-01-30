@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const HomeConnect = () => {
+    const router = useRouter();
     const containerRef = useRef<HTMLDivElement>(null);
     const circleRef = useRef<SVGPathElement>(null);
 
@@ -107,9 +109,11 @@ const HomeConnect = () => {
                 </h2>
             </div>
 
+
             {/* Bottom Buttons */}
             <div className="w-full flex items-center justify-between md:justify-start gap-6">
                 <button
+                    onClick={() => router.push("/contact")}
                     className="connect-btn group relative h-16 px-10 rounded-full bg-[#2D2D2D] text-white overflow-hidden transition-transform hover:scale-105 active:scale-95"
                 >
                     <div className="relative z-10 flex items-center gap-2">

@@ -5,7 +5,8 @@ import { ScrollTrigger } from "gsap/all";
 import Magnetic from "./Magnetic";
 import Menu from "./Menu";
 import React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 import Link from "next/link";
 
 
@@ -13,7 +14,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
 
-    const currentPath = usePathname()
+    const currentPath = usePathname();
+    const router = useRouter();
+
 
 
     useGSAP(() => {
@@ -208,6 +211,8 @@ const Navbar = () => {
         }
     }, [isMenuOpen]);
 
+    if (currentPath === "/contact") return null;
+
     return (
         <>
             <Menu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
@@ -236,6 +241,7 @@ const Navbar = () => {
                 {/* Right Action Button */}
                 <Magnetic>
                     <button
+                        onClick={() => router.push("/contact")}
                         onMouseEnter={() => handleActionMouseEnter()}
                         onMouseLeave={() => handleActionMouseLeave()}
                         className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
