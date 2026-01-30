@@ -108,7 +108,7 @@ const PikkcomVRPage = () => {
         </div>
 
         {/* EDITORIAL HEADLINE SECTION */}
-        <section className="relative w-full max-w-screen mx-auto px-6 md:px-12 pt-24 pb-12 text-[#1a1a1a]">
+        <section className="relative w-full max-w-screen mx-auto px-6 md:px-12 pt-24 pb-12 text-[#2D2D2D]">
           <div className="w-full flex justify-end">
             <h1 className="text-[7vw] text-right leading-none font-anton uppercase tracking-tight relative">
               <AnimatedLine text="We maximize" />
@@ -121,7 +121,7 @@ const PikkcomVRPage = () => {
         </section>
 
         {/* EDITORIAL PARAGRAPH SECTION */}
-        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 md:pb-32 text-[#1a1a1a]">
+        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 md:pb-32 text-[#2D2D2D]">
           <div className="w-full space-y-8 md:space-y-16 ">
             <p className="text-xl md:text-4xl font-normal leading-relaxed text-neutral-800 font-geist-mono">
               We create <span className="font-semibold text-secondary">impactful brand expressions</span> that are <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-accent text-3xl md:text-4xl italic align-middle mx-1">thoughtfully contextualized</span> across multiple dimensions—including audience, channel, timing and desired outcomes—to deliver truly <span className="bg-accent/10 px-2 rounded-md">optimized experiences</span> in a fast-moving world.

@@ -79,7 +79,7 @@ const HomeConnect = () => {
 
             {/* Main Headline */}
             <div className="flex-1 flex items-center justify-center my-12">
-                <h2 className="connect-text text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-[#1a1a1a] text-center relative z-10">
+                <h2 className="connect-text text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-[#2D2D2D] text-center relative z-10">
                     What can we do for{" "}
                     <span className="relative inline-block px-4">
                         you?
@@ -110,7 +110,7 @@ const HomeConnect = () => {
             {/* Bottom Buttons */}
             <div className="w-full flex items-center justify-between md:justify-start gap-6">
                 <button
-                    className="connect-btn group relative h-16 px-10 rounded-full bg-[#1a1a1a] text-white overflow-hidden transition-transform hover:scale-105 active:scale-95"
+                    className="connect-btn group relative h-16 px-10 rounded-full bg-[#2D2D2D] text-white overflow-hidden transition-transform hover:scale-105 active:scale-95"
                 >
                     <div className="relative z-10 flex items-center gap-2">
                         <span className="text-xl font-medium relative overflow-hidden h-7 block">

@@ -6,6 +6,7 @@ import Magnetic from "./Magnetic";
 import Menu from "./Menu";
 import React from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -202,9 +203,9 @@ const Navbar = () => {
             <nav className="fixed top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
                 {/* Logo */}
                 <Magnetic>
-                    <div className="logo text-xl font-fatkat cursor-pointer text-secondary relative z-50">
+                    <Link href="/" className="logo text-xl font-fatkat cursor-pointer text-secondary relative z-50">
                         pikkcom<span className="text-accent">.</span>
-                    </div>
+                    </Link>
                 </Magnetic>
 
                 {/* Menu Icon - Custom Double Line */}

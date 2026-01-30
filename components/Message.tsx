@@ -69,6 +69,7 @@ const Message = () => {
     })
 
     paraTl.from(paragraphSplit.words, {
+      opacity: 0,
       yPercent: 300,
       rotate: 3,
       ease: "power1.inOut",
@@ -78,15 +79,15 @@ const Message = () => {
   });
 
   return (
-    <section className=" message-content bg-secondary font-anton h-screen overflow-hidden flex justify-center items-center relative z-20">
-      <div className="container mx-auto flex justify-center items-center py-28 relative">
+    <section className=" message-content bg-secondary font-anton flex justify-center items-center relative z-20">
+      <div className="container mx-auto flex justify-center items-center py-24 relative">
         <div className="w-full h-full">
-          <div className="2xl:text-[8rem] md:text-8xl text-5xl font-bold uppercase flex flex-col justify-center items-center md:gap-24 gap-14">
+          <div className="2xl:text-[8rem] md:text-8xl text-5xl font-bold uppercase flex flex-col justify-center items-center md:gap-2 gap-2">
             <h1 className="first-message leading-none 2xl:max-w-7xl md:max-w-2xl max-w-xs text-center  text-[#faeade10]">We identify winning products, decode real </h1>
             <div style={{
               clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
-            }} className="msg-text-scroll rotate-3 2xl:translate-y-5 -translate-y-5 absolute z-10">
-              <div className=" md:pb-5 pb-3 px-5">
+            }} className="msg-text-scroll rotate-3 2xl:translate-y-5 -translate-y-5 -mb-5 relative z-10">
+              <div className="px-5">
                 <h2 className="text-accent leading-none">demand</h2>
               </div>
             </div>

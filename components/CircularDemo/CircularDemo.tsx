@@ -66,7 +66,7 @@ const CircularDemo = () => {
         <section className="w-full min-h-screen  relative flex flex-col items-center pt-24 overflow-hidden font-[family-name:var(--font-figtree)]">
             {/* Header Section */}
             <div className="text-center z-10 space-y-6 mb-8 max-w-5xl mx-auto px-4">
-                <h2 className="text-[5rem] leading-none font-medium tracking-tight text-[#1a1a1a]">
+                <h2 className="text-[5rem] leading-none font-medium tracking-tight text-[#2D2D2D]">
                     A growing toolkit for
                     <br />
                     creative developers

@@ -49,7 +49,7 @@ function createCardTexture(
 
     // Text configuration
     const isDark = item.type === 'black';
-    const textColor = isDark ? '#ffffff' : '#1a1a1a';
+    const textColor = isDark ? '#ffffff' : '#2D2D2D';
     const subTextColor = isDark ? '#a0a0a0' : '#555555';
 
     // 1. Draw Star Icon (Center)
@@ -125,7 +125,7 @@ function createCardTexture(
         const startX = width / 2 - thumbW * 1.5 - 20;
         let dx = startX;
 
-        context.fillStyle = '#1a1a1a'; // slightly lighter black
+        context.fillStyle = '#2D2D2D'; // slightly lighter black
         context.strokeStyle = '#333';
         context.lineWidth = 1;
 

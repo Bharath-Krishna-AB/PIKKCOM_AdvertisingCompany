@@ -95,7 +95,7 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
             <div className="max-w-[90rem] mx-auto w-full relative z-10">
 
                 {/* Header */}
-                <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold font-proxima leading-tighter tracking-tight mb-24 md:mb-32 max-w-5xl">
+                <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-7xl font-bold font-clash-display leading-tight tracking-tight mb-24 md:mb-32 w-full text-[#2d2d2d]">
                     Your trusted partner for innovation across four strategic service offerings <span className="text-accent">:</span>
                 </h2>
 

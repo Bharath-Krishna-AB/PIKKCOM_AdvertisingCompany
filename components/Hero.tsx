@@ -64,7 +64,7 @@ const Hero = () => {
                 titleComponent={
                     <div className="flex flex-col items-center justify-center">
                         {/* Headline */}
-                        <h1 className="hero-headline flex flex-nowrap whitespace-nowrap items-center justify-center text-[3.5vw] md:text-[5vw] lg:text-[6vw] font-medium tracking-tighter text-secondary mb-8 md:mb-12">
+                        <h1 className="hero-headline flex flex-nowrap whitespace-nowrap items-center justify-center text-[3.5vw] md:text-[5vw] lg:text-[6vw] font-medium tracking-tighter text-[#2d2d2d] mb-8 md:mb-12">
                             <span>Turn Demand </span>
                             <span className="text-accent flex items-center justify-center relative mx-[1vw] md:mx-[1.5vw]">
                                 <svg width="0.8em" height="0.8em" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="animate-spin-slow hero-svg">
