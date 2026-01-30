@@ -113,16 +113,7 @@ const Footer = () => {
 
             {/* Content Grid */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 w-full mb-32 font-proxima">
-                {/* Column 1: Address/Contact */}
-                <div className="footer-column md:col-span-4 flex flex-col gap-6">
-                    <h3 className="text-accent font-bold tracking-wider uppercase opacity-80 text-sm">PIKKCOM</h3>
-                    <div className="flex flex-col gap-1 text-lg opacity-80 leading-relaxed font-bold">
-                        <p>Infopark Park Centre,</p>
-                        <p>Infopark Phase 1,</p>
-                        <p>Infopark Kochi P.O, Kakkanad,</p>
-                        <p>Kochi, Ernakulam, Kerala - 682042</p>
-                    </div>
-                </div>
+
 
                 {/* Column 2: Navigation */}
                 <div className="footer-column md:col-span-4 flex flex-col gap-6">
