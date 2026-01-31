@@ -152,7 +152,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 {/* Footer Links */}
                 <div className="flex justify-center gap-12 text-secondary/60 font-medium text-sm tracking-wide mt-8 md:mt-0">
                     <a href="#" className="hover:text-secondary transition-colors uppercase">YouTube</a>
-                    <a href="#" className="hover:text-secondary transition-colors uppercase">Instagram</a>
+                    <a href="https://www.instagram.com/pikkcom?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" className="hover:text-secondary transition-colors uppercase">Instagram</a>
                     <a href="#" className="hover:text-secondary transition-colors uppercase">TikTok</a>
                 </div>
             </div>

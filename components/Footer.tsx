@@ -154,7 +154,7 @@ const Footer = () => {
                             <span className="relative z-10">LINKEDIN</span>
                             <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
                         </Link>
-                        <Link href="#" className="group relative inline-block w-fit">
+                        <Link href="https://www.instagram.com/pikkcom?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" className="group relative inline-block w-fit">
                             <span className="relative z-10">INSTAGRAM</span>
                             <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
                         </Link>
