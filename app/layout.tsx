@@ -52,6 +52,7 @@ export const metadata: Metadata = {
 
 import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/components/Navbar";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 export default function RootLayout({
   children,
@@ -80,6 +81,7 @@ export default function RootLayout({
         <div className="relative z-10">
           <Navbar />
           {children}
+          <WhatsAppWidget />
         </div>
       </body>
     </html>
