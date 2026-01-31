@@ -3,12 +3,16 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import emailjs from '@emailjs/browser';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 export default function ContactPage() {
     const router = useRouter();
     const containerRef = useRef(null);
+    const formRef = useRef<HTMLFormElement>(null);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [status, setStatus] = React.useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' });
 
     useGSAP(() => {
         gsap.from(containerRef.current, {
@@ -26,6 +30,30 @@ export default function ContactPage() {
             delay: 0.2
         });
     }, { scope: containerRef });
+
+    const sendEmail = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!formRef.current) return;
+
+        setIsSubmitting(true);
+        setStatus({ type: null, message: '' });
+
+        emailjs.sendForm(
+            'service_3r3aroq',
+            'template_vedme79',
+            formRef.current,
+            'z-JqCBqYp5_JSluFX'
+        )
+            .then((result) => {
+                setStatus({ type: 'success', message: 'Message sent successfully!' });
+                if (formRef.current) formRef.current.reset();
+            }, (error) => {
+                setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
+    };
 
     return (
         <div ref={containerRef} className="h-screen w-full bg-[#FFE6BC] text-[#001D3D] relative overflow-hidden flex flex-col">
@@ -73,12 +101,14 @@ export default function ContactPage() {
                         </h2>
                     </div>
 
-                    <form className="w-full max-w-2xl space-y-6">
+                    <form ref={formRef} onSubmit={sendEmail} className="w-full max-w-2xl space-y-6">
                         <div className="contact-anim space-y-2">
                             <label htmlFor="firstName" className="sr-only">First Name</label>
                             <input
                                 type="text"
+                                name="user_name"
                                 id="firstName"
+                                required
                                 placeholder="First Name*"
                                 className="w-full bg-white rounded-2xl px-6 py-3 text-lg outline-none focus:ring-2 focus:ring-[#001D3D]/20 transition-all placeholder:text-gray-500"
                             />
@@ -88,7 +118,9 @@ export default function ContactPage() {
                             <label htmlFor="email" className="sr-only">Email</label>
                             <input
                                 type="email"
+                                name="user_email"
                                 id="email"
+                                required
                                 placeholder="Email*"
                                 className="w-full bg-white rounded-2xl px-6 py-3 text-lg outline-none focus:ring-2 focus:ring-[#001D3D]/20 transition-all placeholder:text-gray-500"
                             />
@@ -97,24 +129,34 @@ export default function ContactPage() {
                         <div className="contact-anim space-y-2">
                             <label htmlFor="message" className="sr-only">Message Area</label>
                             <textarea
+                                name="message"
                                 id="message"
+                                required
                                 placeholder="Message Area*"
                                 rows={4}
                                 className="w-full bg-white rounded-2xl px-6 py-3 text-lg outline-none focus:ring-2 focus:ring-[#001D3D]/20 transition-all placeholder:text-gray-500 resize-none"
                             ></textarea>
                         </div>
 
+                        {status.message && (
+                            <div className={`text-sm font-medium ${status.type === 'success' ? 'text-green-700' : 'text-red-700'}`}>
+                                {status.message}
+                            </div>
+                        )}
+
                         <div className="contact-anim flex items-center gap-4 pt-4">
                             <button
                                 type="submit"
-                                className="bg-[#001D3D] text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-opacity-90 transition-all"
+                                disabled={isSubmitting}
+                                className="bg-[#001D3D] text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Submit
+                                {isSubmitting ? 'Sending...' : 'Submit'}
                             </button>
 
                             <button
-                                type="button"
-                                className="w-14 h-14 rounded-full bg-[#001D3D] text-white flex items-center justify-center hover:bg-opacity-90 transition-all group"
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-14 h-14 rounded-full bg-[#001D3D] text-white flex items-center justify-center hover:bg-opacity-90 transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="group-hover:translate-x-1 transition-transform">
                                     <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
