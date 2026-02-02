@@ -58,7 +58,7 @@ const ReflexnPage = () => {
         <div className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-            <h1 className="text-[10vw] leading-none font-anton uppercase tracking-tight relative">
+            <h1 className="text-[10vw] md:text-[7vw] leading-none font-anton uppercase tracking-tight relative">
               <AnimatedLine text="Confident" />
               <AnimatedLine text="decisions at" />
               <AnimatedLine text="the moment" />

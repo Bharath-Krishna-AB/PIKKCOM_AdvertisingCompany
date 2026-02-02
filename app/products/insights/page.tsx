@@ -35,7 +35,39 @@ const InsightsPage = () => {
 
     animatePath(arrowMainRef.current, 0.5);
 
+    // Fade in sections
+    gsap.utils.toArray('.content-section').forEach((section: any) => {
+      gsap.from(section, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%"
+        }
+      })
+    });
+
   }, { scope: containerRef });
+
+  const modules = [
+    {
+      title: "Product Ranking Dashboard",
+      desc: "A live dashboard that ranks products based on demand, performance, trends, and profitability — helping brands quickly identify their best products to focus on."
+    },
+    {
+      title: "Customer Preference Segmentation",
+      desc: "Groups customers into preference-based segments (style, price range, category interest, buying behavior) so brands can understand what different audiences want."
+    },
+    {
+      title: "Campaign-ready Product Recommendations",
+      desc: "AI recommends the best products to advertise by matching customer preferences with product potential — creating ready lists of products for campaigns."
+    },
+    {
+      title: "Ad Product Automation System",
+      desc: "Automatically selects and updates products inside ad campaigns based on data + AI, so brands always promote the right products without manual effort."
+    }
+  ]
 
   return (
     <>
@@ -45,11 +77,11 @@ const InsightsPage = () => {
         <div className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-            <h1 className="text-[10vw] leading-none font-anton uppercase tracking-tight relative">
-              <AnimatedLine text="Insights" />
-              <AnimatedLine text="supercharge digital" />
-              <AnimatedLine text="and real-life" />
-              <AnimatedLine text="moments." />
+            <h1 className="text-[10vw] md:text-[7vw] leading-none font-anton uppercase tracking-tight relative">
+              <AnimatedLine text="Focus," />
+              <AnimatedLine text="Plan, and" />
+              <AnimatedLine text="Grow" />
+              <AnimatedLine text="Profitably." />
 
               {/* Arrow SVG */}
               <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
@@ -88,10 +120,10 @@ const InsightsPage = () => {
           <section className="flex justify-end items-end w-full">
             <div className="relative group cursor-pointer w-full md:w-auto max-w-full md:max-w-none">
               <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
-              <div className=" relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/hat.png"
-                  alt="Vintage Synthesizers"
+                  src="/images/insight-hamburger-v2.jpg"
+                  alt="Pikkcom Insights Dashboard"
                   width={2070}
                   height={1553}
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
@@ -101,36 +133,75 @@ const InsightsPage = () => {
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
               </div>
               <div className="absolute -bottom-4 -left-4 bg-secondary text-primary px-4 py-3 rounded-full font-anton text-lg uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                Explore Studio
+                Pikkcom Insights
               </div>
             </div>
           </section>
         </div>
 
-        {/* EDITORIAL HEADLINE SECTION */}
-        <section className="relative w-full max-w-screen mx-auto px-6 md:px-12 pt-24 pb-12 text-[#2D2D2D]">
-          <div className="w-full flex justify-end">
-            <h1 className="text-[7vw] text-right leading-none font-anton uppercase tracking-tight relative">
-              <AnimatedLine text="We maximize" />
-              <AnimatedLine text="the value of" />
-              <AnimatedLine text="each opportunity" />
-              <AnimatedLine text="your brand has" />
-              <AnimatedLine text="to connect." />
-            </h1>
-          </div>
-        </section>
+        {/* CONTENT CONTAINER */}
+        <div className="max-w-[1920px] mx-auto px-6 md:px-12 pb-32 space-y-32">
 
-        {/* EDITORIAL PARAGRAPH SECTION */}
-        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 md:pb-32 text-[#2D2D2D]">
-          <div className="w-full space-y-8 md:space-y-16 ">
-            <p className="text-xl md:text-4xl font-normal leading-relaxed text-neutral-800 font-geist-mono">
-              We create <span className="font-semibold text-secondary">impactful brand expressions</span> that are <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-accent text-3xl md:text-4xl italic align-middle mx-1">thoughtfully contextualized</span> across multiple dimensions—including audience, channel, timing and desired outcomes—to deliver truly <span className="bg-accent/10 px-2 rounded-md">optimized experiences</span> in a fast-moving world.
-              Drawing on our broad expertise in <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-2xl md:text-3xl italic align-middle mx-1">culture & creativity</span>, experience design, production, media investment, and measurement, we help position your brand as the <span className="font-semibold underline decoration-accent decoration-2 underline-offset-4">top choice</span> for your audiences. By embedding an intelligent and streamlined operational model, powered by <span className="inline-flex items-center mx-1 align-middle bg-accent text-white px-3 py-1 rounded-full text-base font-medium">data & AI</span>, we create the agile foundation that allows you to do more with less, making every dollar work as hard as your creative.
-              Every engagement we design not only connects with people in meaningful moments but also generates <span className="inline-block bg-secondary text-primary px-4 py-1 rounded-full italic text-xl md:text-2xl mx-1 align-middle" style={{ fontFamily: 'var(--font-instrument)' }}>valuable data</span>, enabling your brand to remain <span className="font-semibold">agile, responsive, and relevant</span>—both in real time and over the long term.
+          {/* INTRO */}
+          <section className="content-section max-w-4xl">
+            <p className="text-2xl md:text-5xl font-clash-display font-medium text-secondary leading-tight">
+              A product intelligence platform that helps brands <span className="text-accent italic font-instrument">focus, plan campaigns</span>, and grow profitably.
             </p>
+          </section>
 
-          </div>
-        </section>
+          {/* MODULES GRID */}
+          <section className="content-section">
+            <h2 className="text-sm font-sans uppercase tracking-widest text-secondary/50 mb-12">Key Modules</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              {modules.map((mod, i) => (
+                <div key={i} className="group">
+                  <h3 className="text-2xl md:text-3xl font-clash-display font-semibold text-secondary mb-4 group-hover:text-accent transition-colors duration-300">
+                    {mod.title}
+                  </h3>
+                  <p className="text-lg md:text-xl font-sans font-light text-secondary/80 leading-relaxed border-l-2 border-secondary/10 pl-6 group-hover:border-accent transition-colors duration-300">
+                    {mod.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* PROBLEM DEFINITION SECTION */}
+          <section className="content-section bg-secondary text-primary rounded-3xl p-8 md:p-16 relative overflow-hidden">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-4xl md:text-6xl font-anton uppercase mb-8">The Challenge</h2>
+                <p className="text-xl md:text-2xl font-sans font-light opacity-90 mb-8">
+                  When a brand has <span className="font-bold text-accent">1000+ products</span>, they can’t manually decide:
+                </p>
+                <ul className="space-y-4">
+                  {[
+                    "Which products to run ads for",
+                    "Which products to stop advertising",
+                    "Which products to push today / this week / this season",
+                    "Which products match which customers"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-4 text-lg md:text-xl font-clash-display">
+                      <div className="w-2 h-2 rounded-full bg-accent"></div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="border-t lg:border-t-0 lg:border-l border-primary/20 pt-12 lg:pt-0 lg:pl-16">
+                <h2 className="text-4xl md:text-6xl font-anton uppercase mb-8 text-accent">The Solution</h2>
+                <p className="text-xl md:text-3xl font-instrument italic leading-relaxed">
+                  "The <span className="not-italic font-bold font-sans">Ad Product Automation System</span> does this automatically using <span className="bg-primary/20 px-2 rounded-md">data + AI</span>, ensuring campaigns always focus on the right products."
+                </p>
+              </div>
+            </div>
+
+            {/* Background decorative element */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          </section>
+
+        </div>
 
       </main>
       <HomeConnect />
