@@ -11,6 +11,7 @@ import mediaImage from "@/public/images/media.jpeg";
 import optimizationImage from "@/public/images/optimization.jpeg";
 import CircularDemo from "@/components/CircularDemo/CircularDemo";
 import HomeConnect from "@/components/HomeConnect";
+import NewHero from "@/components/NewHero";
 
 const SERVICES_DATA = [
   {
@@ -50,6 +51,9 @@ const SERVICES_DATA = [
 export default function Home() {
   return (
     <SmootherWrapper>
+      <GridSection>
+        <NewHero />
+      </GridSection>
       <GridSection>
         <Hero />
       </GridSection>
