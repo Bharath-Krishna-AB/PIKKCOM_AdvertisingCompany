@@ -116,51 +116,86 @@ const Footer = () => {
 
 
                 {/* Column 2: Navigation */}
-                <div className="footer-column md:col-span-4 flex flex-col gap-6">
-                    <h3 className="text-accent font-bold tracking-wider uppercase opacity-80 text-sm">NAVIGATION</h3>
-                    <div className="grid grid-cols-2 gap-4 text-lg font-bold">
-                        <Link href="/" className="group relative inline-block w-fit">
-                            <span className="relative z-10">HOME</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
-                        </Link>
-                        <Link href="#" className="group relative inline-block w-fit">
-                            <span className="relative z-10">OUR WORK</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
-                        </Link>
-                        <Link href="#" className="group relative inline-block w-fit">
-                            <span className="relative z-10">SOLUTIONS</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
-                        </Link>
-                        <Link href="#" className="group relative inline-block w-fit">
-                            <span className="relative z-10">COMPANY</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
-                        </Link>
-                        <Link href="#" className="group relative inline-block w-fit">
-                            <span className="relative z-10">PRODUCTS</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
-                        </Link>
-                        <Link href="#" className="group relative inline-block w-fit">
-                            <span className="relative z-10">CONTACT</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
-                        </Link>
+                <div className="footer-column md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+
+                    {/* Main Links */}
+                    <div className="flex flex-col gap-6">
+                        <h3 className="text-accent font-bold tracking-wider uppercase opacity-80 text-sm">MENU</h3>
+                        <div className="flex flex-col gap-3 text-lg font-bold">
+                            <Link href="/" className="group relative inline-block w-fit">
+                                <span className="relative z-10">HOME</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/company" className="group relative inline-block w-fit">
+                                <span className="relative z-10">COMPANY</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/contact" className="group relative inline-block w-fit">
+                                <span className="relative z-10">CONTACT</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                        </div>
                     </div>
+
+                    {/* Solutions */}
+                    <div className="flex flex-col gap-6">
+                        <h3 className="text-accent font-bold tracking-wider uppercase opacity-80 text-sm">SOLUTIONS</h3>
+                        <div className="flex flex-col gap-3 text-lg font-bold">
+                            <Link href="/solutions/intelligence" className="group relative inline-block w-fit">
+                                <span className="relative z-10">INTELLIGENCE</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/solutions/selection" className="group relative inline-block w-fit">
+                                <span className="relative z-10">SELECTION</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/solutions/media" className="group relative inline-block w-fit">
+                                <span className="relative z-10">MEDIA</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/solutions/optimisation" className="group relative inline-block w-fit">
+                                <span className="relative z-10">OPTIMISATION</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* Products */}
+                    <div className="flex flex-col gap-6">
+                        <h3 className="text-accent font-bold tracking-wider uppercase opacity-80 text-sm">PRODUCTS</h3>
+                        <div className="flex flex-col gap-3 text-lg font-bold">
+                            <Link href="/products/reflexn" className="group relative inline-block w-fit">
+                                <span className="relative z-10">REFLEXN</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/products/pikkcomvr" className="group relative inline-block w-fit">
+                                <span className="relative z-10">PIKKCOM VR</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                            <Link href="/products/insights" className="group relative inline-block w-fit">
+                                <span className="relative z-10">INSIGHTS</span>
+                                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            </Link>
+                        </div>
+                    </div>
+
                 </div>
 
                 {/* Column 3: Follow */}
-                <div className="footer-column md:col-span-4 flex flex-col gap-6">
+                <div className="footer-column md:col-span-2 flex flex-col gap-6 md:items-end text-left md:text-right">
                     <h3 className="text-accent font-bold tracking-wider uppercase opacity-80 text-sm">FOLLOW</h3>
-                    <div className="grid grid-cols-1 gap-4 text-lg font-bold">
+                    <div className="flex flex-col gap-3 text-lg font-bold">
                         <Link href="#" className="group relative inline-block w-fit">
                             <span className="relative z-10">LINKEDIN</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            <span className="absolute bottom-0 right-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
                         </Link>
                         <Link href="https://www.instagram.com/pikkcom?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" className="group relative inline-block w-fit">
                             <span className="relative z-10">INSTAGRAM</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            <span className="absolute bottom-0 right-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
                         </Link>
                         <Link href="#" className="group relative inline-block w-fit">
                             <span className="relative z-10">YOUTUBE</span>
-                            <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
+                            <span className="absolute bottom-0 right-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full"></span>
                         </Link>
                     </div>
                 </div>
