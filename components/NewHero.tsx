@@ -47,16 +47,8 @@ const NewHero = () => {
             ease: "back.out(1.7)"
         }, "-=0.5");
 
-        // Scroll Rotation Loop for Indicator
+        // Scroll Sync Rotation for Text Circle (Outer)
         gsap.to(".scroll-text-circle", {
-            rotation: 360,
-            duration: 10,
-            repeat: -1,
-            ease: "none"
-        });
-
-        // Scroll Sync Rotation for Center Icon
-        gsap.to(".scroll-center-icon", {
             rotation: 360,
             ease: "none",
             scrollTrigger: {
@@ -64,6 +56,18 @@ const NewHero = () => {
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 1
+            }
+        });
+
+        // Scroll Sync Rotation for Center Icon (Inner) - Opposite direction for dynamic feel
+        gsap.to(".scroll-center-icon", {
+            rotation: 360,
+            ease: "none",
+            scrollTrigger: {
+                trigger: document.body,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
             }
         });
 
