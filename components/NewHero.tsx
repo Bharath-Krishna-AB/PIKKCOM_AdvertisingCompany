@@ -82,8 +82,8 @@ const NewHero = () => {
 
                 {/* Subtitle Content - Pulled up to overlap/tighten gap */}
                 <div className="w-screen flex flex-col items-center gap-3 pointer-events-auto mt-5">
-                    <p className="hero-subtitle text-3xl md:text-5xl font-clash-display text-secondary font-light leading-none tracking-tight text-center">
-                        Blending Data | Media | Tech <br /> for Enhanced Storytelling
+                    <p className="hero-subtitle text-3xl md:text-5xl font-clash-display text-secondary font-light leading-normal tracking-tight text-center">
+                        Blending Data | Media | Tech for <br /> Enhanced Storytelling.
                     </p>
                     <p className="hero-subtitle font-sans font-normal text-center text-sm md:text-base text-secondary/80 max-w-3xl leading-relaxed tracking-wide">
                         We help brands with large product catalogs identify what customers truly want — and turn those insights into high-performing product campaigns.

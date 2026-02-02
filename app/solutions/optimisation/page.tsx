@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import HomeConnect from '@/components/HomeConnect';
+import Footer from '@/components/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,6 +110,7 @@ const OptimisationPage = () => {
             </div>
 
             <HomeConnect />
+            <Footer/>
         </div>
     );
 };
