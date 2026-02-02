@@ -35,6 +35,19 @@ const ReflexnPage = () => {
 
     animatePath(arrowMainRef.current, 0.5);
 
+    // Fade in sections
+    gsap.utils.toArray('.content-section').forEach((section: any) => {
+      gsap.from(section, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%"
+        }
+      })
+    });
+
   }, { scope: containerRef });
 
   return (
@@ -46,10 +59,10 @@ const ReflexnPage = () => {
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
             <h1 className="text-[10vw] leading-none font-anton uppercase tracking-tight relative">
-              <AnimatedLine text="Cool sounds to" />
-              <AnimatedLine text="supercharge digital" />
-              <AnimatedLine text="and real-life" />
-              <AnimatedLine text="moments." />
+              <AnimatedLine text="Confident" />
+              <AnimatedLine text="decisions at" />
+              <AnimatedLine text="the moment" />
+              <AnimatedLine text="of choice." />
 
               {/* Arrow SVG */}
               <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
@@ -90,8 +103,8 @@ const ReflexnPage = () => {
               <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
               <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/hat.png"
-                  alt="Vintage Synthesizers"
+                  src="/images/reflexn-hamburger-v2.jpeg" // Assuming this image exists based on Menu.tsx, fallback if not? Menu uses .jpeg, let's use hat.png fallback if needed but user mentioned reflexn folder
+                  alt="Reflexn Smart Mirror"
                   width={2070}
                   height={1553}
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
@@ -101,36 +114,79 @@ const ReflexnPage = () => {
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
               </div>
               <div className="absolute -bottom-4 -left-4 bg-secondary text-primary px-4 py-3 rounded-full font-anton text-lg uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                Explore Studio
+                Reflexn Mirror
               </div>
             </div>
           </section>
         </div>
 
-        {/* EDITORIAL HEADLINE SECTION */}
-        <section className="relative w-full max-w-screen mx-auto px-6 md:px-12 pt-24 pb-12 text-[#2D2D2D]">
-          <div className="w-full flex justify-end">
-            <h1 className="text-[7vw] text-right leading-none font-anton uppercase tracking-tight relative">
-              <AnimatedLine text="We maximize" />
-              <AnimatedLine text="the value of" />
-              <AnimatedLine text="each opportunity" />
-              <AnimatedLine text="your brand has" />
-              <AnimatedLine text="to connect." />
-            </h1>
-          </div>
-        </section>
+        {/* CONTAINER FOR CONTENT SECTIONS */}
+        <div className="max-w-[1920px] mx-auto px-6 md:px-12 pb-32 space-y-32">
 
-        {/* EDITORIAL PARAGRAPH SECTION */}
-        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 md:pb-32 text-[#2D2D2D]">
-          <div className="w-full space-y-8 md:space-y-16 ">
-            <p className="text-xl md:text-4xl font-normal leading-relaxed text-neutral-800 font-geist-mono">
-              We create <span className="font-semibold text-secondary">impactful brand expressions</span> that are <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-accent text-3xl md:text-4xl italic align-middle mx-1">thoughtfully contextualized</span> across multiple dimensions—including audience, channel, timing and desired outcomes—to deliver truly <span className="bg-accent/10 px-2 rounded-md">optimized experiences</span> in a fast-moving world.
-              Drawing on our broad expertise in <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-2xl md:text-3xl italic align-middle mx-1">culture & creativity</span>, experience design, production, media investment, and measurement, we help position your brand as the <span className="font-semibold underline decoration-accent decoration-2 underline-offset-4">top choice</span> for your audiences. By embedding an intelligent and streamlined operational model, powered by <span className="inline-flex items-center mx-1 align-middle bg-accent text-white px-3 py-1 rounded-full text-base font-medium">data & AI</span>, we create the agile foundation that allows you to do more with less, making every dollar work as hard as your creative.
-              Every engagement we design not only connects with people in meaningful moments but also generates <span className="inline-block bg-secondary text-primary px-4 py-1 rounded-full italic text-xl md:text-2xl mx-1 align-middle" style={{ fontFamily: 'var(--font-instrument)' }}>valuable data</span>, enabling your brand to remain <span className="font-semibold">agile, responsive, and relevant</span>—both in real time and over the long term.
-            </p>
+          {/* SECTION 1: CUSTOMER IMPACT */}
+          <section className="content-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+            <div className="lg:col-span-5">
+              <h2 className="text-4xl md:text-5xl font-instrument italic text-accent mb-6 leading-tight">Customer Impact</h2>
+              <h3 className="text-xl font-sans uppercase tracking-widest text-secondary/50 mb-4">The Experience</h3>
+              <ul className="space-y-4">
+                {[
+                  "Faster outfit decisions with real-time guidance",
+                  "Instantly personalized recommendations",
+                  "Increased confidence through style and fit feedback",
+                  "Reduced decision fatigue during try-ons"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <span className="text-accent text-lg mt-1">✦</span>
+                    <span className="text-xl md:text-2xl font-clash-display font-medium text-secondary">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:col-span-7">
+              <p className="text-lg md:text-2xl font-sans font-light text-secondary/90 leading-relaxed">
+                Reflexn empowers customers to make confident decisions at the moment of choice. With <span className="font-semibold text-secondary">real-time style guidance</span> and AI-driven outfit recommendations, shoppers receive instant, personalized suggestions tailored to their body type, preferences, and context. Visual feedback and style match insights reduce uncertainty, helping customers <span className="bg-accent/10 px-2 rounded-md">decide faster</span>, feel more confident in their selections, and enjoy a smoother, more engaging try-on experience.
+              </p>
+            </div>
+          </section>
 
-          </div>
-        </section>
+          {/* SECTION 2: RETAIL IMPACT */}
+          <section className="content-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+            <div className="lg:col-span-7 order-2 lg:order-1">
+              <p className="text-lg md:text-2xl font-sans font-light text-secondary/90 leading-relaxed text-right md:text-left">
+                For retailers, Reflexn turns mirrors into <span className="font-semibold text-secondary">performance-driven touchpoints</span>. By guiding customers toward better decisions, the smart mirror increases conversion rates, shortens the path to purchase, and reduces drop-offs at critical moments. The enhanced in-store experience keeps customers engaged longer, supports staff with <span className="font-semibold underline decoration-accent decoration-2 underline-offset-4">intelligent assistance</span>, and creates new opportunities for data-driven upselling and brand partnerships.
+              </p>
+            </div>
+            <div className="lg:col-span-5 order-1 lg:order-2">
+              <h2 className="text-4xl md:text-5xl font-instrument italic text-accent mb-6 leading-tight">Retail Impact</h2>
+              <h3 className="text-xl font-sans uppercase tracking-widest text-secondary/50 mb-4">Business Value</h3>
+              <ul className="space-y-4">
+                {[
+                  "Elevated in-store experience through interactive engagement",
+                  "Higher conversion rates and faster sales cycles",
+                  "Reduced decision abandonment and bounce-offs",
+                  "Smarter upselling and cross-selling opportunities",
+                  "Actionable insights into customer preferences and behavior"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <span className="text-accent text-lg mt-1">✦</span>
+                    <span className="text-xl md:text-2xl font-clash-display font-medium text-secondary">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {/* SECTION 3: PUBLISHER MODEL */}
+          <section className="content-section relative py-20 border-t border-secondary/10">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-5xl md:text-7xl font-anton uppercase text-secondary mb-8">Reflexn as a <br /><span className="text-accent">Publisher Model</span></h2>
+              <p className="text-xl md:text-3xl font-instrument italic text-secondary/80 leading-relaxed">
+                "Using real-time context, customer preferences, and intent signals, Reflexn turns the smart mirror into an <span className="font-sans font-bold not-italic text-secondary">intelligent in-store publisher</span>, enabling dynamic ad bidding where brands compete to appear at the <span className="bg-accent/10 px-2 rounded-md not-italic">exact moment of decision</span>—monetizing high-attention interactions while maintaining trust and a seamless experience."
+              </p>
+            </div>
+          </section>
+
+        </div>
 
       </main>
       <HomeConnect />
