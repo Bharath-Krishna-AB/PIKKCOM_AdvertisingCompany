@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/all";
 import Magnetic from "./Magnetic";
 import Menu from "./Menu";
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import Link from "next/link";
 
@@ -15,7 +15,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
 
     const currentPath = usePathname();
-    const router = useRouter();
 
 
 
@@ -240,14 +239,14 @@ const Navbar = () => {
 
                 {/* Right Action Button */}
                 <Magnetic>
-                    <button
-                        onClick={() => router.push("/contact")}
+                    <Link
+                        href="/contact"
                         onMouseEnter={() => handleActionMouseEnter()}
                         onMouseLeave={() => handleActionMouseLeave()}
                         className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
                     >
                         LET'S TALK
-                    </button>
+                    </Link>
                 </Magnetic>
             </nav>
         </>
