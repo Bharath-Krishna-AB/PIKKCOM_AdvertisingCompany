@@ -80,8 +80,8 @@ const NewHero = () => {
             <div className="relative z-10 flex flex-col items-center justify-center w-full h-full pointer-events-none">
 
                 {/* Title */}
-                <h1 ref={titleRef} className="hero-text text-[15vw] md:text-[20vw] leading-[0.8] font-anton text-secondary tracking-tight select-none opacity-20 md:opacity-100 mt-20 md:mt-0">
-                    PIKKCOM<span className="text-accent font-fatkat text-[12vw] md:text-[15vw]">.</span>
+                <h1 ref={titleRef} style={{ fontFamily: "Helvetica Now, Helvetica Neue, Helvetica, Arial, sans-serif" }} className="hero-text text-[12vw] md:text-[15vw] leading-[0.8] font-bold text-secondary tracking-tighter select-none opacity-20 md:opacity-100 mt-20 md:mt-0">
+                    PIKKCOM<span className="text-accent font-fatkat text-[9vw] md:text-[12vw]">.</span>
                 </h1>
 
                 {/* Subtitle Content - Pulled up to overlap/tighten gap */}
