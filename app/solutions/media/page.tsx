@@ -1,0 +1,123 @@
+"use client";
+import React, { useRef } from 'react';
+import Navbar from '@/components/Navbar';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import HomeConnect from '@/components/HomeConnect';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const MediaPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        const tl = gsap.timeline();
+
+        // Hero Text Stagger
+        tl.from(".solution-title-char", {
+            y: 100,
+            opacity: 0,
+            rotate: 5,
+            stagger: 0.05,
+            duration: 1,
+            ease: "power4.out",
+            delay: 0.2
+        });
+
+        tl.from(".solution-subtitle", {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        }, "-=0.5");
+
+        // Content Reveal
+        gsap.from(".content-block", {
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".content-section",
+                start: "top 80%"
+            }
+        });
+
+    }, { scope: containerRef });
+
+    return (
+        <div ref={containerRef} className="bg-primary min-h-screen selection:bg-accent/30">
+            <Navbar />
+
+            {/* Hero Section */}
+            <header className="relative pt-40 pb-20 px-6 md:px-12 max-w-[1920px] mx-auto min-h-[60vh] flex flex-col justify-center">
+                <div className="max-w-7xl">
+                    <p className="solution-subtitle text-xl md:text-3xl font-instrument italic text-accent mb-6">
+                        Run product-based advertising
+                    </p>
+                    <h1 className="text-[12vw] md:text-[8vw] leading-[0.85] font-anton text-secondary uppercase tracking-tight break-words">
+                        {"MEDIA".split("").map((char, i) => (
+                            <span key={i} className="solution-title-char inline-block">{char === " " ? "\u00A0" : char}</span>
+                        ))}
+                    </h1>
+                </div>
+            </header>
+
+            {/* Content Section */}
+            <main className="content-section px-6 md:px-12 max-w-[1920px] mx-auto pb-32">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+
+                    {/* Left: Description */}
+                    <div className="lg:col-span-7 content-block">
+                        <h3 className="text-sm font-sans uppercase tracking-widest text-secondary/50 mb-6 border-b border-secondary/10 pb-2">Description</h3>
+                        <p className="text-lg md:text-2xl font-sans font-light text-secondary/90 leading-relaxed whitespace-pre-line">
+                            We blend technology, data, and AI to accelerate and elevate original content production. By unifying creativity with intelligent systems, tools, and platforms, we help modern marketing organizations operate with greater speed, consistency, and impact. Today, creativity can’t succeed in isolation—it needs a strong operational backbone. Our studio model builds that foundation by integrating data-driven insights, scalable production workflows, and adaptive technology to support content creation, transcreation, and culturally nuanced storytelling across markets. The creative process is strengthened through close collaboration with strategic partners, specialist teams, and distributed production capabilities, enabling brands to deliver high-quality work efficiently at scale—driving measurable cost efficiencies without compromising craft or ambition.
+                        </p>
+                    </div>
+
+                    {/* Right: Capabilities */}
+                    <div className="lg:col-span-5 content-block">
+                        <h3 className="text-sm font-sans uppercase tracking-widest text-secondary/50 mb-6 border-b border-secondary/10 pb-2">Capabilities</h3>
+                        <ul className="space-y-4">
+                            {[
+                                "Data-driven product campaigning",
+                                "Customer targeting using insights",
+                                "Campaign planning + execution"
+                            ].map((cap, i) => (
+                                <li key={i} className="flex items-start gap-4 group cursor-default">
+                                    <span className="text-accent text-lg mt-1 group-hover:translate-x-1 transition-transform">✦</span>
+                                    <span className="text-xl md:text-2xl font-clash-display font-medium text-secondary group-hover:text-accent transition-colors">
+                                        {cap}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </main>
+
+            {/* Sticky "Next" Navigation */}
+            <div className="px-6 md:px-12 max-w-[1920px] mx-auto mb-20 content-block">
+                <Link href="/solutions/optimisation" className="group inline-flex flex-col gap-2">
+                    <span className="text-sm font-sans uppercase tracking-widest text-secondary/50">Next Solution</span>
+                    <span className="text-4xl md:text-6xl font-instrument italic text-secondary group-hover:text-accent transition-colors flex items-center gap-4">
+                        Optimisation
+                        <ArrowRight className="w-8 h-8 md:w-12 md:h-12 transform group-hover:translate-x-4 transition-transform" />
+                    </span>
+                </Link>
+            </div>
+
+            {/* Background Texture */}
+            <div className="fixed inset-0 z-[-1] opacity-[0.03] pointer-events-none"
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+            </div>
+
+            <HomeConnect />
+        </div>
+    );
+};
+
+export default MediaPage;
