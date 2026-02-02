@@ -8,7 +8,17 @@ import Magnetic from "../Magnetic";
 
 const menuItems = [
     { label: "HOME", href: "/", src: "/images/home-hamburger-final.jpeg" },
-    { label: "SOLUTIONS", href: "", src: "/images/solutions-hamburger-v2.jpeg" },
+    {
+        label: "SOLUTIONS",
+        href: "",
+        src: "/images/solutions-hamburger-v2.jpeg",
+        subItems: [
+            { label: "INTELLIGENCE", href: "/solutions/intelligence", src: "/images/intelligence.jpeg" },
+            { label: "SELECTION", href: "/solutions/selection", src: "/images/selection.jpeg" },
+            { label: "MEDIA", href: "/solutions/media", src: "/images/media.jpeg" },
+            { label: "OPTIMISATION", href: "/solutions/optimisation", src: "/images/optimization.jpeg" },
+        ]
+    },
     {
         label: "PRODUCTS",
         href: "",
