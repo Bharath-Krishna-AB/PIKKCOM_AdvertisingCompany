@@ -112,7 +112,7 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
     }, { scope: containerRef, dependencies: [services] });
 
     return (
-        <section ref={containerRef} className="home-solution py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
+        <section data-theme="light" ref={containerRef} className="home-solution py-24 px-4 md:px-8 text-secondary overflow-hidden min-h-screen flex flex-col justify-center">
             <div className="max-w-[90rem] mx-auto w-full relative z-10">
 
                 {/* Header */}

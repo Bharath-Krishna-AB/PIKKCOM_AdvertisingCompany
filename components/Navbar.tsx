@@ -19,145 +19,76 @@ const Navbar = () => {
 
 
     useGSAP(() => {
+        const mm = gsap.matchMedia();
+
+        const updateNavbarTheme = (theme: string) => {
+            if (theme === "dark") {
+                // Dark Theme: Navbar Transparent/Dark, Text White
+                gsap.to("nav", {
+                    backgroundColor: "transparent",
+                    backdropFilter: "none",
+                    borderColor: "transparent",
+                    duration: 0.3
+                });
+                gsap.to(".logo", {
+                    color: "white", // Direct white for contrast on dark
+                    duration: 0.3
+                });
+                gsap.to(".burger-line-1, .burger-line-2", {
+                    backgroundColor: "white",
+                    duration: 0.3
+                });
+                gsap.to(".action-button", {
+                    backgroundColor: "#DCFF93", // Accent
+                    color: "#0f0f0f",
+                    duration: 0.3
+                });
+            } else {
+                // Light Theme: Navbar Light/Glass, Text Dark
+                gsap.to("nav", {
+                    backgroundColor: "rgba(244, 244, 244, 0.7)",
+                    backdropFilter: "blur(12px)",
+                    borderColor: "rgba(34, 29, 29, 0.05)",
+                    duration: 0.3,
+                    clearProps: "backdropFilter"
+                });
+                gsap.to(".logo", {
+                    color: "var(--color-secondary)", // Dark
+                    duration: 0.3
+                });
+                gsap.to(".burger-line-1, .burger-line-2", {
+                    backgroundColor: "var(--color-secondary)",
+                    duration: 0.3
+                });
+                gsap.to(".action-button", {
+                    backgroundColor: "var(--accent)", // Keep accent or specific styling
+                    color: "var(--primary)",
+                    duration: 0.3
+                });
+            }
+        };
+
         if (currentPath === "/") {
+            // Initial Animation
             const tl1 = gsap.timeline();
-            tl1.fromTo(".logo", {
-                opacity: 0,
-                y: -20
-            }, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: "power2.inOut"
-            }).fromTo(".menu-icon", {
-                opacity: 0,
-                y: -20
-            }, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: "power2.inOut"
-            }, "-=0.4").fromTo(".action-button", {
-                opacity: 0,
-                y: -20
-            }, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: "power2.inOut"
-            }, "-=0.4");
+            tl1.fromTo(".logo", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.inOut" })
+                .fromTo(".menu-icon", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.inOut" }, "-=0.4")
+                .fromTo(".action-button", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.inOut" }, "-=0.4");
 
-            // ScrollTrigger for Message Section
-            ScrollTrigger.create({
-                trigger: ".message-content",
-                start: "top top+=50",
-                end: "bottom top",
-                onEnter: () => {
-                    gsap.to("nav", {
-                        backgroundColor: "transparent",
-                        backdropFilter: "none",
-                        borderColor: "transparent",
-                        duration: 0.3
-                    });
-                    gsap.to(".logo", {
-                        color: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                    gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                },
-                onLeave: () => {
-                    gsap.to("nav", {
-                        backgroundColor: "rgba(244, 244, 244, 0.7)", // primary with opacity
-                        backdropFilter: "blur(12px)",
-                        borderColor: "rgba(34, 29, 29, 0.05)", // secondary/5
-                        duration: 0.3,
-                        clearProps: "backdropFilter" // clear to let CSS handle it if needed
-                    });
-                    gsap.to(".logo", {
-                        color: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                    gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                },
-                onEnterBack: () => {
-                    gsap.to("nav", {
-                        backgroundColor: "transparent",
-                        backdropFilter: "none",
-                        borderColor: "transparent",
-                        duration: 0.3
-                    });
-                    gsap.to(".logo", {
-                        color: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                    gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                },
-                onLeaveBack: () => {
-                    gsap.to("nav", {
-                        backgroundColor: "rgba(244, 244, 244, 0.7)",
-                        backdropFilter: "blur(12px)",
-                        borderColor: "rgba(34, 29, 29, 0.05)",
-                        duration: 0.3,
-                        clearProps: "backdropFilter"
-                    });
-                    gsap.to(".logo", {
-                        color: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                    gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                }
-            });
+            // Dynamic Theme Switching based on data-theme attribute
+            const sections = gsap.utils.toArray<HTMLElement>("[data-theme]");
 
-            // ScrollTrigger for Footer Section
-            ScrollTrigger.create({
-                trigger: ".footer-content", // Targeting the footer class added
-                start: "top top+=50",
-                end: "bottom bottom",
-                onEnter: () => {
-                    gsap.to("nav", {
-                        backgroundColor: "transparent",
-                        backdropFilter: "none",
-                        borderColor: "transparent",
-                        duration: 0.3
-                    });
-                    gsap.to(".logo", {
-                        color: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                    gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                },
-                onLeaveBack: () => {
-                    gsap.to("nav", {
-                        backgroundColor: "rgba(244, 244, 244, 0.7)",
-                        backdropFilter: "blur(12px)",
-                        borderColor: "rgba(34, 29, 29, 0.05)",
-                        duration: 0.3,
-                        clearProps: "backdropFilter"
-                    });
-                    gsap.to(".logo", {
-                        color: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                    gsap.to(".burger-line-1, .burger-line-2", {
-                        backgroundColor: "var(--color-secondary)",
-                        duration: 0.3
-                    });
-                }
+            sections.forEach((section) => {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top top+=50", // Switch when section hits top
+                    end: "bottom top+=50",
+                    onEnter: () => updateNavbarTheme(section.dataset.theme || "light"),
+                    onEnterBack: () => updateNavbarTheme(section.dataset.theme || "light"),
+                    // Fallback to light or previous section's theme on leave? 
+                    // Usually better to let the next/prev section triggered handle it, 
+                    // but for gaps, we might want a default. Assuming contiguous sections.
+                });
             });
         }
     }, [currentPath]);

@@ -34,7 +34,7 @@ const Hero = () => {
         });
     })
     return (
-        <section className="flex flex-col items-center justify-center px-4 text-center overflow-hidden">
+        <section data-theme="light" className="flex flex-col items-center justify-center px-4 text-center overflow-hidden">
             <ContainerScroll
                 titleComponent={
                     <div className="flex flex-col items-center justify-center">

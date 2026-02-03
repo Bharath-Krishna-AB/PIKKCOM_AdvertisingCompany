@@ -2,43 +2,19 @@
 import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Magnetic from "../Magnetic";
-
-const menuItems = [
-    { label: "HOME", href: "/", src: "/images/home-hamburger-final.jpeg" },
-    {
-        label: "SOLUTIONS",
-        href: "",
-        src: "/images/solutions-hamburger-v2.jpeg",
-        subItems: [
-            { label: "INTELLIGENCE", href: "/solutions/intelligence", src: "/images/intelligence.jpeg" },
-            { label: "SELECTION", href: "/solutions/selection", src: "/images/selection.jpeg" },
-            { label: "MEDIA", href: "/solutions/media", src: "/images/media.jpeg" },
-            { label: "OPTIMISATION", href: "/solutions/optimisation", src: "/images/optimization.jpeg" },
-        ]
-    },
-    {
-        label: "PRODUCTS",
-        href: "",
-        src: "/images/products-hamburger-v2.jpeg",
-        subItems: [
-            { label: "REFLEXN", href: "/products/reflexn", src: "/images/reflexn-hamburger-v2.jpeg" },
-            { label: "PIKKCOM VR", href: "/products/pikkcomvr", src: "/images/vr-hamburger-v2.jpeg" },
-            { label: "INSIGHTS", href: "/products/insights", src: "/images/insight-hamburger-v2.jpg" }, // TODO: Updates specific images if available
-        ]
-    },
-    // { label: "OUR WORK", href: "/our-work", src: "/images/hero.png" },
-    { label: "COMPANY", href: "/company", src: "/images/company-hamburger-v2.jpeg" },
-    { label: "CONTACTS", href: "/contact", src: "/images/contact-hamburger-v2.jpeg" },
-];
+import { menuItems } from "./menuData";
+import MenuItem from "./MenuItem";
+import MenuImagePreview from "./MenuImagePreview";
 
 export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (v: boolean) => void }) {
     const container = useRef<HTMLDivElement>(null);
     const [activeImage, setActiveImage] = useState(menuItems[0].src);
     const [expandedItem, setExpandedItem] = useState<string | null>(null);
     const tl = useRef<gsap.core.Timeline>(null);
+    const pathname = usePathname();
 
     useGSAP(() => {
         gsap.set(container.current, { yPercent: -100, autoAlpha: 1 });
@@ -56,7 +32,6 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 duration: 0.5,
                 ease: "power3.out"
             }, "-=0.4");
-
     });
 
     useEffect(() => {
@@ -64,13 +39,29 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
             tl.current?.play();
             setActiveImage(menuItems[0].src);
             setExpandedItem(null);
+            document.body.style.overflow = "hidden"; // Lock scroll
         } else {
             tl.current?.reverse();
+            document.body.style.overflow = ""; // Unlock scroll
         }
+
+        // Cleanup on unmount or if isOpen changes unexpectedly
+        return () => {
+            document.body.style.overflow = "";
+        };
     }, [isOpen]);
 
-    const handleMouseEnter = (item: any) => {
-        setActiveImage(item.src);
+    // Close menu on route change logic is handled by handleLinkClick mostly, 
+    // but this acts as a failsafe for browser navigation.
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname, setIsOpen]);
+
+    const handleLinkClick = () => {
+        // Instantly reset animation to start state (closed) to avoid reverse animation lag
+        tl.current?.progress(0).pause();
+        gsap.set(container.current, { yPercent: -100 });
+        setIsOpen(false);
     };
 
     return (
@@ -85,7 +76,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 <div className="flex items-center justify-between w-full mb-8 md:mb-0">
                     <Link
                         href="/"
-                        onClick={() => setIsOpen(false)}
+                        onClick={handleLinkClick}
                         className="text-xl font-fatkat cursor-pointer text-secondary"
                     >
                         pikkcom<span className="text-accent">.</span>
@@ -106,56 +97,20 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 {/* Main Navigation */}
                 <div className="flex flex-col gap-2 items-center justify-center flex-1 w-full">
                     {menuItems.map((item, index) => (
-                        <div
+                        <MenuItem
                             key={index}
-                            className="menu-item-wrapper relative w-full flex flex-col items-center justify-center"
-                            onMouseEnter={() => {
-                                handleMouseEnter(item);
-                                if (item.subItems) setExpandedItem(item.label);
-                                else setExpandedItem(null);
-                            }}
-                            onMouseLeave={() => {
-                                // Optional: collapse on leave, or keep expanded until another hover
-                            }}
-                        >
-                            {item.href ? (
-                                <Link
-                                    href={item.href}
-                                    className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300"
-                                    onClick={() => setIsOpen(false)}
-                                    onMouseEnter={() => handleMouseEnter(item)}
-                                >
-                                    {item.label}
-                                </Link>
-                            ) : (
-                                <span
-                                    className="menu-item-anim block text-5xl md:text-8xl font-anton! font-black text-secondary uppercase hover:text-accent text-center transition-colors duration-300 cursor-default"
-                                    onMouseEnter={() => handleMouseEnter(item)}
-                                >
-                                    {item.label}
-                                </span>
-                            )}
-
-                            {/* Submenu Render */}
-                            {item.subItems && (
-                                <div className={`flex flex-col gap-2 items-center overflow-hidden transition-all duration-500 ease-in-out ${expandedItem === item.label ? 'max-h-[500px] opacity-100 mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
-                                    {item.subItems.map((subItem, subIndex) => (
-                                        <Link
-                                            key={subIndex}
-                                            href={subItem.href}
-                                            className="menu-item-anim block text-2xl md:text-4xl font-anton! text-secondary/70 hover:text-accent uppercase transition-colors duration-300"
-                                            onClick={() => setIsOpen(false)}
-                                            onMouseEnter={(e) => {
-                                                e.stopPropagation();
-                                                handleMouseEnter(subItem);
-                                            }}
-                                        >
-                                            {subItem.label}
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                            item={item}
+                            activeImage={activeImage}
+                            onMouseEnter={setActiveImage} // Passed as prop to update state
+                            onLinkClick={handleLinkClick}
+                            expandedItem={expandedItem}
+                            setExpandedItem={setExpandedItem}
+                            // MenuItem's onMouseEnter expects (item) => void, but we need to adapt it
+                            // Wait, MenuItem prop onMouseEnter: (item: MenuItemType | SubItem) => void
+                            // setActiveImage expects string src? No, state is string.
+                            // Let's fix prop mismatch inside map.
+                            onMouseEnter={(i) => setActiveImage(i.src)}
+                        />
                     ))}
                 </div>
 
@@ -168,23 +123,7 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
             </div>
 
             {/* Right Column: Image Preview */}
-            <div className="hidden md:flex flex-1 relative h-full w-full bg-secondary/5">
-                {menuItems.flatMap(i => i.subItems ? [i, ...i.subItems] : [i]).map((item, index) => (
-                    <div
-                        key={index} // Using unique key strategy might be needed if duplicates exist, but here href/src combo is unique enough or index in flat map
-                        className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${activeImage === item.src ? 'opacity-100' : 'opacity-0'}`}
-                    >
-                        <Image
-                            src={item.src}
-                            alt={item.label}
-                            fill
-                            className="object-cover"
-                            priority={index === 0}
-                        />
-                        <div className="absolute inset-0 bg-black/10" />
-                    </div>
-                ))}
-            </div>
+            <MenuImagePreview items={menuItems} activeImage={activeImage} />
         </div>
     );
 }

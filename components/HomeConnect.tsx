@@ -69,6 +69,7 @@ const HomeConnect = () => {
 
     return (
         <section
+            data-theme="light"
             ref={containerRef}
             className="w-full min-h-[60vh] flex flex-col justify-between py-20 px-8 md:px-16"
         >

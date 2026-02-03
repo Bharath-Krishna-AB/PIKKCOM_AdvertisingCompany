@@ -120,7 +120,7 @@ const MobileCard = ({ item }: { item: DemoItem }) => {
 
 const CircularDemo = () => {
     return (
-        <section className="w-full min-h-screen relative flex flex-col items-center pt-24 pb-24 overflow-hidden font-[family-name:var(--font-figtree)]">
+        <section data-theme="light" className="w-full min-h-screen relative flex flex-col items-center pt-24 pb-24 overflow-hidden font-[family-name:var(--font-figtree)]">
             {/* Header Section */}
             <div className="text-center z-10 space-y-6 mb-8 max-w-5xl mx-auto px-4">
                 <h2 className="text-[3rem] md:text-[5rem] leading-none font-medium tracking-tight text-[#2D2D2D]">

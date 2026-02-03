@@ -79,7 +79,7 @@ const Message = () => {
   });
 
   return (
-    <section className="message-content bg-secondary font-anton flex justify-center items-center relative z-20 py-24 md:py-40 overflow-hidden">
+    <section data-theme="dark" className="message-content bg-secondary font-anton flex justify-center items-center relative z-20 py-24 md:py-40 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 relative w-full">
         <div className="w-full h-full flex flex-col items-center">
 

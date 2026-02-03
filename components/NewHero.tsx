@@ -14,9 +14,7 @@ const NewHero = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     useGSAP(() => {
-        const tl = gsap.timeline({
-            delay: 0.5
-        });
+        const mm = gsap.matchMedia();
 
         // Ensure SplitText is available (fallback if not)
         let heroChars: Element[] = [];
@@ -27,23 +25,46 @@ const NewHero = () => {
             console.warn("SplitText not loaded", e);
         }
 
-        if (heroChars.length > 0) {
-            // "Premium" Reveal: Characters rise from below with opacity
-            gsap.set(heroChars, { yPercent: 120, opacity: 0, rotateX: -90 });
+        // Desktop Animations (3D Effect)
+        mm.add("(min-width: 1024px)", () => {
+            const tl = gsap.timeline({ delay: 0.5 });
+            if (heroChars.length > 0) {
+                // "Premium" Reveal: Characters rise from below with opacity and 3D Rotation
+                gsap.set(heroChars, { yPercent: 120, opacity: 0, rotateX: -90 });
 
-            tl.to(heroChars, {
-                yPercent: 0,
-                opacity: 1,
-                rotateX: 0,
-                stagger: 0.03,
-                duration: 1.5,
-                ease: "power4.out",
-            });
-        } else {
-            tl.from(titleRef.current, { y: 100, opacity: 0, duration: 1 });
-        }
+                tl.to(heroChars, {
+                    yPercent: 0,
+                    opacity: 1,
+                    rotateX: 0,
+                    stagger: 0.03,
+                    duration: 1.5,
+                    ease: "power4.out",
+                });
+            } else {
+                tl.from(titleRef.current, { y: 100, opacity: 0, duration: 1 });
+            }
+        });
 
-        // Scroll Sync Rotation for Text Circle
+        // Mobile/Tablet Animations (Simple Fade/Slide)
+        mm.add("(max-width: 1023px)", () => {
+            const tl = gsap.timeline({ delay: 0.5 });
+            if (heroChars.length > 0) {
+                // Simple Reveal: No 3D rotation, just slide up
+                gsap.set(heroChars, { yPercent: 100, opacity: 0 });
+
+                tl.to(heroChars, {
+                    yPercent: 0,
+                    opacity: 1,
+                    stagger: 0.02,
+                    duration: 1.2,
+                    ease: "power3.out",
+                });
+            } else {
+                tl.from(titleRef.current, { y: 50, opacity: 0, duration: 1 });
+            }
+        });
+
+        // Scroll Sync Rotation for Text Circle (Shared)
         gsap.to(".scroll-text-circle", {
             rotation: 360,
             ease: "none",
@@ -55,7 +76,7 @@ const NewHero = () => {
             }
         });
 
-        // Scroll Center Icon Inverse Rotation
+        // Scroll Center Icon Inverse Rotation (Shared)
         gsap.to(".scroll-center-icon", {
             rotation: -360,
             ease: "none",
@@ -71,6 +92,7 @@ const NewHero = () => {
 
     return (
         <div
+            data-theme="light"
             ref={containerRef}
             className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidde text-secondary"
         >
