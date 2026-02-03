@@ -24,6 +24,7 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
     const titleRef = useRef<HTMLHeadingElement>(null);
 
     useGSAP(() => {
+        const mm = gsap.matchMedia();
 
         const title = SplitText.create(".home-solution h2", {
             type: "words",
@@ -49,7 +50,7 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
 
         // Title Animation
         gsap.from(titleRef.current, {
-            y: 50,
+            y: 30,
             opacity: 0,
             duration: 1,
             ease: "power3.out",
@@ -61,31 +62,51 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
 
         const cards = gsap.utils.toArray<HTMLElement>(".service-card");
 
-        // Staggered Entrance
-        gsap.from(cards, {
-            y: 150,
-            opacity: 0,
-            duration: 1.2,
-            stagger: 0.2, // Defined stagger
-            ease: "power4.out",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 75%",
-            }
+        // Desktop Animations
+        mm.add("(min-width: 1024px)", () => {
+            // Sideways Entrance from right
+            gsap.from(cards, {
+                x: 100,
+                y: 0,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 75%",
+                }
+            });
+
+            const evenCards = cards.filter((_, i) => i % 2 !== 0);
+            gsap.to(evenCards, {
+                y: -50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                }
+            });
         });
 
-        // Parallax Effect for Offset Columns (Middle Card)
-        // They should move slightly differently to enhance the staggered feel
-        const evenCards = cards.filter((_, i) => i % 2 !== 0);
-        gsap.to(evenCards, {
-            y: -30, // Move up slightly faster
-            ease: "none",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1,
-            }
+        // Mobile/Tablet Animations
+        // Mobile/Tablet Animations
+        mm.add("(max-width: 1023px)", () => {
+            // Sideways slide-in animation
+            gsap.from(cards, {
+                x: 50,
+                y: 0,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 80%",
+                }
+            });
         });
 
     }, { scope: containerRef, dependencies: [services] });
@@ -100,15 +121,15 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
                 </h2>
 
                 {/* Staggered Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-24 md:gap-8 lg:gap-12 w-full">
                     {services.map((service, i) => (
                         <div
                             key={service.id}
                             className={`service-card group relative flex flex-col ${i % 2 !== 0 ? "lg:translate-y-24" : ""}`} // Zigzag offset on desktop
                         >
                             {/* Giant Background Number */}
-                            <div className="absolute -top-16 lg:-top-24 right-0 lg:left-0 z-0 select-none pointer-events-none">
-                                <span className="text-[8rem] lg:text-[10rem] font-bold text-transparent leading-none tracking-tighter"
+                            <div className="absolute top-0 right-4 lg:-top-24 lg:left-0 z-0 select-none pointer-events-none">
+                                <span className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold text-transparent leading-none tracking-tighter"
                                     style={{
                                         textShadow: "0px 0px 30px rgba(0,0,0,0.02)",
                                         WebkitTextStroke: "2px #703EFF"
