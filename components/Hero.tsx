@@ -1,139 +1,101 @@
-"use client";
-import React, { useRef, useState } from "react";
+"use client"
+
+import { ContainerScroll } from "./ui/container-scroll-animation";
+import Image from "next/image";
+import heroImage from "@/public/images/hero.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
-import { Volume2, VolumeX, Play } from "lucide-react";
+import { ScrollSmoother, SplitText } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText);
 
 const Hero = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const [isMuted, setIsMuted] = useState(true);
-    const [isPlaying, setIsPlaying] = useState(true);
 
-    useGSAP(
-        () => {
-            const videoContainer = document.querySelector(".video-container");
-            const video = videoContainer?.querySelector("video");
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 70%",
-                    end: "center center",
-                    scrub: 1.2,
-                },
-            });
 
-            // Container Animation: Expand Width, Reduce Radius, Slide Up
-            tl.fromTo(
-                videoContainer,
-                {
-                    width: "50%",
-                    scale: 1, // Ensure exact 50% width
-                    boxShadow: "0px 20px 40px rgba(0,0,0,0.2)"
-                },
-                {
-                    width: "100%",
-                    scale: .9,
-                    boxShadow: "0px 0px 0px rgba(0,0,0,0)",
-                    ease: "power3.out",
-                }
-            );
+    useGSAP(() => {
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-            // Inner Parallax: Scale Video Down as Container Expands
-            if (video) {
-                tl.fromTo(
-                    video,
-                    { scale: 1.1 },
-                    { scale: 1, ease: "power3.out" },
-                    "<"
-                );
-            }
-        },
-        { scope: containerRef }
-    );
+        const tl1 = gsap.timeline();
 
-    const toggleMute = () => {
-        if (videoRef.current) {
-            videoRef.current.muted = !videoRef.current.muted;
-            setIsMuted(!isMuted);
-        }
-    };
 
-    const togglePlay = () => {
-        if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause();
-            } else {
-                videoRef.current.play();
-            }
-            setIsPlaying(!isPlaying);
-        }
-    }
+        const heroHeadline = new SplitText(".hero-headline", {
+            type: "words",
+        });
 
+        tl1.from(heroHeadline.words, {
+            opacity: 0,
+            y: 20,
+            scale: .95,
+            duration: 2,
+            ease: "elastic.out(1,0.3)",
+            stagger: 0.2,
+        })
+
+        const heroSubtext = new SplitText(".hero-subtext", {
+            type: "lines",
+        });
+
+        tl1.from(heroSubtext.lines, {
+            yPercent: 300,
+            rotate: 3,
+            ease: "power1.inOut",
+            duration: 1,
+            stagger: 0.01,
+        }, "-=2").from(".hero-svg", {
+            opacity: 0,
+            duration: 1,
+            scale: 0,
+            rotate: 180,
+            ease: "power4.inOut"
+        }, "-=1.5");
+
+
+        tl1.from(".hero-svg", {
+            rotate: 360,
+            repeat: -1,
+            duration: 7,
+            ease: "none"
+        });
+    })
     return (
-        <section
-            ref={containerRef}
-            className="relative w-full min-h-screen flex flex-col justify-center bg-[#f4f4f4] py-24 overflow-hidden"
-        >
-            {/* Heading Container - Constrained with padding */}
-            <div className="max-w-[90rem] mx-auto w-full px-4 md:px-8 relative z-10 mb-12 md:mb-24">
-                <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-clash-display leading-tight tracking-tight w-full text-[#2d2d2d] text-left">
-                    Your trusted partner for innovation across four strategic service offerings <span className="text-accent">:</span>
-                </h2>
-            </div>
+        <section className="flex flex-col items-center justify-center px-4 text-center pb-40 overflow-hidden">
+            <ContainerScroll
+                titleComponent={
+                    <div className="flex flex-col items-center justify-center">
+                        {/* Headline */}
+                        <h1 className="hero-headline flex flex-nowrap whitespace-nowrap items-center justify-center text-[3.5vw] md:text-[5vw] lg:text-[6vw] font-medium tracking-tighter text-[#2d2d2d] mb-8 md:mb-12">
+                            <span>Turn Demand </span>
+                            <span className="text-accent flex items-center justify-center relative mx-[1vw] md:mx-[1.5vw]">
+                                <svg width="0.8em" height="0.8em" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="animate-spin-slow hero-svg">
+                                    <path d="M 152 70.059 L 201.539 20.519 L 235.48 54.461 L 185.941 104 L 256 104 L 256 152 L 185.941 152 L 235.48 201.539 L 201.539 235.48 L 152 185.941 L 152 256 L 104 256 L 104 185.941 L 54.46 235.48 L 20.52 201.539 L 70.059 152 L 0 152 L 0 104 L 70.059 104 L 20.519 54.46 L 54.461 20.52 L 104 70.059 L 104 0 L 152 0 Z" fill="currentColor"></path>
+                                </svg>
+                            </span>
+                            <span>Into Performance</span>
+                        </h1>
 
-            {/* Video Outer Wrapper - Full Width (No padding) */}
-            <div className="w-full flex justify-center">
-                {/* Video Container - Animates width */}
-                <div
-                    className="video-container relative h-[50vh] md:h-[80vh] overflow-hidden shadow-2xl mx-auto z-0"
-                    style={{ willChange: "width, transform, border-radius" }}
-                >
-                    <video
-                        ref={videoRef}
-                        className="w-full h-full object-cover"
-                        src="/videos/main-video.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                    />
-
-                    {/* Controls */}
-                    <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 flex gap-4 z-20">
-                        <motion.button
-                            onClick={togglePlay}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                        >
-                            {isPlaying ? (
-                                <div className="w-3 h-3 bg-white mx-0.5 rounded-sm flex gap-1">
-                                    <div className="w-1 h-3 bg-white"></div>
-                                    <div className="w-1 h-3 bg-white"></div>
-                                </div>
-                            ) : (
-                                <Play size={20} fill="currentColor" />
-                            )}
-                        </motion.button>
-
-                        <motion.button
-                            onClick={toggleMute}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-                        >
-                            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                        </motion.button>
+                        {/* Subtext */}
+                        <div className="hero-subtext text-base sm:text-xl md:text-2xl leading-relaxed text-secondary/80 max-w-sm sm:max-w-xl md:max-w-3xl mx-auto">
+                            <p>
+                                PIKKCOM combines <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">intelligence</span> , <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">technology</span> and <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">media</span> to help
+                            </p>
+                            <p className="mt-2">
+                                <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">brands</span> spot winning products, understand true <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">customer intent</span> , and launch high-impact campaigns that <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">convert</span>.
+                            </p>
+                        </div>
                     </div>
-
-                </div>
-            </div>
+                }
+            >
+                <Image
+                    src={heroImage}
+                    alt="Pikkcom Digital Advertising Hero"
+                    height={720}
+                    width={1400}
+                    className="mx-auto rounded-2xl object-cover h-full object-top-left"
+                    draggable={false}
+                    priority
+                />
+            </ContainerScroll>
         </section>
     );
 };

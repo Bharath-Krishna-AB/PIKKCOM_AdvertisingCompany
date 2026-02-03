@@ -55,17 +55,17 @@ const ReflexnPage = () => {
       <main ref={containerRef} className="relative w-full text-secondary overflow-hidden">
 
         {/* HERO SECTION */}
-        <div className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
+        <div className="relative pt-24 px-4 md:px-8 lg:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-            <h1 className="text-[10vw] md:text-[7vw] leading-none font-anton uppercase tracking-tight relative">
+            <h1 className="text-[14vw] md:text-[10vw] lg:text-[7vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
               <AnimatedLine text="Confident" />
               <AnimatedLine text="decisions at" />
               <AnimatedLine text="the moment" />
               <AnimatedLine text="of choice." />
 
               {/* Arrow SVG */}
-              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
+              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden lg:block rotate-0">
                 <svg
                   viewBox="0 0 400 300"
                   fill="none"
@@ -121,10 +121,10 @@ const ReflexnPage = () => {
         </div>
 
         {/* CONTAINER FOR CONTENT SECTIONS */}
-        <div className="max-w-[1920px] mx-auto px-6 md:px-12 pb-32 space-y-32">
+        <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-12 pb-24 md:pb-32 space-y-20 md:space-y-32">
 
           {/* SECTION 1: CUSTOMER IMPACT */}
-          <section className="content-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+          <section className="content-section grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 items-start">
             <div className="lg:col-span-5">
               <h2 className="text-4xl md:text-5xl font-instrument italic text-accent mb-6 leading-tight">Customer Impact</h2>
               <h3 className="text-xl font-sans uppercase tracking-widest text-secondary/50 mb-4">The Experience</h3>
@@ -150,7 +150,7 @@ const ReflexnPage = () => {
           </section>
 
           {/* SECTION 2: RETAIL IMPACT */}
-          <section className="content-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+          <section className="content-section grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 items-start">
             <div className="lg:col-span-7 order-2 lg:order-1">
               <p className="text-lg md:text-2xl font-sans font-light text-secondary/90 leading-relaxed text-right md:text-left">
                 For retailers, Reflexn turns mirrors into <span className="font-semibold text-secondary">performance-driven touchpoints</span>. By guiding customers toward better decisions, the smart mirror increases conversion rates, shortens the path to purchase, and reduces drop-offs at critical moments. The enhanced in-store experience keeps customers engaged longer, supports staff with <span className="font-semibold underline decoration-accent decoration-2 underline-offset-4">intelligent assistance</span>, and creates new opportunities for data-driven upselling and brand partnerships.
@@ -177,9 +177,9 @@ const ReflexnPage = () => {
           </section>
 
           {/* SECTION 3: PUBLISHER MODEL */}
-          <section className="content-section relative py-20 border-t border-secondary/10">
+          <section className="content-section relative py-12 md:py-20 border-t border-secondary/10">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-5xl md:text-7xl font-anton uppercase text-secondary mb-8">Reflexn as a <br /><span className="text-accent">Publisher Model</span></h2>
+              <h2 className="text-4xl md:text-7xl font-anton uppercase text-secondary mb-6 md:mb-8">Reflexn as a <br /><span className="text-accent">Publisher Model</span></h2>
               <p className="text-xl md:text-3xl font-instrument italic text-secondary/80 leading-relaxed">
                 "Using real-time context, customer preferences, and intent signals, Reflexn turns the smart mirror into an <span className="font-sans font-bold not-italic text-secondary">intelligent in-store publisher</span>, enabling dynamic ad bidding where brands compete to appear at the <span className="bg-accent/10 px-2 rounded-md not-italic">exact moment of decision</span>—monetizing high-attention interactions while maintaining trust and a seamless experience."
               </p>

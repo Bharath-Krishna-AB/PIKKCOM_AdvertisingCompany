@@ -40,106 +40,139 @@ function createCardTexture(
     canvas.width = width;
     canvas.height = height;
 
-    // Draw Background
-    context.fillStyle = item.type === 'green' ? '#bdff53' : item.type === 'black' ? '#111111' : '#e6e6e6';
-    // Rounded rect for the background
-    context.beginPath();
-    context.roundRect(0, 0, width, height, 40);
-    context.fill();
+    const texture = new Texture(gl, { generateMipmaps: true });
 
-    // Text configuration
-    const isDark = item.type === 'black';
-    const textColor = isDark ? '#ffffff' : '#2D2D2D';
-    const subTextColor = isDark ? '#a0a0a0' : '#555555';
-
-    // 1. Draw Star Icon (Center)
-    context.save();
-    context.translate(width / 2, height / 2 - 50);
-    context.fillStyle = textColor;
-    // Simple 8-point star/sparkle
-    context.font = '80px serif'; // Using unicode char for simplicity or simple drawing
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-
-    // Draw SVG-like star path
-    context.beginPath();
-    const size = 30;
-    for (let i = 0; i < 8; i++) {
-        const rot = Math.PI / 4 * i;
-        const x = Math.cos(rot) * (i % 2 === 0 ? size : size * 0.4);
-        const y = Math.sin(rot) * (i % 2 === 0 ? size : size * 0.4);
-        if (i === 0) context.moveTo(x, y);
-        else context.lineTo(x, y);
-    }
-    context.closePath();
-    context.fill();
-    context.restore();
-
-
-    // 2. Draw Title
-    context.font = '500 70px Figtree, sans-serif';
-    context.fillStyle = textColor;
-    context.textAlign = 'center';
-    const lines = item.title.split('\n');
-    let yPos = height / 2 + 50;
-    lines.forEach(line => {
-        context.fillText(line, width / 2, yPos);
-        yPos += 75;
-    });
-
-    // 3. Draw Description
-    context.font = '400 24px Figtree, sans-serif';
-    context.fillStyle = subTextColor;
-    yPos += 20;
-    const descLines = item.description.split('\n');
-    descLines.forEach(line => {
-        context.fillText(line, width / 2, yPos);
-        yPos += 35;
-    });
-
-    // 4. Draw Badge (Top Left or Right depending on design, placing top left here)
-    if (item.badge) {
-        context.font = '600 16px Figtree, sans-serif';
-        const badgeMetrics = context.measureText(item.badge);
-        const badgeWidth = badgeMetrics.width + 30;
-        const badgeHeight = 36;
-
-        context.save();
-        context.fillStyle = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)';
+    // Function to draw the card content
+    const draw = (image?: HTMLImageElement) => {
+        // Draw Background
+        context.fillStyle = item.type === 'green' ? '#703EFF' : item.type === 'black' ? '#0f0f0f' : '#ffffff';
+        // Rounded rect for the background
         context.beginPath();
-        context.roundRect(30, 30, badgeWidth, badgeHeight, 18);
+        context.roundRect(0, 0, width, height, 40);
         context.fill();
 
-        context.fillStyle = subTextColor;
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(item.badge, 30 + badgeWidth / 2, 30 + badgeHeight / 2);
+        // Text configuration
+        const isDark = item.type === 'black';
+        const textColor = isDark ? '#ffffff' : '#2D2D2D';
+        const subTextColor = isDark ? '#a0a0a0' : '#555555';
+        const accentColor = item.type === 'green' ? '#1a1a1a' : '#703EFF';
+
+        // 1. Draw Badge (Product Name) - Top Left
+        if (item.badge) {
+            context.save();
+            context.font = '600 24px "Clash Display", sans-serif'; // Reduced size slightly
+            context.fillStyle = isDark ? accentColor : '#2D2D2D'; // Accent on dark for pop
+            context.textAlign = 'left';
+            context.textBaseline = 'top';
+            context.fillText(item.badge, 40, 40);
+            context.restore();
+        }
+
+        // 2. Draw Title (Tagline) - Large, Upper Middle
+        context.save();
+        context.font = '700 60px "Anton", sans-serif'; // Use Anton for hero feel
+        context.fillStyle = textColor;
+        context.textAlign = 'left';
+        const lines = item.title.split('\n');
+        let yPos = 120; // Start lower to clear badge
+        lines.forEach(line => {
+            context.fillText(line.toUpperCase(), 40, yPos); // Uppercase for impact
+            yPos += 70;
+        });
         context.restore();
-    }
 
-    // 5. Draw Decorative Grid for "Icons" card (middle black one)
-    if (item.type === 'black') {
-        // Schematic thumbnails at bottom
-        const thumbW = 100;
-        const thumbH = 100;
-        const startX = width / 2 - thumbW * 1.5 - 20;
-        let dx = startX;
+        // 3. Draw Description - Below Title
+        context.save();
+        context.font = '400 28px "Figtree", sans-serif';
+        context.fillStyle = subTextColor;
+        context.textAlign = 'left';
+        const descLines = item.description.split('\n');
+        yPos += 20; // Gap
+        descLines.forEach(line => {
+            context.fillText(line, 40, yPos);
+            yPos += 35;
+        });
+        context.restore();
 
-        context.fillStyle = '#2D2D2D'; // slightly lighter black
-        context.strokeStyle = '#333';
-        context.lineWidth = 1;
+        // 4. Draw Product Image - Bottom Area
+        if (image) {
+            context.save();
+            // Determine image area
+            const imgY = yPos + 40;
+            const imgH = height - imgY - 40; // Remaining height minus margin
+            const imgW = width - 80; // Side margins
 
-        for (let i = 0; i < 3; i++) {
-            context.beginPath();
-            context.roundRect(dx, height - 120, thumbW, thumbH, 10);
-            context.stroke();
-            context.fill();
-            dx += thumbW + 20;
+            if (imgH > 0) {
+                // Clip to rounded rect
+                context.beginPath();
+                context.roundRect(40, imgY, imgW, imgH, 20);
+                context.clip();
+
+                // Draw image cover
+                // Calculate aspect ratio
+                const imgAspect = image.width / image.height;
+                const areaAspect = imgW / imgH;
+
+                let drawW, drawH, drawX, drawY;
+
+                if (imgAspect > areaAspect) {
+                    // Image is wider than area, crop sides
+                    drawH = imgH;
+                    drawW = imgH * imgAspect;
+                    drawX = 40 + (imgW - drawW) / 2;
+                    drawY = imgY;
+                } else {
+                    // Image is taller than area, crop top/bottom
+                    drawW = imgW;
+                    drawH = imgW / imgAspect;
+                    drawX = 40;
+                    drawY = imgY + (imgH - drawH) / 2;
+                }
+
+                context.drawImage(image, drawX, drawY, drawW, drawH);
+            }
+            context.restore();
+        } else {
+            // Placeholder for image area while loading
+            context.save();
+            const imgY = yPos + 40;
+            const imgH = height - imgY - 40;
+            if (imgH > 0) {
+                context.fillStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+                context.beginPath();
+                context.roundRect(40, imgY, width - 80, imgH, 20);
+                context.fill();
+
+                // Loading text
+                context.fillStyle = subTextColor;
+                context.font = '20px sans-serif';
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                context.fillText("Loading...", width / 2, imgY + imgH / 2);
+            }
+            context.restore();
         }
     }
 
-    const texture = new Texture(gl, { generateMipmaps: true });
+    // Initial draw
+    draw();
     texture.image = canvas;
+
+    // Load Image
+    if (item.image) {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = item.image;
+        img.onload = () => {
+            draw(img);
+            texture.image = canvas;
+            // Force update if OGL supports it, otherwise reassignment often triggers internal version bump
+            if ((texture as any).needsUpdate !== undefined) (texture as any).needsUpdate = true;
+            // Some OGL versions rely on .update() or just re-binding. 
+            // We can assume reassignment helps.
+        };
+    }
+
     return { texture, width, height };
 }
 

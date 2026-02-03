@@ -92,7 +92,7 @@ const HomeConnect = () => {
                             viewBox="0 0 200 140"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="absolute bg-transparent left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10"
+                            className="absolute bg-transparent left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-10 hidden md:block"
                         >
                             <path
                                 ref={circleRef}

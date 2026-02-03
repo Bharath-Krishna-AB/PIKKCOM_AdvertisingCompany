@@ -12,52 +12,52 @@ export type DemoItem = {
 
 const demoItems: DemoItem[] = [
     {
-        image: '',
-        text: 'Page Transition Course',
-        type: 'green',
-        title: 'Page Transition\nCourse',
-        description: 'How to create page transitions\nto take your websites to the next level.',
-        badge: 'FEB 2026'
-    },
-    {
-        image: '',
-        text: 'Icons',
+        image: '/images/reflexn-hamburger-v2.jpeg',
+        text: 'Reflexn',
         type: 'black',
-        title: 'Icons',
-        description: 'A uniform library of clean, scalable SVG\nicons you can copy or download in seconds.',
-        badge: 'PART OF THE MEMBERSHIP'
+        title: 'Confident\ndecisions at the\nmoment of choice.',
+        description: 'Smart Mirror Intelligence for Retail\nand Customer Experience.',
+        badge: 'REFLEXN'
     },
     {
-        image: '',
-        text: 'Easings',
-        type: 'white',
-        title: 'Easings',
-        description: 'Coming soon, ready-to-paste easings for\nCSS and GSAP inside the Osmo platform.',
-        badge: 'EXPECTED EARLY 2026'
-    },
-    {
-        image: '',
-        text: 'Page Transition Course',
-        type: 'green',
-        title: 'Page Transition\nCourse',
-        description: 'How to create page transitions\nto take your websites to the next level.',
-        badge: 'FEB 2026'
-    },
-    {
-        image: '',
-        text: 'Icons',
+        image: '/images/hat.png',
+        text: 'Pikkcom VR',
         type: 'black',
-        title: 'Icons',
-        description: 'A uniform library of clean, scalable SVG\nicons you can copy or download in seconds.',
-        badge: 'PART OF THE MEMBERSHIP'
+        title: 'Place users\ninside products,\nplaces & processes.',
+        description: 'Immersive Storytelling with VR\nand 360° Environments.',
+        badge: 'PIKKCOM VR'
     },
     {
-        image: '',
-        text: 'Easings',
-        type: 'white',
-        title: 'Easings',
-        description: 'Coming soon, ready-to-paste easings for\nCSS and GSAP inside the Osmo platform.',
-        badge: 'EXPECTED EARLY 2026'
+        image: '/images/insight-hamburger-v2.jpg',
+        text: 'Insights',
+        type: 'black',
+        title: 'Focus, Plan,\nand Grow\nProfitably.',
+        description: 'Product Intelligence Platform\nfor Data-Driven Growth.',
+        badge: 'PIKKCOM INSIGHTS'
+    },
+    {
+        image: '/images/reflexn-hamburger-v2.jpeg',
+        text: 'Reflexn',
+        type: 'black',
+        title: 'Confident\ndecisions at the\nmoment of choice.',
+        description: 'Smart Mirror Intelligence for Retail\nand Customer Experience.',
+        badge: 'REFLEXN'
+    },
+    {
+        image: '/images/hat.png',
+        text: 'Pikkcom VR',
+        type: 'black',
+        title: 'Place users\ninside products,\nplaces & processes.',
+        description: 'Immersive Storytelling with VR\nand 360° Environments.',
+        badge: 'PIKKCOM VR'
+    },
+    {
+        image: '/images/insight-hamburger-v2.jpg',
+        text: 'Insights',
+        type: 'black',
+        title: 'Focus, Plan,\nand Grow\nProfitably.',
+        description: 'Product Intelligence Platform\nfor Data-Driven Growth.',
+        badge: 'PIKKCOM INSIGHTS'
     }
 ];
 
@@ -67,13 +67,13 @@ const CircularDemo = () => {
             {/* Header Section */}
             <div className="text-center z-10 space-y-6 mb-8 max-w-5xl mx-auto px-4">
                 <h2 className="text-[5rem] leading-none font-medium tracking-tight text-[#2D2D2D]">
-                    A growing toolkit for
+                    Our Strategic
                     <br />
-                    creative developers
+                    Products
                 </h2>
 
                 <p className="text-lg text-neutral-600">
-                    Access everything with a single membership:
+                    Innovation driven solutions for modern brands:
                 </p>
             </div>
 
@@ -96,7 +96,7 @@ const CircularDemo = () => {
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
                 <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] bg-neutral-100 rounded-full blur-3xl" />
             </div>
-        </section>
+        </section >
     );
 };
 

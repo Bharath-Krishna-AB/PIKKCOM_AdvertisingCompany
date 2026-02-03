@@ -42,17 +42,17 @@ const PikkcomVRPage = () => {
       <main ref={containerRef} className="relative w-full text-secondary overflow-hidden">
 
         {/* HERO SECTION */}
-        <div className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
+        <div className="relative pt-24 px-4 md:px-8 lg:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-            <h1 className="text-[10vw] md:text-[7vw] leading-none font-anton uppercase tracking-tight relative">
+            <h1 className="text-[14vw] md:text-[10vw] lg:text-[7vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
               <AnimatedLine text="Place users" />
               <AnimatedLine text="inside products," />
               <AnimatedLine text="places and" />
               <AnimatedLine text="processes." />
 
               {/* Arrow SVG */}
-              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
+              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden lg:block rotate-0">
                 <svg
                   viewBox="0 0 400 300"
                   fill="none"
@@ -108,9 +108,9 @@ const PikkcomVRPage = () => {
         </div>
 
         {/* EDITORIAL HEADLINE SECTION */}
-        <section className="relative w-full max-w-screen mx-auto px-6 md:px-12 pt-24 pb-12 text-[#2D2D2D]">
+        <section className="relative w-full max-w-screen mx-auto px-4 md:px-8 lg:px-12 pt-12 md:pt-16 lg:pt-24 pb-12 text-[#2D2D2D]">
           <div className="w-full flex justify-end">
-            <h1 className="text-[7vw] text-right leading-none font-anton uppercase tracking-tight relative">
+            <h1 className="text-5xl md:text-6xl lg:text-[7vw] text-right leading-none font-anton uppercase tracking-tight relative">
               <AnimatedLine text="Turning" />
               <AnimatedLine text="environments" />
               <AnimatedLine text="into powerful" />
@@ -120,7 +120,7 @@ const PikkcomVRPage = () => {
         </section>
 
         {/* EDITORIAL PARAGRAPH SECTION */}
-        <section className="relative w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 md:pb-32 text-[#2D2D2D]">
+        <section className="relative w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 pb-24 md:pb-32 text-[#2D2D2D]">
           <div className="w-full space-y-8 md:space-y-16 ">
             <p className="text-xl md:text-4xl font-normal leading-relaxed text-neutral-800 font-geist-mono">
               We build <span className="font-semibold text-secondary">immersive, technology-driven</span> storytelling experiences that <span style={{ fontFamily: 'var(--font-instrument)' }} className="text-accent text-3xl md:text-4xl italic align-middle mx-1">place users inside</span> products, places, and processes.

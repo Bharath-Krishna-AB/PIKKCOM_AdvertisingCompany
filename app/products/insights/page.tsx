@@ -74,17 +74,17 @@ const InsightsPage = () => {
       <main ref={containerRef} className="relative w-full text-secondary overflow-hidden">
 
         {/* HERO SECTION */}
-        <div className="relative pt-24 px-6 md:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
+        <div className="relative pt-24 px-4 md:px-8 lg:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-            <h1 className="text-[10vw] md:text-[7vw] leading-none font-anton uppercase tracking-tight relative">
+            <h1 className="text-[14vw] md:text-[10vw] lg:text-[7vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
               <AnimatedLine text="Focus," />
               <AnimatedLine text="Plan, and" />
               <AnimatedLine text="Grow" />
               <AnimatedLine text="Profitably." />
 
               {/* Arrow SVG */}
-              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden md:block rotate-0">
+              <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden lg:block rotate-0">
                 <svg
                   viewBox="0 0 400 300"
                   fill="none"
@@ -140,19 +140,19 @@ const InsightsPage = () => {
         </div>
 
         {/* CONTENT CONTAINER */}
-        <div className="max-w-[1920px] mx-auto px-6 md:px-12 pb-32 space-y-32">
+        <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-12 pb-24 md:pb-32 space-y-24 md:space-y-32">
 
           {/* INTRO */}
           <section className="content-section max-w-4xl">
-            <p className="text-2xl md:text-5xl font-clash-display font-medium text-secondary leading-tight">
+            <p className="text-3xl md:text-4xl lg:text-5xl font-clash-display font-medium text-secondary leading-tight">
               A product intelligence platform that helps brands <span className="text-accent italic font-instrument">focus, plan campaigns</span>, and grow profitably.
             </p>
           </section>
 
           {/* MODULES GRID */}
           <section className="content-section">
-            <h2 className="text-sm font-sans uppercase tracking-widest text-secondary/50 mb-12">Key Modules</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+            <h2 className="text-sm font-sans uppercase tracking-widest text-secondary/50 mb-8 md:mb-12">Key Modules</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-12 md:gap-y-16">
               {modules.map((mod, i) => (
                 <div key={i} className="group">
                   <h3 className="text-2xl md:text-3xl font-clash-display font-semibold text-secondary mb-4 group-hover:text-accent transition-colors duration-300">
@@ -167,8 +167,8 @@ const InsightsPage = () => {
           </section>
 
           {/* PROBLEM DEFINITION SECTION */}
-          <section className="content-section bg-secondary text-primary rounded-3xl p-8 md:p-16 relative overflow-hidden">
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <section className="content-section bg-secondary text-primary rounded-3xl p-6 md:p-10 lg:p-16 relative overflow-hidden">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
               <div>
                 <h2 className="text-4xl md:text-6xl font-anton uppercase mb-8">The Challenge</h2>
                 <p className="text-xl md:text-2xl font-sans font-light opacity-90 mb-8">
