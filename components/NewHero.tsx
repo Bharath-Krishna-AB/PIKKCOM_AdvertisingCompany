@@ -13,49 +13,18 @@ const NewHero = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Mouse Parallax State
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const { clientX, clientY } = e;
-        const innerWidth = window.innerWidth;
-        const innerHeight = window.innerHeight;
-
-        // Calculate normalized position -0.5 to 0.5
-        const x = (clientX / innerWidth) - 0.5;
-        const y = (clientY / innerHeight) - 0.5;
-
-        mouseX.set(x);
-        mouseY.set(y);
-    };
-
-    // Smooth springs for parallax
-    const xSpring = useSpring(mouseX, { stiffness: 50, damping: 20 });
-    const ySpring = useSpring(mouseY, { stiffness: 50, damping: 20 });
-
-    // Transform values for elements
-    const titleX = useTransform(xSpring, [-0.5, 0.5], ["-20px", "20px"]); // Title moves slightly opposite
-    const titleY = useTransform(ySpring, [-0.5, 0.5], ["-20px", "20px"]);
-
-    const bgX = useTransform(xSpring, [-0.5, 0.5], ["50px", "-50px"]); // Background moves more
-    const bgY = useTransform(ySpring, [-0.5, 0.5], ["50px", "-50px"]);
-
     useGSAP(() => {
         const tl = gsap.timeline({
             delay: 0.5
         });
 
         // Ensure SplitText is available (fallback if not)
-        // Note: In real prod without Club GSAP, this might need a manual char wrapper. 
-        // Assuming user has it working as per previous file.
         let heroChars: Element[] = [];
         try {
             const split = new SplitText(titleRef.current, { type: "chars" });
             heroChars = split.chars;
         } catch (e) {
             console.warn("SplitText not loaded", e);
-            // Fallback: manually select characters if they were pre-split or just animate the whole line
         }
 
         if (heroChars.length > 0) {
@@ -73,9 +42,6 @@ const NewHero = () => {
         } else {
             tl.from(titleRef.current, { y: 100, opacity: 0, duration: 1 });
         }
-
-        // Subtitle Animation happens via Framer Motion in the render, 
-        // but we can sync the scroll indicator here if we want GSAP control.
 
         // Scroll Sync Rotation for Text Circle
         gsap.to(".scroll-text-circle", {
@@ -106,13 +72,11 @@ const NewHero = () => {
     return (
         <div
             ref={containerRef}
-            onMouseMove={handleMouseMove}
             className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidde text-secondary"
         >
 
             {/* Background Gradient/Noise Parallax */}
-            <motion.div
-                style={{ x: bgX, y: bgY }}
+            <div
                 className="absolute inset-0 z-0 pointer-events-none"
             >
                 <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-accent/5 rounded-full blur-[100px] mix-blend-multiply filter" />
@@ -120,13 +84,13 @@ const NewHero = () => {
                 <div className="absolute inset-0 opacity-[0.04]"
                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
                 />
-            </motion.div>
+            </div>
 
             {/* Centered Content Group */}
             <div className="relative z-10 flex flex-col items-center justify-center w-full h-full pointer-events-none">
 
                 {/* Title */}
-                <motion.div style={{ x: titleX, y: titleY }} className="relative z-20">
+                <div className="relative z-20">
                     <h1
                         ref={titleRef}
                         style={{ fontFamily: "'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif" }}
@@ -134,7 +98,7 @@ const NewHero = () => {
                     >
                         PIKKCOM<span className="text-accent font-fatkat text-[11vw] md:text-[12vw] inline-block">.</span>
                     </h1>
-                </motion.div>
+                </div>
 
                 {/* Subtitle Content - Framer Motion Entrance */}
                 <motion.div
@@ -174,7 +138,7 @@ const NewHero = () => {
                                 <path id="circle" d="M 50, 50 m -28, 0 a 28,28 0 1,1 56,0 a 28,28 0 1,1 -56,0" />
                             </defs>
                             <text fontSize="8" fontFamily="var(--font-anton)" letterSpacing="1px">
-                                <textPath xlinkHref="#circle" className="fill-current text-secondary font-medium tracking-widest">
+                                <textPath xlinkHref="#circle" textLength="175" lengthAdjust="spacingAndGlyphs" className="fill-current text-secondary font-medium tracking-widest">
                                     SCROLL • EXPLORE • SCROLL • EXPLORE •
                                 </textPath>
                             </text>
@@ -184,7 +148,7 @@ const NewHero = () => {
                     {/* Center Icon */}
                     <motion.div
                         animate={{ scale: isHovered ? 1.1 : 1 }}
-                        className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/10 border border-secondary/10 p-3 overflow-hidden shadow-lg"
+                        className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center p-3 overflow-hidden"
                     >
                         <svg
                             viewBox="0 0 256 256"
