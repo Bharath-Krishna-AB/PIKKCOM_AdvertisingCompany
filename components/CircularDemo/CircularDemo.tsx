@@ -25,7 +25,7 @@ const demoItems: DemoItem[] = [
         link: '/products/reflexn'
     },
     {
-        image: '/images/hat.png',
+        image: '/images/vr-hamburger-v2.jpeg',
         text: 'Pikkcom VR',
         type: 'black',
         title: 'Place users\ninside products,\nplaces & processes.',
@@ -52,7 +52,7 @@ const demoItems: DemoItem[] = [
         link: '/products/reflexn'
     },
     {
-        image: '/images/hat.png',
+        image: '/images/vr-hamburger-v2.jpeg',
         text: 'Pikkcom VR',
         type: 'black',
         title: 'Place users\ninside products,\nplaces & processes.',

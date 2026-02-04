@@ -121,7 +121,8 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
                 {/* Staggered Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-20 md:gap-8 lg:gap-12 w-full">
                     {services.map((service, i) => (
-                        <div
+                        <Link
+                            href={service.link}
                             key={service.id}
                             className={`service-card group relative flex flex-col ${i % 2 !== 0 ? "lg:translate-y-24" : ""}`} // Zigzag offset on desktop
                         >
@@ -159,18 +160,17 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
                                         {service.title}
                                     </h3>
 
-                                    <Link
-                                        href={service.link}
+                                    <div
                                         className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--secondary)] text-[var(--primary)] group-hover:bg-[var(--accent)] transition-colors duration-300 shrink-0 mt-1"
                                     >
                                         <ArrowRight
                                             size={20}
                                             className="transform -rotate-45 group-hover:rotate-0 transition-transform duration-300"
                                         />
-                                    </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
