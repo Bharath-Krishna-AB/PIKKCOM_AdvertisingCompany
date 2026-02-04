@@ -145,7 +145,7 @@ const CircularDemo = () => {
         <section data-theme="light" className="w-full min-h-screen relative flex flex-col items-center pt-16 sm:pt-24 pb-16 sm:pb-24 overflow-hidden font-[family-name:var(--font-figtree)]">
             {/* Header Section */}
             <div className="text-center z-10 space-y-4 sm:space-y-6 mb-8 max-w-5xl mx-auto px-4">
-                <h2 className="text-[clamp(2.5rem,10vw,5rem)] leading-[0.9] font-medium tracking-tight text-[#2D2D2D]">
+                <h2 className="text-[clamp(2.5rem,10vw,5rem)] lg:text-[10vw] leading-[0.9] font-medium tracking-tight text-[#2D2D2D]">
                     Our Strategic
                     <br />
                     Products

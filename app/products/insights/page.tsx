@@ -77,7 +77,7 @@ const InsightsPage = () => {
         <div className="relative pt-24 px-4 md:px-8 lg:px-12 pb-12 w-full max-w-screen mx-auto min-h-screen flex flex-col justify-between">
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
-            <h1 className="text-[14vw] md:text-[10vw] lg:text-[7vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
+            <h1 className="text-[14vw] md:text-[10vw] lg:text-[10vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
               <AnimatedLine text="Focus," />
               <AnimatedLine text="Plan, and" />
               <AnimatedLine text="Grow" />
@@ -86,30 +86,22 @@ const InsightsPage = () => {
               {/* Arrow SVG */}
               <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden lg:block rotate-0">
                 <svg
-                  viewBox="0 0 400 300"
+                  viewBox="0 0 1080 659.23"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-full h-full"
                 >
-                  <defs>
-                    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <path d="M 1,1 Q 5,3 1,5" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-accent" />
-                    </marker>
-                  </defs>
-
+                  <path
+                    className="fill-[#703fff]"
+                    d="M63.47,25.6c-54.54,120.22-24.02,270.36,88.82,345.1,31.06,21.01,66.88,35.14,104.17,39.55,36.98,4.11,75.5-1.53,108.76-18.55,18.63-9.83,35.86-23.01,48.21-40.22,26.97-36.3,41.55-96.65-8.83-119.8-43.55-19.59-96.85-4.58-130.22,27.96-63.17,59.24-65.56,163.86-17.43,233.08,49.86,71.04,135.13,106.89,217.97,122.83,193.05,33.05,390.26-3.65,576.48-56.79,4.13-1.19,8.44,1.2,9.63,5.33,1.19,4.13-1.2,8.44-5.33,9.63-167.65,47.42-343.13,79.63-517.92,63.38-106.97-9.5-226.06-46.04-290.14-138.05-37.62-55.54-46.14-130.46-18.71-192.09,18.25-40.86,52.93-75.56,96.52-88.08,27.03-8.02,57.22-7.46,83.06,4.47,55.86,26.36,42.59,91.99,11.74,133.14-13.15,18.13-31.55,32.17-51.31,42.43-34.76,17.58-74.84,23.3-113.35,18.82-82.55-10.2-156.25-65.84-193.97-139.22-20.06-39.22-29.96-83.27-30.08-127.22-.15-43.92,9.23-87.81,27.4-127.77.57-1.25,2.05-1.81,3.3-1.24,1.25.57,1.8,2.04,1.24,3.29h0Z"
+                  />
                   <path
                     ref={arrowMainRef}
-                    d="M 80 80 
-                        C 80 250, 200 250, 220 200
-                        C 230 170, 180 170, 190 200
-                        C 200 240, 300 180, 320 150"
-                    stroke="currentColor"
-                    strokeWidth="8"
+                    className="fill-none stroke-[#703fff]"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    fill="none"
-                    markerEnd="url(#arrowhead)"
-                    className="text-accent"
+                    strokeWidth="15.56px"
+                    d="M982.8,626.65c6.25-7.98,13.8-16.55,22.85-25.17,16.88-16.09,33.78-27.38,47.87-35.24-15.83,1.12-38.85.48-64.09-8.8-8.11-2.98-15.28-6.42-21.52-9.93"
                   />
                 </svg>
               </div>
