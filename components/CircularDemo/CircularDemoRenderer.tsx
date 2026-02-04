@@ -29,31 +29,45 @@ function autoBind(instance: any): void {
 function createCardTexture(
     gl: GL,
     item: DemoItem,
-): { texture: Texture; textureHover: Texture; width: number; height: number } {
+): { texture: Texture; textureHover: Texture; width: number; height: number; buttonBounds: { x: number; y: number; w: number; h: number } } {
+    // Create separate canvas for normal state
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     if (!context) throw new Error('Could not get 2d context');
+
+    // Create separate canvas for hover state
+    const canvasHover = document.createElement('canvas');
+    const contextHover = canvasHover.getContext('2d');
+    if (!contextHover) throw new Error('Could not get 2d context hover');
 
     // High resolution canvas for sharp text
     const width = 600;
     const height = 800;
     canvas.width = width;
     canvas.height = height;
+    canvasHover.width = width;
+    canvasHover.height = height;
 
     const texture = new Texture(gl, { generateMipmaps: true });
     const textureHover = new Texture(gl, { generateMipmaps: true });
+    let buttonBounds = { x: 0, y: 0, w: 0, h: 0 };
 
     // Function to draw the card content
-    const draw = (targetTexture: Texture, isHover: boolean, image?: HTMLImageElement) => {
+    const draw = (
+        targetCanvas: HTMLCanvasElement,
+        targetCtx: CanvasRenderingContext2D,
+        targetTexture: Texture,
+        isHover: boolean,
+        image?: HTMLImageElement
+    ) => {
         // Clear
-        context.clearRect(0, 0, width, height);
+        targetCtx.clearRect(0, 0, width, height);
 
         // Draw Background
-        context.fillStyle = item.type === 'green' ? '#703EFF' : item.type === 'black' ? '#0f0f0f' : '#ffffff';
-        // Rounded rect for the background
-        context.beginPath();
-        context.roundRect(0, 0, width, height, 40);
-        context.fill();
+        targetCtx.fillStyle = item.type === 'green' ? '#703EFF' : item.type === 'black' ? '#0f0f0f' : '#ffffff';
+        targetCtx.beginPath();
+        targetCtx.roundRect(0, 0, width, height, 40);
+        targetCtx.fill();
 
         // Text configuration
         const isDark = item.type === 'black';
@@ -61,56 +75,56 @@ function createCardTexture(
         const subTextColor = isDark ? '#a0a0a0' : '#555555';
         const accentColor = item.type === 'green' ? '#1a1a1a' : '#703EFF';
 
-        // 1. Draw Badge (Product Name) - Top Left
+        // 1. Draw Badge (Product Name)
         if (item.badge) {
-            context.save();
-            context.font = '600 24px "Clash Display", sans-serif';
-            context.fillStyle = isDark ? accentColor : '#2D2D2D';
-            context.textAlign = 'left';
-            context.textBaseline = 'top';
-            context.fillText(item.badge, 40, 40);
-            context.restore();
+            targetCtx.save();
+            targetCtx.font = '600 24px "Clash Display", sans-serif';
+            targetCtx.fillStyle = isDark ? accentColor : '#2D2D2D';
+            targetCtx.textAlign = 'left';
+            targetCtx.textBaseline = 'top';
+            targetCtx.fillText(item.badge, 40, 40);
+            targetCtx.restore();
         }
 
-        // 2. Draw Title (Tagline) - Large, Upper Middle
-        context.save();
-        context.font = '700 60px "Anton", sans-serif';
-        context.fillStyle = textColor;
-        context.textAlign = 'left';
+        // 2. Draw Title
+        targetCtx.save();
+        targetCtx.font = '700 60px "Anton", sans-serif';
+        targetCtx.fillStyle = textColor;
+        targetCtx.textAlign = 'left';
         const lines = item.title.split('\n');
-        let yPos = 120; // Start lower to clear badge
+        let yPos = 120;
         lines.forEach(line => {
-            context.fillText(line.toUpperCase(), 40, yPos);
+            targetCtx.fillText(line.toUpperCase(), 40, yPos);
             yPos += 70;
         });
-        context.restore();
+        targetCtx.restore();
 
-        // 3. Draw Description - Below Title
-        context.save();
-        context.font = '400 28px "Figtree", sans-serif';
-        context.fillStyle = subTextColor;
-        context.textAlign = 'left';
+        // 3. Draw Description
+        targetCtx.save();
+        targetCtx.font = '400 28px "Figtree", sans-serif';
+        targetCtx.fillStyle = subTextColor;
+        targetCtx.textAlign = 'left';
         const descLines = item.description.split('\n');
-        yPos += 20; // Gap
+        yPos += 20;
         descLines.forEach(line => {
-            context.fillText(line, 40, yPos);
+            targetCtx.fillText(line, 40, yPos);
             yPos += 35;
         });
-        context.restore();
+        targetCtx.restore();
 
-        // 4. Draw Content (Image OR Button)
+        // 4. Draw Content
         if (!isHover) {
             // Normal State: Draw Image
             if (image) {
-                context.save();
+                targetCtx.save();
                 const imgY = yPos + 40;
                 const imgH = height - imgY - 40;
                 const imgW = width - 80;
 
                 if (imgH > 0) {
-                    context.beginPath();
-                    context.roundRect(40, imgY, imgW, imgH, 20);
-                    context.clip();
+                    targetCtx.beginPath();
+                    targetCtx.roundRect(40, imgY, imgW, imgH, 20);
+                    targetCtx.clip();
 
                     const imgAspect = image.width / image.height;
                     const areaAspect = imgW / imgH;
@@ -127,76 +141,72 @@ function createCardTexture(
                         drawX = 40;
                         drawY = imgY + (imgH - drawH) / 2;
                     }
-                    context.drawImage(image, drawX, drawY, drawW, drawH);
+                    targetCtx.drawImage(image, drawX, drawY, drawW, drawH);
                 }
-                context.restore();
+                targetCtx.restore();
             } else {
                 // Placeholder
-                context.save();
+                targetCtx.save();
                 const imgY = yPos + 40;
                 const imgH = height - imgY - 40;
                 if (imgH > 0) {
-                    context.fillStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-                    context.beginPath();
-                    context.roundRect(40, imgY, width - 80, imgH, 20);
-                    context.fill();
+                    targetCtx.fillStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+                    targetCtx.beginPath();
+                    targetCtx.roundRect(40, imgY, width - 80, imgH, 20);
+                    targetCtx.fill();
                 }
-                context.restore();
+                targetCtx.restore();
             }
-
-
         } else {
             // Hover State: Draw Button 
-            // Position button where image would start
             const btnY = yPos + 60;
             const btnX = 40;
             const btnH = 60;
-            const btnW = 220; // Approx
 
-            context.save();
-            // Button Pill
-            context.fillStyle = isDark ? '#ffffff' : '#0f0f0f';
-            context.beginPath();
-            context.roundRect(btnX, btnY, btnW, btnH, 30);
-            context.fill();
+            targetCtx.save();
 
-            // Button Text
-            context.fillStyle = isDark ? '#0f0f0f' : '#ffffff';
-            context.font = '700 20px "Figtree", sans-serif';
-            context.textAlign = 'left';
-            context.textBaseline = 'middle';
-            context.fillText(`Explore ${item.text}`, btnX + 30, btnY + btnH / 2);
+            // 1. Setup Font & Measure Text
+            targetCtx.font = '700 20px "Figtree", sans-serif';
+            const safeText = item.text || '';
+            const textStr = `Explore ${safeText}`;
+            const metrics = targetCtx.measureText(textStr);
+            const textWidth = metrics ? metrics.width : 100;
 
-            // Arrow (Simple drawing)
-            // context.fillText("->", btnX + 160, btnY + btnH/2);
-            // Draw arrow manually for nicer look
-            context.beginPath();
-            context.lineWidth = 2;
-            context.strokeStyle = isDark ? '#0f0f0f' : '#ffffff';
-            const ax = btnX + 180;
-            const ay = btnY + btnH / 2;
-            context.moveTo(ax, ay + 4);
-            context.lineTo(ax + 4, ay);
-            context.lineTo(ax, ay - 4);
-            context.moveTo(ax - 8, ay + 4);
-            context.lineTo(ax - 4, ay); // simple arrow attempt
-            // Actually simple text arrow might be safer for canvas
-            // Let's use text
-            // context.stroke();
-            context.font = '20px sans-serif';
-            context.fillText("↗", btnX + 180, btnY + btnH / 2 + 1);
+            // 2. Calculate Dynamic Width
+            // padding-left (30) + text + gap (10) + arrow (20) + padding-right (30)
+            let btnW = 30 + textWidth + 10 + 20 + 30;
+            if (!btnW || isNaN(btnW)) btnW = 220; // Fallback
 
-            context.restore();
+            // 3. Draw Button Pill
+            targetCtx.fillStyle = isDark ? '#ffffff' : '#0f0f0f';
+            targetCtx.beginPath();
+            targetCtx.roundRect(btnX, btnY, btnW, btnH, 30);
+            targetCtx.fill();
+
+            // 4. Draw Button Text
+            targetCtx.fillStyle = isDark ? '#0f0f0f' : '#ffffff';
+            targetCtx.textAlign = 'left';
+            targetCtx.textBaseline = 'middle';
+            targetCtx.fillText(textStr, btnX + 30, btnY + btnH / 2);
+
+            // 5. Draw Arrow
+            targetCtx.font = '20px sans-serif';
+            targetCtx.fillText("↗", btnX + 30 + textWidth + 10, btnY + btnH / 2 + 1);
+
+            targetCtx.restore();
+
+            // Store bounds
+            buttonBounds = { x: btnX, y: btnY, w: btnW, h: btnH };
         }
 
         // Upload to texture
-        targetTexture.image = canvas;
+        targetTexture.image = targetCanvas;
         if ((targetTexture as any).needsUpdate !== undefined) (targetTexture as any).needsUpdate = true;
     }
 
     // Initial draw
-    draw(texture, false);
-    draw(textureHover, true); // Hover texture always has button, no image needed
+    draw(canvas, context, texture, false);
+    draw(canvasHover, contextHover, textureHover, true);
 
     // Load Image
     if (item.image) {
@@ -205,11 +215,11 @@ function createCardTexture(
         img.src = item.image;
         img.onload = () => {
             // Only redraw normal texture with image
-            draw(texture, false, img);
+            draw(canvas, context, texture, false, img);
         };
     }
 
-    return { texture, textureHover, width, height };
+    return { texture, textureHover, width, height, buttonBounds };
 }
 
 interface ScreenSize {
@@ -261,6 +271,7 @@ class Media {
     isAfter: boolean = false;
     hoverTarget: number = 0;
     hoverCurrent: number = 0;
+    buttonBounds!: { x: number; y: number; w: number; h: number };
 
     constructor({
         geometry,
@@ -292,7 +303,8 @@ class Media {
     }
 
     createShader() {
-        const { texture, textureHover } = createCardTexture(this.gl, this.item);
+        const { texture, textureHover, buttonBounds } = createCardTexture(this.gl, this.item);
+        this.buttonBounds = buttonBounds;
 
         this.program = new Program(this.gl, {
             depthTest: false,
@@ -616,12 +628,15 @@ class App {
         if (!this.renderer || !this.medias) return;
 
         // Update mouse position for raycast (normalized -1 to 1)
-        const x = (e.clientX / window.innerWidth) * 2 - 1;
-        const y = -(e.clientY / window.innerHeight) * 2 + 1; // Invert Y
+        const bounds = this.container.getBoundingClientRect();
+        const mouseX = e.clientX - bounds.left;
+        const mouseY = e.clientY - bounds.top;
+        const x = (mouseX / bounds.width) * 2 - 1;
+        const y = -(mouseY / bounds.height) * 2 + 1; // Invert Y
         this.mouse.set(x, y);
 
         this.raycast.castMouse(this.camera, this.mouse);
-        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane)) as any[];
 
         // Reset all
         this.medias.forEach(m => m.hoverTarget = 0);
@@ -631,8 +646,26 @@ class App {
             const hitMesh = hits[0];
             const media = (hitMesh as any).media;
             if (media) {
+                // Always show hover effect for the card
                 media.hoverTarget = 1;
-                this.container.style.cursor = 'pointer';
+
+                // Only show pointer if over the button
+                // Check detailed intersection for UVs
+                const detailedHits = this.raycast.intersectMeshes([hitMesh]) as any[];
+
+                if (detailedHits && detailedHits.length > 0) {
+                    const hit = detailedHits[0];
+                    // UV (0,0) is bottom-left, Canvas (0,0) is top-left
+                    // Canvas Y = (1 - uv.y) * 800
+                    if (hit.hit && hit.hit.uv) {
+                        const cx = hit.hit.uv.x * 600;
+                        const cy = (1 - hit.hit.uv.y) * 800;
+                        const b = media.buttonBounds;
+                        if (cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h) {
+                            this.container.style.cursor = 'pointer';
+                        }
+                    }
+                }
             }
         }
 
@@ -642,17 +675,46 @@ class App {
     onClick(e: MouseEvent) {
         if (this.isDown) return;
 
-        const x = (e.clientX / window.innerWidth) * 2 - 1;
-        const y = -(e.clientY / window.innerHeight) * 2 + 1;
+        const bounds = this.container.getBoundingClientRect();
+        const mouseX = e.clientX - bounds.left;
+        const mouseY = e.clientY - bounds.top;
+        const x = (mouseX / bounds.width) * 2 - 1;
+        const y = -(mouseY / bounds.height) * 2 + 1;
+
         this.mouse.set(x, y);
         this.raycast.castMouse(this.camera, this.mouse);
-        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane)) as any[];
 
         if (hits && hits.length > 0) {
             const hitMesh = hits[0];
             const media = (hitMesh as any).media;
             if (media && media.item.link) {
-                window.location.href = media.item.link;
+                // Check detailed button bounds
+                const detailedHits = this.raycast.intersectMeshes([hitMesh]) as any[];
+                if (detailedHits && detailedHits.length > 0) {
+                    const hit = detailedHits[0];
+                    console.log('Click detected on mesh, checking UVs...', hit);
+
+                    if (hit.hit && hit.hit.uv) {
+                        const cx = hit.hit.uv.x * 600;
+                        const cy = (1 - hit.hit.uv.y) * 800;
+                        const b = media.buttonBounds;
+
+                        console.log('Click UV:', hit.hit.uv);
+                        console.log('Calculated (cx, cy):', cx, cy);
+                        console.log('Button Bounds:', b);
+                        console.log('Link:', media.item.link);
+
+                        if (cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h) {
+                            console.log('Button click confirmed! Redirecting to:', media.item.link);
+                            window.location.href = media.item.link;
+                        } else {
+                            console.log('Click outside button bounds.');
+                        }
+                    } else {
+                        console.log('No UV on hit result', hit);
+                    }
+                }
             }
         }
     }

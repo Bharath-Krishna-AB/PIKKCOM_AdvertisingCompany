@@ -25,14 +25,16 @@ export default function Menu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen
                 duration: 0.8,
                 ease: "power4.inOut",
             })
-            .from(".menu-item-anim", {
-                y: 100,
-                opacity: 0,
-                stagger: 0.05,
-                duration: 0.5,
-                ease: "power3.out"
-            }, "-=0.4");
-    });
+            .fromTo(".menu-item-anim",
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.05,
+                    duration: 0.5,
+                    ease: "power3.out"
+                }, "-=0.4");
+    }, { scope: container });
 
     useEffect(() => {
         if (isOpen) {
