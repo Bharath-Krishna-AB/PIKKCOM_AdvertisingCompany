@@ -115,7 +115,7 @@ const NewHero = () => {
                         style={{ fontFamily: "'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif" }}
                         className="hero-text text-[13vw] md:text-[15vw] leading-[0.8] font-bold text-secondary tracking-tighter select-none perspective-500"
                     >
-                        pikkcomvr<span className="text-accent font-fatkat text-[11vw] md:text-[12vw] inline-block">.</span>
+                        PIKKCOM<span className="text-accent font-fatkat text-[11vw] md:text-[12vw] inline-block">.</span>
                     </h1>
                 </div>
 

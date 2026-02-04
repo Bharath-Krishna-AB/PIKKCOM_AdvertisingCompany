@@ -613,52 +613,16 @@ class App {
     onMouseMove(e: MouseEvent) {
         if (!this.renderer || !this.medias) return;
 
-        // Update mouse position for raycast (normalized -1 to 1)
-        // Need to account for canvas position if possible, but window logic is easier if full width
-        // Assuming canvas fills relevant area or calc relative
-        const x = (e.clientX / window.innerWidth) * 2 - 1;
-        const y = -(e.clientY / window.innerHeight) * 2 + 1; // Invert Y
-        this.mouse.set(x, y);
-
-        this.raycast.castMouse(this.camera, this.mouse);
-        // OGL intersectBounds check
-        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
-
-        // Reset all
-        this.medias.forEach(m => m.hoverTarget = 0);
-        this.container.style.cursor = 'grab';
-
-        if (hits && hits.length > 0) {
-            const hitMesh = hits[0];
-            const media = (hitMesh as any).media; // Access linked media
-            if (media) {
-                media.hoverTarget = 1;
-                this.container.style.cursor = 'pointer';
-            }
+        // Mouse position tracking mainly for drag now, hover effects removed
+        if (this.isDown) {
+            this.container.style.cursor = 'grabbing';
+        } else {
+            this.container.style.cursor = 'grab';
         }
-
-        if (this.isDown) this.container.style.cursor = 'grabbing';
     }
 
     onClick(e: MouseEvent) {
-        // Prevent click if dragging
-        // Simplistic check: if we moved significantly? 
-        // For now, simple raycast click
-        if (this.isDown) return; // Don't click on release of drag? 
-
-        const x = (e.clientX / window.innerWidth) * 2 - 1;
-        const y = -(e.clientY / window.innerHeight) * 2 + 1;
-        this.mouse.set(x, y);
-        this.raycast.castMouse(this.camera, this.mouse);
-        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
-
-        if (hits && hits.length > 0) {
-            const hitMesh = hits[0];
-            const media = (hitMesh as any).media;
-            if (media && media.item.link) {
-                window.location.href = media.item.link;
-            }
-        }
+        // Interaction removed as per request
     }
 
     destroy() {

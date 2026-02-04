@@ -112,18 +112,8 @@ const MobileCard = ({ item }: { item: DemoItem }) => {
                 {item.description}
             </p>
 
-            {/* Action Button */}
-            <Link
-                href={item.link}
-                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-wide uppercase transition-all mb-8 self-start hover:scale-105 active:scale-95"
-                style={{
-                    backgroundColor: isDark ? '#ffffff' : '#0f0f0f',
-                    color: isDark ? '#0f0f0f' : '#ffffff'
-                }}
-            >
-                Explore {item.text}
-                <ArrowUpRight size={16} className="sm:w-[18px] sm:h-[18px]" />
-            </Link>
+            {/* Action Button Removed */}
+            <div className="mb-8" > </div>
 
             {/* Image Area - Pushed to bottom */}
             <div className="mt-auto relative w-full aspect-4/3 rounded-[20px] overflow-hidden">
