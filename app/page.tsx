@@ -19,7 +19,7 @@ const SERVICES_DATA = [
     label: "Solutions",
     title: "Intelligence",
     image: intelligenceImage,
-    link: "#",
+    link: "/solutions/intelligence",
     color: "#ffb400"
   },
   {
@@ -27,7 +27,7 @@ const SERVICES_DATA = [
     label: "Solutions",
     title: "Selection",
     image: selectionImage,
-    link: "#",
+    link: "/solutions/selection",
     color: "#a0a0ff"
   },
   {
@@ -35,7 +35,7 @@ const SERVICES_DATA = [
     label: "Solutions",
     title: "Media",
     image: mediaImage,
-    link: "#",
+    link: "/solutions/media",
     color: "#b0e0b0"
   },
   {
@@ -43,7 +43,7 @@ const SERVICES_DATA = [
     label: "Solutions",
     title: "Optimization",
     image: optimizationImage,
-    link: "#",
+    link: "/solutions/optimisation",
     color: "#ff8080"
   }
 ];
