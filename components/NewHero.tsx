@@ -91,7 +91,7 @@ const NewHero = () => {
         <div
             data-theme="light"
             ref={containerRef}
-            className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidde text-secondary"
+            className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden text-secondary"
         >
 
             {/* Background Gradient/Noise Parallax */}
