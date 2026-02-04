@@ -193,7 +193,7 @@ const Navbar = () => {
                         href="/contact"
                         onMouseEnter={() => handleActionMouseEnter()}
                         onMouseLeave={() => handleActionMouseLeave()}
-                        className="action-button px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
+                        className="action-button hidden sm:block px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
                     >
                         LET'S TALK
                     </Link>
