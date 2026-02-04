@@ -119,7 +119,7 @@ const Message = () => {
           {/* Subtext Paragraph */}
           <div className="flex justify-center items-center mt-12 md:mt-20 lg:mt-24 w-full">
             <div className="w-full max-w-[90%] sm:max-w-lg md:max-w-2xl px-4 md:px-0 overflow-hidden">
-              <p className='message-content-p text-center font-proxima text-primary text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed opacity-90'>
+              <p className='message-content-p text-center font-proxima text-primary text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed opacity-90 text-balance'>
                 Fuel smarter growth and unlock real performance
                 with PIKKCOM, where every campaign is driven by
                 proven demand, sharp intelligence, and results that convert.

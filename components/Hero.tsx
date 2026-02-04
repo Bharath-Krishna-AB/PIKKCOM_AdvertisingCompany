@@ -1,8 +1,6 @@
 "use client"
 
 import { ContainerScroll } from "./ui/container-scroll-animation";
-import Image from "next/image";
-import heroImage from "@/public/images/hero.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollSmoother, SplitText } from "gsap/all";
@@ -42,25 +40,24 @@ const Hero = () => {
                         {/* Headline Removed */}
 
                         {/* Subtext */}
-                        <div className="hero-subtext text-base sm:text-xl md:text-2xl leading-relaxed text-secondary/80 max-w-sm sm:max-w-xl md:max-w-3xl mx-auto">
+                        <div className="hero-subtext text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-secondary/80 max-w-[90%] sm:max-w-xl md:max-w-3xl mx-auto px-4 text-balance">
                             <p>
-                                PIKKCOM combines <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">intelligence</span> , <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">technology</span> and <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">media</span> to help
+                                PIKKCOM combines <span className="bg-[#DCFF93] px-1.5 py-0.5 rounded-md text-secondary font-medium mx-0.5">intelligence</span>, <span className="bg-[#DCFF93] px-1.5 py-0.5 rounded-md text-secondary font-medium mx-0.5">technology</span> and <span className="bg-[#DCFF93] px-1.5 py-0.5 rounded-md text-secondary font-medium mx-0.5">media</span> to help
                             </p>
-                            <p className="mt-2">
-                                <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">brands</span> spot winning products, understand true <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">customer intent</span> , and launch high-impact campaigns that <span className="bg-[#DCFF93] px-2 py-0.5 rounded-md text-secondary font-medium mx-1">convert</span>.
+                            <p className="mt-2 sm:mt-4">
+                                <span className="bg-[#DCFF93] px-1.5 py-0.5 rounded-md text-secondary font-medium mx-0.5">brands</span> spot winning products, understand true <span className="bg-[#DCFF93] px-1.5 py-0.5 rounded-md text-secondary font-medium mx-0.5">customer intent</span>, and launch high-impact campaigns that <span className="bg-[#DCFF93] px-1.5 py-0.5 rounded-md text-secondary font-medium mx-0.5">convert</span>.
                             </p>
                         </div>
                     </div>
                 }
             >
-                <Image
-                    src={heroImage}
-                    alt="Pikkcom Digital Advertising Hero"
-                    height={720}
-                    width={1400}
-                    className="mx-auto rounded-2xl object-cover h-full object-top-left"
-                    draggable={false}
-                    priority
+                <video
+                    src="/videos/work-syso.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover rounded-2xl"
                 />
             </ContainerScroll>
         </section>

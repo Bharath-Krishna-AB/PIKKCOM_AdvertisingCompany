@@ -32,11 +32,12 @@ export const ContainerScroll = ({
 
     const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [20, 0]);
     const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
+    // Reduce translation distance on mobile to keep content in view
     const translate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -100]);
 
     return (
         <div
-            className="h-auto md:h-360 flex items-center justify-center relative p-2 md:px-20"
+            className="h-auto md:h-360 flex items-center justify-center relative p-2 md:px-10 lg:px-20"
             ref={containerRef}
         >
             <div
@@ -85,17 +86,10 @@ export const Card = ({
                 boxShadow:
                     "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
             }}
-            className="max-w-5xl mx-auto h-auto aspect-video md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl -mt-12 relative z-20"
+            className="max-w-5xl mx-auto h-auto aspect-video lg:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl lg:-mt-12 relative z-20"
         >
             <div className=" h-full w-full  overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 md:rounded-2xl ">
-                <video
-                    src="/videos/work-syso.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="h-full w-full object-cover"
-                />
+                {children}
             </div>
         </motion.div>
     );

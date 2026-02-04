@@ -92,19 +92,17 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
         });
 
         // Mobile/Tablet Animations
-        // Mobile/Tablet Animations
         mm.add("(max-width: 1023px)", () => {
-            // Sideways slide-in animation
+            // Vertical slide-up animation for natural scroll flow
             gsap.from(cards, {
-                x: 50,
-                y: 0,
+                y: 100,
                 opacity: 0,
-                duration: 0.8,
-                stagger: 0.15,
-                ease: "power2.out",
+                duration: 1,
+                stagger: 0.2, // Slightly slower stagger for better "one by one" feel
+                ease: "power3.out", // Smoother ease
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 80%",
+                    start: "top 85%", // Start a bit earlier
                 }
             });
         });
@@ -116,19 +114,19 @@ const HomeSolutions = ({ services }: { services: ServiceItem[] }) => {
             <div className="max-w-[90rem] mx-auto w-full relative z-10">
 
                 {/* Header */}
-                <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-7xl font-bold font-clash-display leading-tight tracking-tight mb-24 md:mb-32 w-full text-[#2d2d2d]">
+                <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-7xl font-bold font-clash-display leading-tight tracking-tight mb-20 md:mb-32 w-full text-[#2d2d2d] text-balance">
                     Your trusted partner for innovation across four strategic service offerings <span className="text-accent">:</span>
                 </h2>
 
                 {/* Staggered Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-24 md:gap-8 lg:gap-12 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-20 md:gap-8 lg:gap-12 w-full">
                     {services.map((service, i) => (
                         <div
                             key={service.id}
                             className={`service-card group relative flex flex-col ${i % 2 !== 0 ? "lg:translate-y-24" : ""}`} // Zigzag offset on desktop
                         >
                             {/* Giant Background Number */}
-                            <div className="absolute top-0 right-4 lg:-top-24 lg:left-0 z-0 select-none pointer-events-none">
+                            <div className="absolute -top-12 right-0 md:top-0 md:right-4 lg:-top-24 lg:left-0 z-0 select-none pointer-events-none">
                                 <span className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold text-transparent leading-none tracking-tighter"
                                     style={{
                                         textShadow: "0px 0px 30px rgba(0,0,0,0.02)",

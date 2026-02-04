@@ -18,6 +18,8 @@ const Navbar = () => {
 
 
 
+    const navRef = React.useRef<HTMLElement>(null);
+
     useGSAP(() => {
         const mm = gsap.matchMedia();
 
@@ -28,20 +30,24 @@ const Navbar = () => {
                     backgroundColor: "transparent",
                     backdropFilter: "none",
                     borderColor: "transparent",
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
                 gsap.to(".logo", {
                     color: "white", // Direct white for contrast on dark
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
                 gsap.to(".burger-line-1, .burger-line-2", {
                     backgroundColor: "white",
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
                 gsap.to(".action-button", {
                     backgroundColor: "#DCFF93", // Accent
                     color: "#0f0f0f",
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
             } else {
                 // Light Theme: Navbar Light/Glass, Text Dark
@@ -50,20 +56,24 @@ const Navbar = () => {
                     backdropFilter: "blur(12px)",
                     borderColor: "rgba(34, 29, 29, 0.05)",
                     duration: 0.3,
-                    clearProps: "backdropFilter"
+                    clearProps: "backdropFilter",
+                    overwrite: "auto"
                 });
                 gsap.to(".logo", {
                     color: "var(--color-secondary)", // Dark
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
                 gsap.to(".burger-line-1, .burger-line-2", {
                     backgroundColor: "var(--color-secondary)",
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
                 gsap.to(".action-button", {
                     backgroundColor: "var(--accent)", // Keep accent or specific styling
                     color: "var(--primary)",
-                    duration: 0.3
+                    duration: 0.3,
+                    overwrite: "auto"
                 });
             }
         };
@@ -81,17 +91,26 @@ const Navbar = () => {
             sections.forEach((section) => {
                 ScrollTrigger.create({
                     trigger: section,
-                    start: "top top+=50", // Switch when section hits top
+                    start: "top top+=50",
                     end: "bottom top+=50",
                     onEnter: () => updateNavbarTheme(section.dataset.theme || "light"),
                     onEnterBack: () => updateNavbarTheme(section.dataset.theme || "light"),
-                    // Fallback to light or previous section's theme on leave? 
-                    // Usually better to let the next/prev section triggered handle it, 
-                    // but for gaps, we might want a default. Assuming contiguous sections.
+                    // Ensure we check on refresh/load to prevent FOUC
+                    onRefresh: (self) => {
+                        if (self.isActive) {
+                            updateNavbarTheme(section.dataset.theme || "light");
+                        }
+                    }
                 });
             });
+
+            // Set initial state based on the first section if at top (and not covered by onRefresh which runs later)
+            const firstSection = sections[0] as HTMLElement;
+            if (window.scrollY < 50 && firstSection) {
+                updateNavbarTheme(firstSection.dataset.theme || "light");
+            }
         }
-    }, [currentPath]);
+    }, { scope: navRef, dependencies: [currentPath] });
 
     const handleMenuMouseEnter = () => {
         gsap.to(".menu-icon", {
@@ -146,7 +165,7 @@ const Navbar = () => {
     return (
         <>
             <Menu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-            <nav className="fixed top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
+            <nav ref={navRef} className="fixed top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
                 {/* Logo */}
                 <Magnetic>
                     <Link href="/" className="logo text-xl font-fatkat cursor-pointer text-secondary relative z-50">
