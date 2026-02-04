@@ -144,23 +144,7 @@ function createCardTexture(
                 context.restore();
             }
 
-            // B. Draw Overlay if Hover
-            if (isHover) {
-                // Dark overlay
-                context.fillStyle = 'rgba(0, 0, 0, 0.6)';
-                context.fillRect(40, imgY, imgW, imgH);
 
-                // "Explore" Text
-                context.fillStyle = '#ffffff';
-                context.font = '700 32px "Figtree", sans-serif';
-                context.textAlign = 'center';
-                context.textBaseline = 'middle';
-                context.fillText("EXPLORE", 40 + imgW / 2, imgY + imgH / 2);
-
-                // Arrow below text
-                context.font = '32px sans-serif'; // Unicode arrow
-                context.fillText("↗", 40 + imgW / 2, imgY + imgH / 2 + 40);
-            }
         } else {
             // Hover State: Draw Button 
             // Position button where image would start
