@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import { useScroll, useTransform, motion, MotionValue, useSpring } from "framer-motion";
 
 export const ContainerScroll = ({
     titleComponent,
@@ -30,18 +30,24 @@ export const ContainerScroll = ({
         return isMobile ? [1, 1] : [1.05, 1];
     };
 
-    const rotate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [20, 0]);
-    const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
+    const scrollYProgressSpring = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+
+    const rotate = useTransform(scrollYProgressSpring, [0, 1], isMobile ? [0, 0] : [20, 0]);
+    const scale = useTransform(scrollYProgressSpring, [0, 1], scaleDimensions());
     // Reduce translation distance on mobile to keep content in view
-    const translate = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -100]);
+    const translate = useTransform(scrollYProgressSpring, [0, 1], isMobile ? [0, 0] : [0, -100]);
 
     return (
         <div
-            className="h-auto md:h-360 flex items-center justify-center relative p-2 md:px-10 lg:px-20"
+            className="h-auto min-h-[50rem] flex items-start justify-center relative p-2 md:px-10 lg:px-20"
             ref={containerRef}
         >
             <div
-                className="py-10 w-full relative flex flex-col items-center justify-center"
+                className="py-4 md:py-10 w-full relative flex flex-col items-center justify-center"
                 style={{
                     perspective: "1000px",
                 }}
