@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image'; // Ensure Next.js Image is imported
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 import CircularDemoRenderer from './CircularDemoRenderer';
 
 export type DemoItem = {
@@ -9,6 +11,7 @@ export type DemoItem = {
     title: string;
     description: string;
     badge?: string;
+    link: string;
 }
 
 const demoItems: DemoItem[] = [
@@ -18,7 +21,8 @@ const demoItems: DemoItem[] = [
         type: 'black',
         title: 'Confident\ndecisions at the\nmoment of choice.',
         description: 'Smart Mirror Intelligence for Retail\nand Customer Experience.',
-        badge: 'REFLEXN'
+        badge: 'REFLEXN',
+        link: '/products/reflexn'
     },
     {
         image: '/images/hat.png',
@@ -26,7 +30,8 @@ const demoItems: DemoItem[] = [
         type: 'black',
         title: 'Place users\ninside products,\nplaces & processes.',
         description: 'Immersive Storytelling with VR\nand 360° Environments.',
-        badge: 'PIKKCOM VR'
+        badge: 'PIKKCOM VR',
+        link: '/products/pikkcomvr'
     },
     {
         image: '/images/insight-hamburger-v2.jpg',
@@ -34,7 +39,8 @@ const demoItems: DemoItem[] = [
         type: 'black',
         title: 'Focus, Plan,\nand Grow\nProfitably.',
         description: 'Product Intelligence Platform\nfor Data-Driven Growth.',
-        badge: 'PIKKCOM INSIGHTS'
+        badge: 'PIKKCOM INSIGHTS',
+        link: '/products/insights'
     },
     {
         image: '/images/reflexn-hamburger-v2.jpeg',
@@ -42,7 +48,8 @@ const demoItems: DemoItem[] = [
         type: 'black',
         title: 'Confident\ndecisions at the\nmoment of choice.',
         description: 'Smart Mirror Intelligence for Retail\nand Customer Experience.',
-        badge: 'REFLEXN'
+        badge: 'REFLEXN',
+        link: '/products/reflexn'
     },
     {
         image: '/images/hat.png',
@@ -50,7 +57,8 @@ const demoItems: DemoItem[] = [
         type: 'black',
         title: 'Place users\ninside products,\nplaces & processes.',
         description: 'Immersive Storytelling with VR\nand 360° Environments.',
-        badge: 'PIKKCOM VR'
+        badge: 'PIKKCOM VR',
+        link: '/products/pikkcomvr'
     },
     {
         image: '/images/insight-hamburger-v2.jpg',
@@ -58,7 +66,8 @@ const demoItems: DemoItem[] = [
         type: 'black',
         title: 'Focus, Plan,\nand Grow\nProfitably.',
         description: 'Product Intelligence Platform\nfor Data-Driven Growth.',
-        badge: 'PIKKCOM INSIGHTS'
+        badge: 'PIKKCOM INSIGHTS',
+        link: '/products/insights'
     }
 ];
 
@@ -74,13 +83,13 @@ const MobileCard = ({ item }: { item: DemoItem }) => {
 
     return (
         <div
-            className="w-full relative overflow-hidden rounded-[40px] flex flex-col p-6 sm:p-8 min-h-[500px]"
+            className="w-full relative overflow-hidden rounded-[32px] sm:rounded-[40px] flex flex-col p-5 sm:p-8 min-h-[400px] sm:min-h-[500px]"
             style={{ backgroundColor: bgColor }}
         >
             {/* Badge */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
                 <span
-                    className="font-clash-display font-semibold text-xl sm:text-2xl"
+                    className="font-clash-display font-semibold text-lg sm:text-2xl"
                     style={{ color: isDark || isGreen ? accentColor : '#2D2D2D' }}
                 >
                     {item.badge}
@@ -89,7 +98,7 @@ const MobileCard = ({ item }: { item: DemoItem }) => {
 
             {/* Title */}
             <h3
-                className="font-anton font-bold text-5xl sm:text-6xl mb-6 leading-none tracking-wide"
+                className="font-anton font-bold text-[clamp(2.5rem,12vw,3.75rem)] sm:text-6xl mb-4 sm:mb-6 leading-none tracking-wide"
                 style={{ color: textColor }}
             >
                 {item.title.toUpperCase()}
@@ -97,11 +106,24 @@ const MobileCard = ({ item }: { item: DemoItem }) => {
 
             {/* Description */}
             <p
-                className="font-figtree text-xl sm:text-2xl mb-8 whitespace-pre-line"
+                className="font-figtree text-lg sm:text-2xl mb-6 sm:mb-8 whitespace-pre-line"
                 style={{ color: subTextColor }}
             >
                 {item.description}
             </p>
+
+            {/* Action Button */}
+            <Link
+                href={item.link}
+                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-bold text-xs sm:text-sm tracking-wide uppercase transition-all mb-8 self-start hover:scale-105 active:scale-95"
+                style={{
+                    backgroundColor: isDark ? '#ffffff' : '#0f0f0f',
+                    color: isDark ? '#0f0f0f' : '#ffffff'
+                }}
+            >
+                Explore {item.text}
+                <ArrowUpRight size={16} className="sm:w-[18px] sm:h-[18px]" />
+            </Link>
 
             {/* Image Area - Pushed to bottom */}
             <div className="mt-auto relative w-full aspect-4/3 rounded-[20px] overflow-hidden">
@@ -120,16 +142,16 @@ const MobileCard = ({ item }: { item: DemoItem }) => {
 
 const CircularDemo = () => {
     return (
-        <section data-theme="light" className="w-full min-h-screen relative flex flex-col items-center pt-24 pb-24 overflow-hidden font-[family-name:var(--font-figtree)]">
+        <section data-theme="light" className="w-full min-h-screen relative flex flex-col items-center pt-16 sm:pt-24 pb-16 sm:pb-24 overflow-hidden font-[family-name:var(--font-figtree)]">
             {/* Header Section */}
-            <div className="text-center z-10 space-y-6 mb-8 max-w-5xl mx-auto px-4">
-                <h2 className="text-[3rem] md:text-[5rem] leading-none font-medium tracking-tight text-[#2D2D2D]">
+            <div className="text-center z-10 space-y-4 sm:space-y-6 mb-8 max-w-5xl mx-auto px-4">
+                <h2 className="text-[clamp(2.5rem,10vw,5rem)] leading-[0.9] font-medium tracking-tight text-[#2D2D2D]">
                     Our Strategic
                     <br />
                     Products
                 </h2>
 
-                <p className="text-lg text-neutral-600">
+                <p className="text-base sm:text-lg text-neutral-600 max-w-[90%] mx-auto">
                     Innovation driven solutions for modern brands:
                 </p>
             </div>
@@ -150,7 +172,7 @@ const CircularDemo = () => {
             </div>
 
             {/* Mobile/Tablet Gallery Section (Vertical List) */}
-            <div className="lg:hidden w-full px-4 mt-8 flex flex-col gap-6 max-w-xl mx-auto z-10 relative">
+            <div className="lg:hidden w-full px-4 mt-4 sm:mt-8 flex flex-col gap-4 sm:gap-6 max-w-xl mx-auto z-10 relative">
                 {demoItems.slice(0, 3).map((item, index) => (
                     <MobileCard key={index} item={item} />
                 ))}

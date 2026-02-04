@@ -165,10 +165,10 @@ const Navbar = () => {
     return (
         <>
             <Menu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-            <nav ref={navRef} className="fixed top-0 z-50 w-full flex items-center justify-between px-6 py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
+            <nav ref={navRef} className="fixed top-0 z-50 w-full flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 select-none bg-primary/70 backdrop-blur-md border-b border-secondary/5" >
                 {/* Logo */}
                 <Magnetic>
-                    <Link href="/" className="logo text-xl font-fatkat cursor-pointer text-secondary relative z-50">
+                    <Link href="/" className="logo text-lg sm:text-xl font-fatkat cursor-pointer text-secondary relative z-50">
                         pikkcom<span className="text-accent">.</span>
                     </Link>
                 </Magnetic>
@@ -179,11 +179,11 @@ const Navbar = () => {
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         onMouseEnter={() => handleMenuMouseEnter()}
                         onMouseLeave={() => handleMenuMouseLeave()}
-                        className="menu-icon flex flex-col gap-2 cursor-pointer p-2 relative z-50"
+                        className="menu-icon flex flex-col gap-1.5 sm:gap-2 cursor-pointer p-2 relative z-50"
                         aria-label="Menu"
                     >
-                        <div className="burger-line-1 w-8 h-0.5 bg-secondary origin-center"></div>
-                        <div className="burger-line-2 w-8 h-0.5 bg-secondary origin-center"></div>
+                        <div className="burger-line-1 w-6 sm:w-8 h-0.5 bg-secondary origin-center"></div>
+                        <div className="burger-line-2 w-6 sm:w-8 h-0.5 bg-secondary origin-center"></div>
                     </button>
                 </Magnetic>
 
@@ -193,7 +193,7 @@ const Navbar = () => {
                         href="/contact"
                         onMouseEnter={() => handleActionMouseEnter()}
                         onMouseLeave={() => handleActionMouseLeave()}
-                        className="action-button px-8 py-3 rounded-full text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
+                        className="action-button px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wider shadow-sm bg-accent text-primary cursor-pointer relative z-50"
                     >
                         LET'S TALK
                     </Link>

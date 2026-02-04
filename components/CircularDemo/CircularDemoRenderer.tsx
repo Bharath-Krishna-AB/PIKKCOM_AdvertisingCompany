@@ -1,5 +1,5 @@
 "use client"
-import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
+import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Raycast, Vec2 } from 'ogl';
 import { useEffect, useRef } from 'react';
 import { DemoItem } from './CircularDemo';
 
@@ -29,7 +29,7 @@ function autoBind(instance: any): void {
 function createCardTexture(
     gl: GL,
     item: DemoItem,
-): { texture: Texture; width: number; height: number } {
+): { texture: Texture; textureHover: Texture; width: number; height: number } {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     if (!context) throw new Error('Could not get 2d context');
@@ -41,9 +41,13 @@ function createCardTexture(
     canvas.height = height;
 
     const texture = new Texture(gl, { generateMipmaps: true });
+    const textureHover = new Texture(gl, { generateMipmaps: true });
 
     // Function to draw the card content
-    const draw = (image?: HTMLImageElement) => {
+    const draw = (targetTexture: Texture, isHover: boolean, image?: HTMLImageElement) => {
+        // Clear
+        context.clearRect(0, 0, width, height);
+
         // Draw Background
         context.fillStyle = item.type === 'green' ? '#703EFF' : item.type === 'black' ? '#0f0f0f' : '#ffffff';
         // Rounded rect for the background
@@ -60,8 +64,8 @@ function createCardTexture(
         // 1. Draw Badge (Product Name) - Top Left
         if (item.badge) {
             context.save();
-            context.font = '600 24px "Clash Display", sans-serif'; // Reduced size slightly
-            context.fillStyle = isDark ? accentColor : '#2D2D2D'; // Accent on dark for pop
+            context.font = '600 24px "Clash Display", sans-serif';
+            context.fillStyle = isDark ? accentColor : '#2D2D2D';
             context.textAlign = 'left';
             context.textBaseline = 'top';
             context.fillText(item.badge, 40, 40);
@@ -70,13 +74,13 @@ function createCardTexture(
 
         // 2. Draw Title (Tagline) - Large, Upper Middle
         context.save();
-        context.font = '700 60px "Anton", sans-serif'; // Use Anton for hero feel
+        context.font = '700 60px "Anton", sans-serif';
         context.fillStyle = textColor;
         context.textAlign = 'left';
         const lines = item.title.split('\n');
         let yPos = 120; // Start lower to clear badge
         lines.forEach(line => {
-            context.fillText(line.toUpperCase(), 40, yPos); // Uppercase for impact
+            context.fillText(line.toUpperCase(), 40, yPos);
             yPos += 70;
         });
         context.restore();
@@ -94,69 +98,103 @@ function createCardTexture(
         });
         context.restore();
 
-        // 4. Draw Product Image - Bottom Area
-        if (image) {
-            context.save();
-            // Determine image area
-            const imgY = yPos + 40;
-            const imgH = height - imgY - 40; // Remaining height minus margin
-            const imgW = width - 80; // Side margins
+        // 4. Draw Content (Image OR Button)
+        if (!isHover) {
+            // Normal State: Draw Image
+            if (image) {
+                context.save();
+                const imgY = yPos + 40;
+                const imgH = height - imgY - 40;
+                const imgW = width - 80;
 
-            if (imgH > 0) {
-                // Clip to rounded rect
-                context.beginPath();
-                context.roundRect(40, imgY, imgW, imgH, 20);
-                context.clip();
+                if (imgH > 0) {
+                    context.beginPath();
+                    context.roundRect(40, imgY, imgW, imgH, 20);
+                    context.clip();
 
-                // Draw image cover
-                // Calculate aspect ratio
-                const imgAspect = image.width / image.height;
-                const areaAspect = imgW / imgH;
+                    const imgAspect = image.width / image.height;
+                    const areaAspect = imgW / imgH;
+                    let drawW, drawH, drawX, drawY;
 
-                let drawW, drawH, drawX, drawY;
-
-                if (imgAspect > areaAspect) {
-                    // Image is wider than area, crop sides
-                    drawH = imgH;
-                    drawW = imgH * imgAspect;
-                    drawX = 40 + (imgW - drawW) / 2;
-                    drawY = imgY;
-                } else {
-                    // Image is taller than area, crop top/bottom
-                    drawW = imgW;
-                    drawH = imgW / imgAspect;
-                    drawX = 40;
-                    drawY = imgY + (imgH - drawH) / 2;
+                    if (imgAspect > areaAspect) {
+                        drawH = imgH;
+                        drawW = imgH * imgAspect;
+                        drawX = 40 + (imgW - drawW) / 2;
+                        drawY = imgY;
+                    } else {
+                        drawW = imgW;
+                        drawH = imgW / imgAspect;
+                        drawX = 40;
+                        drawY = imgY + (imgH - drawH) / 2;
+                    }
+                    context.drawImage(image, drawX, drawY, drawW, drawH);
                 }
-
-                context.drawImage(image, drawX, drawY, drawW, drawH);
+                context.restore();
+            } else {
+                // Placeholder
+                context.save();
+                const imgY = yPos + 40;
+                const imgH = height - imgY - 40;
+                if (imgH > 0) {
+                    context.fillStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+                    context.beginPath();
+                    context.roundRect(40, imgY, width - 80, imgH, 20);
+                    context.fill();
+                }
+                context.restore();
             }
-            context.restore();
         } else {
-            // Placeholder for image area while loading
-            context.save();
-            const imgY = yPos + 40;
-            const imgH = height - imgY - 40;
-            if (imgH > 0) {
-                context.fillStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-                context.beginPath();
-                context.roundRect(40, imgY, width - 80, imgH, 20);
-                context.fill();
+            // Hover State: Draw Button 
+            // Position button where image would start
+            const btnY = yPos + 60;
+            const btnX = 40;
+            const btnH = 60;
+            const btnW = 220; // Approx
 
-                // Loading text
-                context.fillStyle = subTextColor;
-                context.font = '20px sans-serif';
-                context.textAlign = 'center';
-                context.textBaseline = 'middle';
-                context.fillText("Loading...", width / 2, imgY + imgH / 2);
-            }
+            context.save();
+            // Button Pill
+            context.fillStyle = isDark ? '#ffffff' : '#0f0f0f';
+            context.beginPath();
+            context.roundRect(btnX, btnY, btnW, btnH, 30);
+            context.fill();
+
+            // Button Text
+            context.fillStyle = isDark ? '#0f0f0f' : '#ffffff';
+            context.font = '700 20px "Figtree", sans-serif';
+            context.textAlign = 'left';
+            context.textBaseline = 'middle';
+            context.fillText(`Explore ${item.text}`, btnX + 30, btnY + btnH / 2);
+
+            // Arrow (Simple drawing)
+            // context.fillText("->", btnX + 160, btnY + btnH/2);
+            // Draw arrow manually for nicer look
+            context.beginPath();
+            context.lineWidth = 2;
+            context.strokeStyle = isDark ? '#0f0f0f' : '#ffffff';
+            const ax = btnX + 180;
+            const ay = btnY + btnH / 2;
+            context.moveTo(ax, ay + 4);
+            context.lineTo(ax + 4, ay);
+            context.lineTo(ax, ay - 4);
+            context.moveTo(ax - 8, ay + 4);
+            context.lineTo(ax - 4, ay); // simple arrow attempt
+            // Actually simple text arrow might be safer for canvas
+            // Let's use text
+            // context.stroke();
+            context.font = '20px sans-serif';
+            context.fillText("↗", btnX + 180, btnY + btnH / 2 + 1);
+
             context.restore();
         }
+
+        // Upload to texture
+        targetTexture.image = canvas;
+        if ((targetTexture as any).needsUpdate !== undefined) (targetTexture as any).needsUpdate = true;
     }
 
     // Initial draw
-    draw();
-    texture.image = canvas;
+    draw(texture, false);
+    draw(textureHover, true); // Hover texture always has button, no image needed
 
     // Load Image
     if (item.image) {
@@ -164,16 +202,12 @@ function createCardTexture(
         img.crossOrigin = "anonymous";
         img.src = item.image;
         img.onload = () => {
-            draw(img);
-            texture.image = canvas;
-            // Force update if OGL supports it, otherwise reassignment often triggers internal version bump
-            if ((texture as any).needsUpdate !== undefined) (texture as any).needsUpdate = true;
-            // Some OGL versions rely on .update() or just re-binding. 
-            // We can assume reassignment helps.
+            // Only redraw normal texture with image
+            draw(texture, false, img);
         };
     }
 
-    return { texture, width, height };
+    return { texture, textureHover, width, height };
 }
 
 interface ScreenSize {
@@ -223,6 +257,8 @@ class Media {
     speed: number = 0;
     isBefore: boolean = false;
     isAfter: boolean = false;
+    hoverTarget: number = 0;
+    hoverCurrent: number = 0;
 
     constructor({
         geometry,
@@ -254,7 +290,7 @@ class Media {
     }
 
     createShader() {
-        const { texture } = createCardTexture(this.gl, this.item);
+        const { texture, textureHover } = createCardTexture(this.gl, this.item);
 
         this.program = new Program(this.gl, {
             depthTest: false,
@@ -271,22 +307,26 @@ class Media {
         void main() {
           vUv = uv;
           vec3 p = position;
-          // REMOVED WOBBLE for flat card look
           gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
         }
       `,
             fragment: `
         precision highp float;
         uniform sampler2D tMap;
+        uniform sampler2D tHoverMap;
+        uniform float uHover;
         varying vec2 vUv;
         
         void main() {
-          vec4 color = texture2D(tMap, vUv);
-          gl_FragColor = color;
+          vec4 t1 = texture2D(tMap, vUv);
+          vec4 t2 = texture2D(tHoverMap, vUv);
+          gl_FragColor = mix(t1, t2, uHover);
         }
       `,
             uniforms: {
                 tMap: { value: texture },
+                tHoverMap: { value: textureHover },
+                uHover: { value: 0 },
                 uSpeed: { value: 0 },
                 uTime: { value: 0 }
             },
@@ -299,6 +339,7 @@ class Media {
             geometry: this.geometry,
             program: this.program
         });
+        (this.plane as any).media = this; // Link for raycast
         this.plane.setParent(this.scene);
     }
 
@@ -328,6 +369,10 @@ class Media {
 
         this.speed = scroll.current - scroll.last;
         this.program.uniforms.uSpeed.value = this.speed;
+
+        // Tween Hover
+        this.hoverCurrent = lerp(this.hoverCurrent, this.hoverTarget, 0.1);
+        this.program.uniforms.uHover.value = this.hoverCurrent;
 
         const planeOffset = this.plane.scale.x / 2;
         const viewportOffset = this.viewport.width / 2;
@@ -395,10 +440,15 @@ class App {
     viewport!: { width: number; height: number };
     raf: number = 0;
 
+    raycast!: Raycast;
+    mouse!: Vec2;
+
     boundOnResize!: () => void;
     boundOnTouchDown!: (e: MouseEvent | TouchEvent) => void;
     boundOnTouchMove!: (e: MouseEvent | TouchEvent) => void;
     boundOnTouchUp!: () => void;
+    boundOnMouseMove!: (e: MouseEvent) => void;
+    boundOnClick!: (e: MouseEvent) => void;
 
     isDown: boolean = false;
     start: number = 0;
@@ -424,6 +474,10 @@ class App {
         this.onResize();
         this.createGeometry();
         this.createMedias(items || [], bend, borderRadius);
+
+        this.raycast = new Raycast(this.gl);
+        this.mouse = new Vec2();
+
         this.update();
         this.addEventListeners();
     }
@@ -540,13 +594,71 @@ class App {
         this.boundOnTouchDown = this.onTouchDown.bind(this);
         this.boundOnTouchMove = this.onTouchMove.bind(this);
         this.boundOnTouchUp = this.onTouchUp.bind(this);
+        this.boundOnMouseMove = this.onMouseMove.bind(this);
+        this.boundOnClick = this.onClick.bind(this);
+
         window.addEventListener('resize', this.boundOnResize);
         window.addEventListener('mousedown', this.boundOnTouchDown);
-        window.addEventListener('mousemove', this.boundOnTouchMove);
+        window.addEventListener('mousemove', this.boundOnTouchMove); // Drag
         window.addEventListener('mouseup', this.boundOnTouchUp);
         window.addEventListener('touchstart', this.boundOnTouchDown);
         window.addEventListener('touchmove', this.boundOnTouchMove);
         window.addEventListener('touchend', this.boundOnTouchUp);
+
+        // Interaction listeners (Hover/Click)
+        window.addEventListener('mousemove', this.boundOnMouseMove);
+        window.addEventListener('click', this.boundOnClick);
+    }
+
+    onMouseMove(e: MouseEvent) {
+        if (!this.renderer || !this.medias) return;
+
+        // Update mouse position for raycast (normalized -1 to 1)
+        // Need to account for canvas position if possible, but window logic is easier if full width
+        // Assuming canvas fills relevant area or calc relative
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1; // Invert Y
+        this.mouse.set(x, y);
+
+        this.raycast.castMouse(this.camera, this.mouse);
+        // OGL intersectBounds check
+        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+
+        // Reset all
+        this.medias.forEach(m => m.hoverTarget = 0);
+        this.container.style.cursor = 'grab';
+
+        if (hits && hits.length > 0) {
+            const hitMesh = hits[0];
+            const media = (hitMesh as any).media; // Access linked media
+            if (media) {
+                media.hoverTarget = 1;
+                this.container.style.cursor = 'pointer';
+            }
+        }
+
+        if (this.isDown) this.container.style.cursor = 'grabbing';
+    }
+
+    onClick(e: MouseEvent) {
+        // Prevent click if dragging
+        // Simplistic check: if we moved significantly? 
+        // For now, simple raycast click
+        if (this.isDown) return; // Don't click on release of drag? 
+
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1;
+        this.mouse.set(x, y);
+        this.raycast.castMouse(this.camera, this.mouse);
+        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+
+        if (hits && hits.length > 0) {
+            const hitMesh = hits[0];
+            const media = (hitMesh as any).media;
+            if (media && media.item.link) {
+                window.location.href = media.item.link;
+            }
+        }
     }
 
     destroy() {
@@ -558,6 +670,10 @@ class App {
         window.removeEventListener('touchstart', this.boundOnTouchDown);
         window.removeEventListener('touchmove', this.boundOnTouchMove);
         window.removeEventListener('touchend', this.boundOnTouchUp);
+
+        window.removeEventListener('mousemove', this.boundOnMouseMove);
+        window.removeEventListener('click', this.boundOnClick);
+
         if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
             this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas as HTMLCanvasElement);
         }
