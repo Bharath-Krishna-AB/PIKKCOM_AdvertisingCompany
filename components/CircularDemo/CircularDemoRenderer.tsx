@@ -143,6 +143,24 @@ function createCardTexture(
                 }
                 context.restore();
             }
+
+            // B. Draw Overlay if Hover
+            if (isHover) {
+                // Dark overlay
+                context.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                context.fillRect(40, imgY, imgW, imgH);
+
+                // "Explore" Text
+                context.fillStyle = '#ffffff';
+                context.font = '700 32px "Figtree", sans-serif';
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                context.fillText("EXPLORE", 40 + imgW / 2, imgY + imgH / 2);
+
+                // Arrow below text
+                context.font = '32px sans-serif'; // Unicode arrow
+                context.fillText("↗", 40 + imgW / 2, imgY + imgH / 2 + 40);
+            }
         } else {
             // Hover State: Draw Button 
             // Position button where image would start
@@ -475,7 +493,7 @@ class App {
         this.createGeometry();
         this.createMedias(items || [], bend, borderRadius);
 
-        this.raycast = new Raycast(this.gl);
+        this.raycast = new Raycast();
         this.mouse = new Vec2();
 
         this.update();
@@ -613,16 +631,46 @@ class App {
     onMouseMove(e: MouseEvent) {
         if (!this.renderer || !this.medias) return;
 
-        // Mouse position tracking mainly for drag now, hover effects removed
-        if (this.isDown) {
-            this.container.style.cursor = 'grabbing';
-        } else {
-            this.container.style.cursor = 'grab';
+        // Update mouse position for raycast (normalized -1 to 1)
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1; // Invert Y
+        this.mouse.set(x, y);
+
+        this.raycast.castMouse(this.camera, this.mouse);
+        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+
+        // Reset all
+        this.medias.forEach(m => m.hoverTarget = 0);
+        this.container.style.cursor = 'grab';
+
+        if (hits && hits.length > 0) {
+            const hitMesh = hits[0];
+            const media = (hitMesh as any).media;
+            if (media) {
+                media.hoverTarget = 1;
+                this.container.style.cursor = 'pointer';
+            }
         }
+
+        if (this.isDown) this.container.style.cursor = 'grabbing';
     }
 
     onClick(e: MouseEvent) {
-        // Interaction removed as per request
+        if (this.isDown) return;
+
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1;
+        this.mouse.set(x, y);
+        this.raycast.castMouse(this.camera, this.mouse);
+        const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+
+        if (hits && hits.length > 0) {
+            const hitMesh = hits[0];
+            const media = (hitMesh as any).media;
+            if (media && media.item.link) {
+                window.location.href = media.item.link;
+            }
+        }
     }
 
     destroy() {
