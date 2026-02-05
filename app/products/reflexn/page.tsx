@@ -75,7 +75,27 @@ const ReflexnPage = () => {
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
             <h1 className="text-[14vw] md:text-[10vw] lg:text-[10vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
               <AnimatedLine text="Confident" />
-              <AnimatedLine text="decisions at" />
+              {/* Custom Layout for Second Line */}
+              <div className="overflow-hidden" style={{ display: 'block' }}>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', width: '38%', backgroundColor: '#B3D9FF', verticalAlign: 'top' }}
+                >
+                  <span style={{ display: 'block' }}>decisions</span>
+                </motion.div>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', marginLeft: '0.2em' }}
+                >
+                  at
+                </motion.div>
+              </div>
               <AnimatedLine text="the moment" />
               <AnimatedLine text="of choice." />
 

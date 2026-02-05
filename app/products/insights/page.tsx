@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Footer from '@/components/Footer'
 import HomeConnect from '@/components/HomeConnect'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { motion } from "framer-motion"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,9 +79,40 @@ const InsightsPage = () => {
           {/* Big Hero Text */}
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
             <h1 className="text-[14vw] md:text-[10vw] lg:text-[10vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
-              <AnimatedLine text="Focus," />
+              {/* Custom Layout for "Focus," */}
+              <div className="overflow-hidden" style={{ display: 'block' }}>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', backgroundColor: '#B3D9FF' }}
+                >
+                  <span style={{ display: 'block', paddingLeft: '0.1em', paddingRight: '0.1em' }}>Focus</span>
+                </motion.div>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block' }}
+                >
+                  ,
+                </motion.div>
+              </div>
               <AnimatedLine text="Plan, and" />
-              <AnimatedLine text="Grow" />
+              {/* Custom Layout for "Grow" */}
+              <div className="overflow-hidden" style={{ display: 'block' }}>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', backgroundColor: '#B3D9FF' }}
+                >
+                  <span style={{ display: 'block', paddingLeft: '0.1em', paddingRight: '0.1em' }}>Grow</span>
+                </motion.div>
+              </div>
               <AnimatedLine text="Profitably." />
 
               {/* Arrow SVG */}

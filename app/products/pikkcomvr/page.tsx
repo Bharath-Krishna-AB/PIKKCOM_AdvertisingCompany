@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Footer from '@/components/Footer'
 import HomeConnect from '@/components/HomeConnect'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { motion } from "framer-motion"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,9 +48,58 @@ const PikkcomVRPage = () => {
           <section className="relative z-10 my-10 md:my-0 flex-1 flex flex-col justify-center">
             <h1 className="text-[14vw] md:text-[10vw] lg:text-[10vw] leading-none font-anton uppercase tracking-tight relative wrap-break-word">
               <AnimatedLine text="Place users" />
-              <AnimatedLine text="inside products," />
+              {/* Custom Layout for "inside products," */}
+              <div className="overflow-hidden" style={{ display: 'block' }}>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', marginRight: '0.2em' }}
+                >
+                  inside
+                </motion.div>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', backgroundColor: '#B3D9FF' }}
+                >
+                  <span style={{ display: 'block', paddingLeft: '0.1em', paddingRight: '0.1em' }}>products</span>
+                </motion.div>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block' }}
+                >
+                  ,
+                </motion.div>
+              </div>
               <AnimatedLine text="places and" />
-              <AnimatedLine text="processes." />
+              {/* Custom Layout for "processes." */}
+              <div className="overflow-hidden" style={{ display: 'block' }}>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block', backgroundColor: '#B3D9FF' }}
+                >
+                  <span style={{ display: 'block', paddingLeft: '0.1em', paddingRight: '0.1em' }}>processes</span>
+                </motion.div>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  style={{ display: 'inline-block' }}
+                >
+                  .
+                </motion.div>
+              </div>
 
               {/* Arrow SVG */}
               <div className="absolute left-[15%] top-full w-[40vw] min-w-[350px] pointer-events-none z-0 hidden lg:block rotate-0">
