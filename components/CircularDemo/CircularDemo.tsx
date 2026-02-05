@@ -16,7 +16,7 @@ export type DemoItem = {
 
 const demoItems: DemoItem[] = [
     {
-        image: '/images/reflexn-hamburger-v2.jpeg',
+        image: '/images/menu/reflexn-hamburger-v2.jpeg',
         text: 'Reflexn',
         type: 'black',
         title: 'Confident\ndecisions at the\nmoment of choice.',
@@ -25,7 +25,7 @@ const demoItems: DemoItem[] = [
         link: '/products/reflexn'
     },
     {
-        image: '/images/vr-hamburger-v2.jpeg',
+        image: '/images/menu/vr-hamburger-v2.jpeg',
         text: 'Pikkcom VR',
         type: 'black',
         title: 'Place users\ninside products,\nplaces & processes.',
@@ -34,7 +34,7 @@ const demoItems: DemoItem[] = [
         link: '/products/pikkcomvr'
     },
     {
-        image: '/images/insight-hamburger-v2.jpg',
+        image: '/images/menu/insight-hamburger-v2.jpg',
         text: 'Insights',
         type: 'black',
         title: 'Focus, Plan,\nand Grow\nProfitably.',
@@ -43,7 +43,7 @@ const demoItems: DemoItem[] = [
         link: '/products/insights'
     },
     {
-        image: '/images/reflexn-hamburger-v2.jpeg',
+        image: '/images/menu/reflexn-hamburger-v2.jpeg',
         text: 'Reflexn',
         type: 'black',
         title: 'Confident\ndecisions at the\nmoment of choice.',
@@ -52,7 +52,7 @@ const demoItems: DemoItem[] = [
         link: '/products/reflexn'
     },
     {
-        image: '/images/vr-hamburger-v2.jpeg',
+        image: '/images/menu/vr-hamburger-v2.jpeg',
         text: 'Pikkcom VR',
         type: 'black',
         title: 'Place users\ninside products,\nplaces & processes.',
@@ -61,7 +61,7 @@ const demoItems: DemoItem[] = [
         link: '/products/pikkcomvr'
     },
     {
-        image: '/images/insight-hamburger-v2.jpg',
+        image: '/images/menu/insight-hamburger-v2.jpg',
         text: 'Insights',
         type: 'black',
         title: 'Focus, Plan,\nand Grow\nProfitably.',

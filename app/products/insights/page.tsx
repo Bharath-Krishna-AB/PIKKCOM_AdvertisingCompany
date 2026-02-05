@@ -146,7 +146,7 @@ const InsightsPage = () => {
               <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
               <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/insight-hamburger-v2.jpg"
+                  src="/images/menu/insight-hamburger-v2.jpg"
                   alt="Pikkcom Insights Dashboard"
                   width={2070}
                   height={1553}

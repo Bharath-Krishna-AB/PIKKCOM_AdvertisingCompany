@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
-import optimizationImage from '@/public/images/optimization.jpeg';
+import optimizationImage from '@/public/images/solutions/optimization.jpeg';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

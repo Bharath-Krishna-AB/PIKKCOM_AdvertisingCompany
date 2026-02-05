@@ -132,7 +132,7 @@ const PikkcomVRPage = () => {
               <div className="absolute inset-0 bg-accent rounded-3xl rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20"></div>
               <div className="relative w-full md:w-[600px] aspect-4/3 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/vr-hamburger-v2.jpeg"
+                  src="/images/menu/vr-hamburger-v2.jpeg"
                   alt="Virtual Reality Experience"
                   width={2070}
                   height={1553}
