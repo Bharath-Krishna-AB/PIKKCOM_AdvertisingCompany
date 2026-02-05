@@ -102,6 +102,53 @@ const CompanyPage = () => {
                         </div>
 
                     </div>
+
+                    {/* Founders Section */}
+                    <div className="mt-32 md:mt-48 space-y-16">
+                        <div className="overflow-hidden">
+                            <h2 className="animate-text text-5xl md:text-7xl font-clash-display font-medium text-secondary leading-[0.9] tracking-tighter">
+                                THE MINDS <br /> BEHIND.
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                            {[
+                                { name: "Nandu Das", role: "Co-founder", image: "/images/founders/Nandu Das.jpg" },
+                                { name: "Aravind G", role: "Co-founder", image: "/images/founders/Aravind G.jpg" },
+                                { name: "Hridul Raj K", role: "Media Head", image: null },
+                                { name: "Vishnupriya S", role: "Engineering Lead", image: "/images/founders/Vishnupriya S.jpg" },
+                                { name: "Sandra B S", role: "Marketing and HR Lead", image: "/images/founders/Sandra B S.jpg" },
+                            ].map((founder, index) => (
+                                <div key={index} className="group cursor-pointer">
+                                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg mb-6 bg-secondary/5">
+                                        {founder.image ? (
+                                            <Image
+                                                src={founder.image}
+                                                alt={founder.name}
+                                                fill
+                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-secondary/10 text-secondary/20">
+                                                <span className="text-8xl font-clash-display opacity-20">{founder.name.split(' ').map(n => n[0]).join('')}</span>
+                                            </div>
+                                        )}
+                                        {/* Overlay */}
+                                        <div className="absolute inset-0 bg-secondary/10 pointer-events-none mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    </div>
+
+                                    <div className="overflow-hidden">
+                                        <h3 className="text-2xl font-anton text-secondary uppercase tracking-wide translate-y-0 transition-transform duration-500">
+                                            {founder.name}
+                                        </h3>
+                                    </div>
+                                    <p className="text-secondary/60 font-instrument italic text-lg mt-1">
+                                        {founder.role}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </main>
 
                 {/* Background Texture */}
