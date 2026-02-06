@@ -111,7 +111,7 @@ const CompanyPage = () => {
                             </h2>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-12">
                             {[
                                 { name: "Nandu Das", role: "Co-founder", image: "/images/founders/Nandu Das.jpg" },
                                 { name: "Aravind G", role: "Co-founder", image: "/images/founders/Aravind G.jpg" },
